@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    overlay_scam_alert.xml
+    Shown by ScamAlertManager when verdict = SCAM.
+    Design intent: STOP THE USER. Big, red, impossible to ignore.
+    They must consciously tap a button to dismiss — no auto-dismiss.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#B71C1C"
+    android:padding="24dp"
+    android:elevation="16dp">
+
+    <!-- Warning emoji + source label -->
+    <TextView
+        android:id="@+id/tv_alert_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚠  SMS SCAM ALERT"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EF9A9A"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Plain-language reason text -->
+    <TextView
+        android:id="@+id/tv_alert_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This message looks like a scam."
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Confidence score -->
+    <TextView
+        android:id="@+id/tv_alert_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confidence: 90/100"
+        android:textSize="16sp"
+        android:textColor="#FFCDD2"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Action buttons side by side -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- "I'll be careful" — primary action -->
+        <Button
+            android:id="@+id/btn_alert_safe"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="I'll be careful"
+            android:textSize="18sp"
+            android:textColor="#B71C1C"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Dismiss -->
+        <Button
+            android:id="@+id/btn_alert_dismiss"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="Dismiss"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#7F0000"/>
+
+    </LinearLayout>
+
+</LinearLayout>

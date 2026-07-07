@@ -1,0 +1,6 @@
+// Root build.gradle — Scam Shield
+// Declares the Android Gradle Plugin (AGP) version for all modules.
+
+plugins {
+    id 'com.android.application' version '8.7.3' apply false
+}

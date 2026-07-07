@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_chat_assistant.xml
+    Layout for ChatAssistantActivity.
+    Includes top bar, scrollable message list, input box, and bottom nav.
+    Elderly-friendly: large text (>= 18sp), simple layout.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/chat_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#00695C"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_chat_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💬  Chat Assistant"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
+    <include
+        android:id="@+id/bottom_navigation_bar"
+        layout="@layout/layout_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"/>
+
+    <!-- ── Input Area at the bottom (above nav) ────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/layout_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:layout_above="@id/bottom_navigation_bar"
+        android:elevation="4dp">
+
+        <EditText
+            android:id="@+id/et_chat_input"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:hint="Ask about a message or link..."
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:inputType="textShortMessage"/>
+
+        <Button
+            android:id="@+id/btn_chat_send"
+            android:layout_width="80dp"
+            android:layout_height="56dp"
+            android:text="Send"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#00695C"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+    <!-- ── Chat Area ───────────────────────────────────────────────────────── -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/chat_topbar"
+        android:layout_above="@id/layout_input"
+        android:padding="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Assistant Introduction message bubble -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#E0F2F1"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Scam Shield Assistant"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#004D40"
+                    android:layout_marginBottom="6dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hello! I am your Scam Shield Assistant.\n\nType or paste any suspicious message, link, or scenario here. I will check it and tell you what to do."
+                    android:textSize="18sp"
+                    android:textColor="#1A1A1A"
+                    android:lineSpacingExtra="4dp"/>
+            </LinearLayout>
+
+            <!-- Dynamic conversation thread gets appended here -->
+            <LinearLayout
+                android:id="@+id/layout_chat_thread"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- User and Assistant responses are added dynamically in code -->
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

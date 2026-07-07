@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_settings.xml
+    Refactored to card design: rounded cards, border, light-neutral background, chevrons.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F8F6">
+
+    <!-- ── Top Bar ─────────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/settings_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#00695C"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚙  Settings &amp; Permissions"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
+    <include
+        android:id="@+id/bottom_navigation_bar"
+        layout="@layout/layout_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"/>
+
+    <!-- ── Main Scroll Content ─────────────────────────────────────────────── -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/settings_topbar"
+        android:layout_above="@id/bottom_navigation_bar"
+        android:padding="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Permissions Group Title -->
+            <TextView
+                android:id="@+id/tv_settings_group_protection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="App Protection Settings"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#555555"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Notification Access Card Button -->
+            <LinearLayout
+                android:id="@+id/btn_permission_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_white"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔔"
+                    android:textSize="22sp"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_permission_notifications_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable Notification Protection"
+                    android:textSize="19sp"
+                    android:textColor="#1A1A1A"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_permission_notifications_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="➔"
+                    android:textSize="20sp"
+                    android:textColor="#9E9E9E"/>
+            </LinearLayout>
+
+            <!-- System App Details Settings Card Button -->
+            <LinearLayout
+                android:id="@+id/btn_system_settings"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_white"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚙"
+                    android:textSize="22sp"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_system_settings_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Manage System Permissions"
+                    android:textSize="19sp"
+                    android:textColor="#1A1A1A"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_system_settings_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="➔"
+                    android:textSize="20sp"
+                    android:textColor="#9E9E9E"/>
+            </LinearLayout>
+
+            <!-- Data & Storage Group Title -->
+            <TextView
+                android:id="@+id/tv_settings_group_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Storage &amp; Data"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#555555"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Clear History Card Button (Light Red warning tint) -->
+            <LinearLayout
+                android:id="@+id/btn_clear_history"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_light_red"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🗑️"
+                    android:textSize="22sp"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_clear_history_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Clear Detection History"
+                    android:textSize="19sp"
+                    android:textColor="#B71C1C"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_btn_clear_history_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="➔"
+                    android:textSize="20sp"
+                    android:textColor="#B71C1C"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

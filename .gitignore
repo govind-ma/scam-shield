@@ -1,0 +1,49 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# .gitignore — Scam Shield Android project
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── SECRET KEYS — NEVER COMMIT ───────────────────────────────────────────────
+# gradle.properties holds GEMINI_API_KEY and other local secrets.
+# Use gradle.properties.example (committed) to show what keys are needed.
+gradle.properties
+
+# ── Android Studio / IntelliJ IDEA ───────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.gradle/
+local.properties
+
+# ── Build outputs ────────────────────────────────────────────────────────────
+build/
+app/build/
+*/build/
+
+# ── Kotlin / Java compiled output ────────────────────────────────────────────
+*.class
+*.jar
+*.aar
+*.ap_
+*.dex
+
+# ── Android generated files ───────────────────────────────────────────────────
+gen/
+out/
+release/
+
+# ── Signing keystores (NEVER commit real keystores) ──────────────────────────
+*.jks
+*.keystore
+
+# ── OS noise ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── ProGuard mapping (keep locally for crash symbolication, not in repo) ─────
+mapping.txt
+
+# ── Capture / profiling output ───────────────────────────────────────────────
+captures/
+*.hprof

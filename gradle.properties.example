@@ -1,0 +1,31 @@
+# gradle.properties.example — Scam Shield
+#
+# !! DO NOT rename this file to gradle.properties and commit it with a real key.
+#
+# HOW TO USE:
+#   1. Copy this file:
+#        cp gradle.properties.example gradle.properties
+#   2. Replace the placeholder value below with your real Gemini API key.
+#   3. gradle.properties is listed in .gitignore — it will NEVER be committed.
+#
+# Get a free Gemini API key at: https://aistudio.google.com/app/apikey
+
+# ── Project-wide Gradle settings ─────────────────────────────────────────────
+
+# Use AndroidX instead of old support libraries
+android.useAndroidX=true
+
+# Parallel builds
+org.gradle.parallel=true
+
+# Daemon for faster rebuilds
+org.gradle.daemon=true
+
+# JVM args for Gradle
+org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+
+# ── API Keys (REPLACE with real values in your local gradle.properties) ───────
+
+# Gemini API key — used by GeminiApiClient for the Cyber Help Agent chat.
+# Required for the AI chat assistant, image analysis, and voice features.
+GEMINI_API_KEY=your_gemini_api_key_here

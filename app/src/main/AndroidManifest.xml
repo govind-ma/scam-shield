@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  AndroidManifest.xml — Scam Shield                                         ║
+║                                                                              ║
+║  This file is the "identity card" Android reads before installing the app. ║
+║  It declares:                                                                ║
+║    • What the app is called (package, label, icon)                          ║
+║    • What permissions it needs at the manifest level (Gate 1 of 2)         ║
+║    • Every Activity and BroadcastReceiver the app contains                 ║
+║                                                                              ║
+║  PERMISSION MODEL (two gates, both must be open):                          ║
+║    Gate 1 — This file: "I may need this permission"                        ║
+║    Gate 2 — MainActivity.java: user taps Allow at runtime                  ║
+║    Dangerous permissions (RECEIVE_SMS, READ_SMS) require BOTH gates.       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.scamshield.app">
+
+    <!-- ======================================================================
+         PERMISSIONS — Gate 1 (manifest declarations)
+         These tell the OS which permissions the app may request.
+         Without these lines, runtime requests in MainActivity will always fail.
+         ====================================================================== -->
+
+    <!--
+        RECEIVE_SMS — Dangerous permission.
+        Lets our SmsReceiver get the SMS_RECEIVED system broadcast.
+        The user must also approve this at runtime (Gate 2, MainActivity.java).
+    -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <!--
+        READ_SMS — Dangerous permission.
+        Required alongside RECEIVE_SMS on many OEM ROMs (Samsung, Xiaomi, etc.)
+        to reliably receive the SMS broadcast. Also needed if you later want to
+        read historical SMS from the inbox ContentProvider.
+        The user must also approve this at runtime (Gate 2, MainActivity.java).
+    -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <!--
+        INTERNET — Normal permission (no runtime dialog needed).
+        Auto-granted at install. Declared now for the future AI second-pass
+        engine that will make network calls to an LLM API.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--
+        SYSTEM_ALERT_WINDOW — Special permission.
+        Lets ScamAlertManager draw overlays above other apps (scam warnings).
+        Unlike normal runtime permissions, this requires sending the user to
+        a special Settings screen — handled by OverlayPermissionHelper.
+    -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!--
+        FOREGROUND_SERVICE — Normal permission (auto-granted).
+        Required on API 28+ for any Service that calls startForeground().
+        FloatingAssistantService uses this to keep the floating bubble alive.
+    -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!--
+        FOREGROUND_SERVICE_SPECIAL_USE — Normal permission.
+        Required on API 34+ for starting a foreground service of type specialUse.
+    -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- ======================================================================
+         APPLICATION BLOCK
+         android:name=".ScamShieldApp" activates our Application subclass.
+         Without this, ScamShieldApp.onCreate() never runs and the engine
+         is never initialised before the first SMS arrives.
+         ====================================================================== -->
+    <application
+        android:name=".ScamShieldApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_shield"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_shield"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ScamShield">
+
+        <!-- ==================================================================
+             MAINACTIVITY — the screen shown when the user taps the app icon.
+             Currently only requests permissions; UI/Dashboard added in Part C.
+             ================================================================== -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <!-- MAIN + LAUNCHER together mark this as the app launch point -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- ==================================================================
+             SMSRECEIVER — our BroadcastReceiver for incoming SMS messages
+
+             android:exported="true"
+               MUST be true. The SMS_RECEIVED broadcast comes from the Android
+               OS — a different process. If exported is false, the OS cannot
+               deliver the broadcast to us.
+
+             android:permission="android.permission.BROADCAST_SMS"
+               Only components that themselves hold BROADCAST_SMS (i.e., the OS
+               itself and trusted carrier apps) can trigger our receiver. This
+               blocks any malicious third-party app from sending a fake
+               SMS_RECEIVED intent to trick Scam Shield into running.
+
+             android:priority="999"
+               When multiple apps listen to SMS_RECEIVED, higher priority runs
+               first. 999 puts us near the front of the queue (max is 1000,
+               reserved for system apps). For a security app, early delivery
+               means we warn the user before they read the message.
+             ================================================================== -->
+        <receiver
+            android:name=".sensors.SmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+
+            <intent-filter android:priority="999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+
+        </receiver>
+
+        <!-- ==================================================================
+             HOMEACTIVITY — the main dashboard screen.
+             Not the launcher (MainActivity handles launch + permissions),
+             but opened from there or from the floating bubble.
+             ================================================================== -->
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             CHECKSOMETHINGACTIVITY — manual text checking screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.CheckSomethingActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             LEARNABOUTSCAMSACTIVITY — educational content screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.LearnAboutScamsActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             IGOTSCAMMEDACTIVITY — emergency recovery / help screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.IGotScammedActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             QUIZACTIVITY — interactive quiz screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.QuizActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             CHATASSISTANTACTIVITY — text dialogue consulting screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.ChatAssistantActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             SETTINGSACTIVITY — configuration and permissions settings screen.
+             ================================================================== -->
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="false" />
+
+        <!-- ==================================================================
+             FLOATINGASSISTANTSERVICE — always-on-screen draggable bubble.
+             Runs as a foreground service with a persistent notification.
+             ================================================================== -->
+        <service
+            android:name=".ui.FloatingAssistantService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Interactive floating overlay for quick scam-checking utilities and emergency recovery access." />
+        </service>
+
+        <!-- ==================================================================
+             PAYMENTNOTIFICATIONLISTENER — intercepts payment app notifications.
+             Must declare BIND_NOTIFICATION_LISTENER_SERVICE so only the OS
+             can bind to it, protecting user notification privacy.
+             ================================================================== -->
+        <service
+            android:name=".sensors.PaymentNotificationListener"
+            android:label="Scam Shield Payment Protection"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

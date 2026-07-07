@@ -1,0 +1,43 @@
+// app/build.gradle — Scam Shield app module
+// This file tells Gradle how to compile and package the app.
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.scamshield.app'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.scamshield.app"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // AndroidX core
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.core:core:1.15.0'
+
+    // RecyclerView — used in HomeActivity for history list
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+
+    // Material Components — for AlertDialog, Button styling, etc.
+    implementation 'com.google.android.material:material:1.12.0'
+}

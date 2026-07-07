@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_quiz.xml
+    Layout for QuizActivity.
+    Uses a ViewFlipper to switch between:
+      Screen 0: The quiz questions and immediate feedback card
+      Screen 1: The final quiz results score screen
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- ── Top Bar ─────────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/quiz_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#00796B"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_quiz_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="✍️  Spot the Scam"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <!-- Progress text, e.g. "1 / 10" -->
+        <TextView
+            android:id="@+id/tv_quiz_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scenario 1 of 10"
+            android:textSize="14sp"
+            android:textColor="#E0F2F1"/>
+
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/quiz_view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             SCREEN 0 — Scenario Question & Feedback View
+             ═══════════════════════════════════════════════════════════════════ -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Is this message a SCAM or is it SAFE?"
+                    android:textSize="20sp"
+                    android:textColor="#555555"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- The Message/Scenario Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/tv_scenario_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="URGENT: Your bank account is locked! Share your OTP immediately to verify: http://fake-bank.xyz"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A"
+                        android:lineSpacingExtra="6dp"/>
+
+                </LinearLayout>
+
+                <!-- SCAM Button -->
+                <Button
+                    android:id="@+id/btn_answer_scam"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="🚨  SCAM"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#B71C1C"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- SAFE Button -->
+                <Button
+                    android:id="@+id/btn_answer_safe"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="✓  SAFE"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2E7D32"
+                    android:layout_marginBottom="24dp"/>
+
+                <!-- FEEDBACK LAYOUT (hidden until user clicks an answer) -->
+                <LinearLayout
+                    android:id="@+id/layout_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FFF9C4"
+                    android:padding="16dp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Title showing "Correct!" or "Incorrect" -->
+                    <TextView
+                        android:id="@+id/tv_feedback_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Correct!"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        android:textColor="#F57F17"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- Short explanation -->
+                    <TextView
+                        android:id="@+id/tv_feedback_explanation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This is a scam. Banks will never ask you to click a non-official link."
+                        android:textSize="17sp"
+                        android:textColor="#333333"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Next button -->
+                    <Button
+                        android:id="@+id/btn_next_scenario"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Next Scenario  ➔"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#F57F17"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             SCREEN 1 — Quiz Results Screen
+             ═══════════════════════════════════════════════════════════════════ -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎉  Quiz Finished!"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="#00796B"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"/>
+
+                <!-- Score Label -->
+                <TextView
+                    android:id="@+id/tv_final_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You scored 7 / 10"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Dynamic feedback text based on score -->
+                <TextView
+                    android:id="@+id/tv_score_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Great job! You know how to spot scams. Keep being careful!"
+                    android:textSize="18sp"
+                    android:textColor="#555555"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="32dp"/>
+
+                <!-- Retake button -->
+                <Button
+                    android:id="@+id/btn_retake_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="🔄  Try Again"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#00796B"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Go back to learning button -->
+                <Button
+                    android:id="@+id/btn_exit_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="📖  Browse Learning Topics"
+                    android:textSize="18sp"
+                    android:textColor="#1A1A1A"
+                    android:backgroundTint="#E0E0E0"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </ViewFlipper>
+
+</LinearLayout>

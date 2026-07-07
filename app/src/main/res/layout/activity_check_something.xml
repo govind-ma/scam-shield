@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FAFAFA">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔍  Check a message"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#1A1A1A"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paste or type the message you want to check:"
+        android:textSize="18sp"
+        android:textColor="#424242"
+        android:paddingBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_check_input"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:hint="Type or paste the message here..."
+        android:textSize="18sp"
+        android:gravity="top"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:inputType="textMultiLine"/>
+
+    <Button
+        android:id="@+id/btn_run_check"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Check this message"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1565C0"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_check_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="18sp"
+        android:textColor="#1A1A1A"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="20dp"/>
+
+    <!-- "Get Help Now" — shown after a SCAM or SUSPICIOUS result -->
+    <Button
+        android:id="@+id/btn_get_help_now"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="🆘  I got scammed — Get Help Now"
+        android:textSize="19sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#B71C1C"
+        android:visibility="gone"/>
+
+</LinearLayout>

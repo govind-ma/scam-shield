@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    overlay_suspicious_alert.xml
+    Shown by ScamAlertManager when verdict = SUSPICIOUS.
+    Design intent: noticeable but not panic-inducing.
+    Amber/orange colour, smaller than SCAM overlay.
+    Auto-dismisses after 8 seconds (set by ScamAlertManager).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#E65100"
+    android:padding="20dp"
+    android:elevation="12dp">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/tv_suspicious_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚠  Please Check This Message"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="12dp"/>
+
+    <!-- Reason text -->
+    <TextView
+        android:id="@+id/tv_suspicious_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This message has some warning signs."
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Dismiss button -->
+    <Button
+        android:id="@+id/btn_suspicious_dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="OK, I'll check it"
+        android:textSize="18sp"
+        android:textColor="#E65100"
+        android:backgroundTint="#FFFFFF"/>
+
+</LinearLayout>

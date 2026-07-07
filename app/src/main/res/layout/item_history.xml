@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_history.xml
+    Refactored to card design: rounded card, 1dp border, 10dp bottom margin.
+    No font smaller than 16sp.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_card_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/card_white"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp"
+    android:layout_marginBottom="10dp">
+
+    <!-- Top row: verdict pill + source + timestamp -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Verdict (e.g. "⚠ SCAM") — colour set in HistoryAdapter -->
+        <TextView
+            android:id="@+id/tv_history_verdict"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#B71C1C"
+            android:text="⚠ SCAM"/>
+
+        <!-- Source badge (SMS / PAYMENT / CALL) -->
+        <TextView
+            android:id="@+id/tv_history_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:text="SMS"/>
+
+        <!-- Timestamp (right-aligned) -->
+        <TextView
+            android:id="@+id/tv_history_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:textColor="#9E9E9E"
+            android:text="10:30 AM"/>
+
+    </LinearLayout>
+
+    <!-- Reason text — full plain-language explanation -->
+    <TextView
+        android:id="@+id/tv_history_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:textColor="#1A1A1A"
+        android:text="Urgency language and OTP request detected."/>
+
+</LinearLayout>

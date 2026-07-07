@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    view_floating_menu.xml
+    Popup menu shown when the user taps the floating bubble.
+    Three large, clearly labelled buttons — no icons without text.
+    Semi-transparent dark background so the app underneath is still visible.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#EE1A237E"
+    android:padding="12dp"
+    android:elevation="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Need help?"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="10dp"/>
+
+    <!-- Button 1 -->
+    <Button
+        android:id="@+id/btn_menu_check"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="🔍 Check something"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1565C0"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Button 2 -->
+    <Button
+        android:id="@+id/btn_menu_learn"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="📖 Learn about scams"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#00695C"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Button 3 -->
+    <Button
+        android:id="@+id/btn_menu_scammed"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="🆘 I got scammed"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#B71C1C"/>
+
+</LinearLayout>

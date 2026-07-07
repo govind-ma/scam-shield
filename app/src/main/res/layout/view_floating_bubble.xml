@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    view_floating_bubble.xml — redesigned as a proper FAB
+    60dp circular button, solid green background, white icon, 10dp elevation shadow.
+    Positioned at bottom-right by FloatingAssistantService (Gravity.BOTTOM | Gravity.END).
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floating_bubble_root"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:elevation="10dp"
+    android:outlineProvider="bounds">
+
+    <!--
+        Circular FAB-style button:
+        - Solid green circle background (oval shape drawable)
+        - White shield emoji as icon (no icon resource needed)
+        - elevation on the FrameLayout provides the drop shadow
+    -->
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="🛡"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/circle_fab_green"
+        android:elevation="10dp"
+        android:stateListAnimator="@null"/>
+
+</FrameLayout>
+

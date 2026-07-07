@@ -1,0 +1,20 @@
+// settings.gradle — Scam Shield
+// Tells Gradle where to find plugins and which modules to include.
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "ScamShield"
+include ':app'
