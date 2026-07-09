@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     android:background="#FAFAFA">
+
+    <!-- Main content area with padding -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -65,5 +72,10 @@
         android:textColor="#FFFFFF"
         android:backgroundTint="#B71C1C"
         android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <!-- Bottom navigation bar — included from layout_bottom_nav.xml -->
+    <include layout="@layout/layout_bottom_nav" />
 
 </LinearLayout>

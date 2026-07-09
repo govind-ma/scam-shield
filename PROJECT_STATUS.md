@@ -1,8 +1,8 @@
 # Scam Shield — Project Status
 
-> Last updated: 2026-07-07 (Post UI & Functionality Pass)
-> This document reflects the exact state of the codebase after the full UI + functionality pass, including PaymentNotificationListener integration and the Pause-and-Verify countdown.
-> The "Recent alerts" RecyclerView is confirmed working — detections persist and display correctly.
+> Last updated: 2026-07-09 (Navigation & UI Polish)
+> This document reflects the exact state of the codebase after the UI + functionality pass (Part D), centralized ThemeManager implementation (Part C), and full navigation system wiring (Part F).
+> The "Recent alerts" RecyclerView is confirmed working — detections persist and display correctly. All bottom navigation tabs now navigate and highlight correctly. Floating shield bubble properly positioned above nav bar.
 
 ---
 
@@ -88,6 +88,14 @@ ScamAlertManager.onResult()
 
 *   **PaymentNotificationListener device test**: Newly created `PaymentNotificationListener` intercepts notifications from UPI apps (Google Pay, PhonePe, Paytm, etc.) and processes them via the detection engine. Needs device test using simulated payment notifications.
 *   **Pause-and-Verify countdown test**: The 30-second timed countdown lock on the red SCAM overlay needs verification on a running emulator/device.
+
+---
+
+## 4.5. Navigation & Floating Bubble Polish (Post Part F)
+
+*   **Bottom Navigation Tab Wiring**: All 4 navigation tabs (Home, Chat, Learn, Settings) now have fully functional click listeners. Each tap launches the correct Activity and applies `FLAG_ACTIVITY_REORDER_TO_FRONT` to prevent activity stack buildup. The active tab is automatically highlighted with the theme accent color (green in Safe Mode, red in Alert Mode) via `NavigationHelper.setupBottomNavigation()` called in each Activity's `onResume()`.
+*   **Check Something Screen**: The "Check a message" screen (`CheckSomethingActivity`) now includes the bottom navigation bar and highlights the Home tab, since this screen is accessed from Home.
+*   **Floating Shield Position**: The glowing shield bubble now sits properly at the bottom-right corner with a 72dp bottom margin above the 64dp navigation bar (136dp total from bottom), preventing overlap and ensuring clear visibility above the nav area.
 
 ---
 

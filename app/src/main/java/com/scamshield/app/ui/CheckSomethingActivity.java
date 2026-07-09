@@ -83,5 +83,9 @@ public class CheckSomethingActivity extends AppCompatActivity {
         btnGetHelp.setOnClickListener(v -> {
             startActivity(new Intent(this, IGotScammedActivity.class));
         });
+
+        // ── Wire bottom navigation ──────────────────────────────────────────────
+        // Highlight Home tab since this screen is accessed from Home
+        NavigationHelper.setupBottomNavigation(this, NavigationHelper.TAB_HOME);
     }
 }
