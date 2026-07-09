@@ -167,7 +167,7 @@ public class FloatingAssistantService extends Service {
         // Window params — bottom-right corner, above the 64dp nav bar
         float density      = getResources().getDisplayMetrics().density;
         int marginRightPx  = (int) (16 * density);
-        int marginBottomPx = (int) (76 * density);   // 64dp nav + 12dp gap
+        int marginBottomPx = (int) ((72 + 64) * density);   // 72dp margin + 64dp nav bar
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,

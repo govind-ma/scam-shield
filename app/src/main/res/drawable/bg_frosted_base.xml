@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Frosted glass base fill — very light translucent white layer
+    with rounded corners to match the card-based UI style.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Rounded corners at 16dp radius -->
+    <corners android:radius="16dp"/>
+
+    <!-- Light translucent white fill (#1AFFFFFF = 10% opacity white) -->
+    <solid android:color="#1AFFFFFF"/>
+
+</shape>

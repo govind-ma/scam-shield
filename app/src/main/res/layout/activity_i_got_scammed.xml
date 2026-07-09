@@ -344,7 +344,8 @@
                     android:layout_width="match_parent" android:layout_height="56dp"
                     android:text="← Go back"
                     android:textSize="17sp" android:textColor="#555555"
-                    android:backgroundTint="#EEEEEE" android:layout_marginTop="8dp"/>
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null" android:layout_marginTop="8dp"/>
 
             </LinearLayout>
         </ScrollView>
@@ -407,7 +408,8 @@
                         android:textSize="19sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#1565C0"/>
+                        android:background="@drawable/ripple_frosted"
+                        android:backgroundTint="@null"/>
                 </LinearLayout>
 
                 <!-- ── Section: Cyber Crime helpline ───────────────────────── -->
@@ -444,7 +446,8 @@
                         android:textSize="19sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#B71C1C"/>
+                        android:background="@drawable/ripple_frosted"
+                        android:backgroundTint="@null"/>
                 </LinearLayout>
 
                 <!-- ── Section: Report online ──────────────────────────────── -->
@@ -480,7 +483,8 @@
                         android:text="🌐  Open cybercrime.gov.in"
                         android:textSize="18sp"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#1565C0"/>
+                        android:background="@drawable/ripple_frosted"
+                        android:backgroundTint="@null"/>
                 </LinearLayout>
 
                 <!-- ── Important reminders card ────────────────────────────── -->
@@ -516,7 +520,8 @@
                     android:layout_width="match_parent" android:layout_height="56dp"
                     android:text="← Go back"
                     android:textSize="17sp" android:textColor="#555555"
-                    android:backgroundTint="#EEEEEE"/>
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null"/>
 
             </LinearLayout>
         </ScrollView>

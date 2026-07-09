@@ -101,7 +101,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#B71C1C"
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null"
                     android:layout_marginBottom="12dp"/>
 
                 <!-- SAFE Button -->
@@ -113,7 +114,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#2E7D32"
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null"
                     android:layout_marginBottom="24dp"/>
 
                 <!-- FEEDBACK LAYOUT (hidden until user clicks an answer) -->
@@ -157,7 +159,8 @@
                         android:text="Next Scenario  ➔"
                         android:textSize="18sp"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#F57F17"/>
+                        android:background="@drawable/ripple_frosted"
+                        android:backgroundTint="@null"/>
 
                 </LinearLayout>
 
@@ -219,7 +222,8 @@
                     android:text="🔄  Try Again"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#00796B"
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null"
                     android:layout_marginBottom="12dp"/>
 
                 <!-- Go back to learning button -->
@@ -230,7 +234,8 @@
                     android:text="📖  Browse Learning Topics"
                     android:textSize="18sp"
                     android:textColor="#1A1A1A"
-                    android:backgroundTint="#E0E0E0"/>
+                    android:background="@drawable/ripple_frosted"
+                    android:backgroundTint="@null"/>
 
             </LinearLayout>
         </ScrollView>

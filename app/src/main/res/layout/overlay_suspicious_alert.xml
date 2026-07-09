@@ -45,6 +45,7 @@
         android:text="OK, I'll check it"
         android:textSize="18sp"
         android:textColor="#E65100"
-        android:backgroundTint="#FFFFFF"/>
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"/>
 
 </LinearLayout>

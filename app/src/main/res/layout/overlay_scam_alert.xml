@@ -69,7 +69,8 @@
             android:text="I'll be careful"
             android:textSize="18sp"
             android:textColor="#B71C1C"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/ripple_frosted"
+            android:backgroundTint="@null"
             android:layout_marginEnd="8dp"/>
 
         <!-- Dismiss -->
@@ -81,7 +82,8 @@
             android:text="Dismiss"
             android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#7F0000"/>
+            android:background="@drawable/ripple_frosted"
+            android:backgroundTint="@null"/>
 
     </LinearLayout>
 

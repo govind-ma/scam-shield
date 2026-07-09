@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +86,11 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         Log.d(TAG, "HomeActivity created.");
+
+        // ── Apply theme based on current app state ──────────────────────────────
+        // If an alert is pending, show Alert Mode (red); otherwise show Safe Mode (green).
+        boolean isAlertMode = ThemeManager.isAlertMode(this);
+        applyHomeTheme(isAlertMode);
 
         setupProtectionStatusCard();
         setupSmsInboxList();   // NEW: set up the SMS inbox RecyclerView
@@ -419,16 +428,19 @@ public class HomeActivity extends AppCompatActivity
 
     private void setupActionButtons() {
         View btnCheck = findViewById(R.id.btn_check_something);
-        btnCheck.setOnClickListener(v ->
-            startActivity(new Intent(this, CheckSomethingActivity.class)));
+        setupCardWithAnimation(btnCheck, 0, v -> {
+            startActivity(new Intent(this, CheckSomethingActivity.class));
+        });
 
         View btnLearn = findViewById(R.id.btn_learn);
-        btnLearn.setOnClickListener(v ->
-            startActivity(new Intent(this, LearnAboutScamsActivity.class)));
+        setupCardWithAnimation(btnLearn, 1, v -> {
+            startActivity(new Intent(this, LearnAboutScamsActivity.class));
+        });
 
         View btnScammed = findViewById(R.id.btn_i_got_scammed);
-        btnScammed.setOnClickListener(v ->
-            startActivity(new Intent(this, IGotScammedActivity.class)));
+        setupCardWithAnimation(btnScammed, 2, v -> {
+            startActivity(new Intent(this, IGotScammedActivity.class));
+        });
 
         View fabShield = findViewById(R.id.fab_shield);
         if (fabShield != null) {
@@ -436,10 +448,28 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    // =========================================================================
-    // FloatingAssistantService — unchanged from original
-    // =========================================================================
+    /**
+     * Setup card with staggered entrance animation and press feedback.
+     */
+    private void setupCardWithAnimation(View card, int delayMultiplier, View.OnClickListener onClickListener) {
+        if (card == null) return;
 
+        // Animate entrance with staggered timing
+        Animation slideUpAnim = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
+        slideUpAnim.setStartOffset(delayMultiplier * 100); // Stagger by 100ms
+        card.startAnimation(slideUpAnim);
+
+        // Add press feedback animations
+        card.setOnClickListener(v -> {
+            Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+            card.startAnimation(scaleDown);
+            card.postDelayed(() -> {
+                Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+                card.startAnimation(scaleUp);
+                onClickListener.onClick(v);
+            }, 150);
+        });
+    }
     private void startFloatingService() {
         if (floatingServiceStarted) {
             Log.d(TAG, "FloatingAssistantService already started — skipping.");

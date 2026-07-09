@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Frosted glass button press effect — soft, translucent ripple with rounded corners.
+    Applies a subtle white ripple (#33FFFFFF) on tap, with a faint frosted base (#1AFFFFFF).
+    
+    This works across both Safe Mode (green) and Alert Mode (red) themes since
+    the translucent white overlay reads as "frosted" on both color backgrounds.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF"
+    android:radius="16dp">
+
+    <!-- Frosted glass base layer — very light translucent white background -->
+    <item android:drawable="@drawable/bg_frosted_base"/>
+
+</ripple>
