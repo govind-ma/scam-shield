@@ -29,6 +29,13 @@ import com.scamshield.app.engine.DetectionResult;
  */
 public class CheckSomethingActivity extends AppCompatActivity {
 
+    /**
+     * Optional Intent extra: pre-fill the input field with this text.
+     * Used by SmsInboxAdapter when the user taps a message row on HomeActivity.
+     * Example: intent.putExtra(EXTRA_PREFILL_TEXT, smsBody);
+     */
+    public static final String EXTRA_PREFILL_TEXT = "com.scamshield.app.PREFILL_TEXT";
+
     private DetectionEngine engine;
 
     @Override
@@ -44,6 +51,14 @@ public class CheckSomethingActivity extends AppCompatActivity {
         Button   btnCheck        = findViewById(R.id.btn_run_check);
         TextView tvResult        = findViewById(R.id.tv_check_result);
         Button   btnGetHelp      = findViewById(R.id.btn_get_help_now);
+
+        // ── Pre-fill from Intent extra (e.g. when opened from SMS inbox row tap) ─
+        String prefill = getIntent().getStringExtra(EXTRA_PREFILL_TEXT);
+        if (prefill != null && !prefill.isEmpty()) {
+            etInput.setText(prefill);
+            // Move cursor to end for easier editing
+            etInput.setSelection(etInput.getText().length());
+        }
 
         // ── Run check ─────────────────────────────────────────────────────────
         btnCheck.setOnClickListener(v -> {

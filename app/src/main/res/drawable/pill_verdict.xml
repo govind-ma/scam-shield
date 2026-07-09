@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    pill_verdict.xml
+    Rounded rectangle used as the background for verdict pills in SmsInboxAdapter.
+    The fill colour is overridden programmatically in SmsInboxAdapter.onBindViewHolder()
+    using setBackgroundColor(), so this drawable only provides the shape/corners.
+    We use a neutral transparent fill here as the default; code sets the real color.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#00000000" />
+    <corners android:radius="12dp" />
+</shape>
