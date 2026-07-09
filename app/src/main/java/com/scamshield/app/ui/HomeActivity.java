@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -350,19 +352,19 @@ public class HomeActivity extends AppCompatActivity
 
         // ── "Check something" ─────────────────────────────────────────────────
         View btnCheck = findViewById(R.id.btn_check_something);
-        btnCheck.setOnClickListener(v -> {
+        setupCardWithAnimation(btnCheck, 0, v -> {
             startActivity(new Intent(this, CheckSomethingActivity.class));
         });
 
         // ── "Learn about scams" ───────────────────────────────────────────────
         View btnLearn = findViewById(R.id.btn_learn);
-        btnLearn.setOnClickListener(v -> {
+        setupCardWithAnimation(btnLearn, 1, v -> {
             startActivity(new Intent(this, LearnAboutScamsActivity.class));
         });
 
         // ── "I got scammed" ───────────────────────────────────────────────────
         View btnScammed = findViewById(R.id.btn_i_got_scammed);
-        btnScammed.setOnClickListener(v -> {
+        setupCardWithAnimation(btnScammed, 2, v -> {
             startActivity(new Intent(this, IGotScammedActivity.class));
         });
 
@@ -371,6 +373,29 @@ public class HomeActivity extends AppCompatActivity
         if (fabShield != null) {
             fabShield.setOnClickListener(v -> triggerScanNowGesture());
         }
+    }
+
+    /**
+     * Setup card with staggered entrance animation and press feedback.
+     */
+    private void setupCardWithAnimation(View card, int delayMultiplier, View.OnClickListener onClickListener) {
+        if (card == null) return;
+
+        // Animate entrance with staggered timing
+        Animation slideUpAnim = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
+        slideUpAnim.setStartOffset(delayMultiplier * 100); // Stagger by 100ms
+        card.startAnimation(slideUpAnim);
+
+        // Add press feedback animations
+        card.setOnClickListener(v -> {
+            Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+            card.startAnimation(scaleDown);
+            card.postDelayed(() -> {
+                Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+                card.startAnimation(scaleUp);
+                onClickListener.onClick(v);
+            }, 150);
+        });
     }
 
     /**
