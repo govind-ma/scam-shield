@@ -488,7 +488,7 @@
 
                 <!-- Empty State Card -->
                 <LinearLayout
-                    android:id="@+id/tv_history_empty"
+                    android:id="@+id/card_history_empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/card_elevated"
@@ -507,6 +507,7 @@
                         android:contentDescription="All clear"/>
 
                     <TextView
+                        android:id="@+id/tv_history_empty"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

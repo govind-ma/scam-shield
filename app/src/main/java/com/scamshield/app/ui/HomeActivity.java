@@ -317,7 +317,7 @@ public class HomeActivity extends AppCompatActivity
         View root = findViewById(R.id.home_root_layout);
         TextView tvTitle = findViewById(R.id.tv_app_title);
         android.widget.ImageView ivShield = findViewById(R.id.iv_app_shield);
-        TextView tvAlertsTitle = findViewById(R.id.tv_recent_alerts_title);
+        View cardEmpty = findViewById(R.id.card_history_empty);
         TextView tvEmpty = findViewById(R.id.tv_history_empty);
 
         View fab = findViewById(R.id.fab_shield);
@@ -343,9 +343,10 @@ public class HomeActivity extends AppCompatActivity
             if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#E24B4A"));
             if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow_red);
             if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_red);
-            if (tvAlertsTitle != null) tvAlertsTitle.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
+            if (cardEmpty != null) {
+                cardEmpty.setBackgroundResource(R.drawable.card_dark_gray);
+            }
             if (tvEmpty != null) {
-                tvEmpty.setBackgroundResource(R.drawable.card_dark_gray);
                 tvEmpty.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
             }
             if (btnCheck != null) btnCheck.setBackgroundResource(R.drawable.card_dark_gray);
@@ -363,9 +364,10 @@ public class HomeActivity extends AppCompatActivity
             if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#3B6D11"));
             if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow);
             if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_green);
-            if (tvAlertsTitle != null) tvAlertsTitle.setTextColor(android.graphics.Color.parseColor("#555555"));
+            if (cardEmpty != null) {
+                cardEmpty.setBackgroundResource(R.drawable.card_elevated);
+            }
             if (tvEmpty != null) {
-                tvEmpty.setBackgroundResource(R.drawable.card_white);
                 tvEmpty.setTextColor(android.graphics.Color.parseColor("#757575"));
             }
             if (btnCheck != null) btnCheck.setBackgroundResource(R.drawable.card_white);
@@ -411,13 +413,13 @@ public class HomeActivity extends AppCompatActivity
         Log.d(TAG, "[DIAG] refreshHistory #" + callNum + " — DataStore returned " + history.size() + " entries");
         historyAdapter.setItems(history);
 
-        TextView tvEmpty = findViewById(R.id.tv_history_empty);
+        View cardEmpty = findViewById(R.id.card_history_empty);
         RecyclerView rv  = findViewById(R.id.rv_history);
         if (history.isEmpty()) {
-            tvEmpty.setVisibility(View.VISIBLE);
+            if (cardEmpty != null) cardEmpty.setVisibility(View.VISIBLE);
             rv.setVisibility(View.GONE);
         } else {
-            tvEmpty.setVisibility(View.GONE);
+            if (cardEmpty != null) cardEmpty.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
         }
     }
