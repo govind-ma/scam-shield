@@ -1,48 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    activity_chat_assistant.xml — Cyber Help Agent chat screen
-    Input bar: [ 📎 Attach ] [ EditText ] [ 🎤 Mic ] [ Send ]
-    Elderly-friendly: large text (≥ 18sp), generous padding, high contrast.
+    activity_chat_assistant.xml — Cyber Help Agent chat screen (Safe Mode)
+    Design system: bg #F7F8F6, card #FFFFFF, border #E5E7E0, green #3B6D11, red #E24B4A.
+    Glowing shield header, rounded chat bubbles, pill input bar with
+    paperclip + mic + send icons. Elderly-friendly: large text, generous padding.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F8F6">
 
-    <!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+    <!-- ── Top bar with glowing shield ─────────────────────────────────────── -->
     <LinearLayout
         android:id="@+id/chat_topbar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#00695C"
+        android:layout_height="wrap_content"
+        android:background="#3B6D11"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-        <TextView
-            android:id="@+id/tv_chat_title"
+        <!-- Glowing shield badge -->
+        <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/glow_white">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shield_filled"
+                app:tint="#3B6D11"
+                android:contentDescription="Shield"/>
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="🤖  Cyber Help Agent"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
 
-        <!-- Subtitle badge -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gemini AI"
-            android:textSize="12sp"
-            android:textColor="#B2DFDB"
-            android:background="#1AFFFFFF"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"/>
+            <TextView
+                android:id="@+id/tv_chat_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cyber Help Agent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_badge_green"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Online · Powered by Gemini AI"
+                    android:textSize="13sp"
+                    android:textColor="#D7E7C6"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
@@ -59,21 +92,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:background="#FFFFFF"
         android:layout_above="@id/bottom_navigation_bar"
-        android:elevation="6dp"
+        android:elevation="8dp"
         android:gravity="center_vertical">
 
         <!-- Attach / image picker button -->
-        <TextView
+        <ImageView
             android:id="@+id/btn_attach"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="📎"
-            android:textSize="22sp"
-            android:gravity="center"
-            android:background="@drawable/card_white"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_attach"
+            android:background="@drawable/bg_icon_button"
+            android:scaleType="fitCenter"
             android:clickable="true"
             android:focusable="true"
             android:contentDescription="Attach image"/>
@@ -85,38 +121,44 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:hint="Ask about a message, link, or image…"
-            android:textSize="17sp"
-            android:padding="10dp"
-            android:background="#F0F0F0"
+            android:textSize="16sp"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#9AA398"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:background="@drawable/bg_input_field"
             android:inputType="textShortMessage|textMultiLine"
             android:maxLines="3"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
 
         <!-- Voice / microphone button -->
-        <TextView
+        <ImageView
             android:id="@+id/btn_mic"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="🎤"
-            android:textSize="22sp"
-            android:gravity="center"
-            android:background="@drawable/card_white"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_mic"
+            android:background="@drawable/bg_icon_button"
+            android:scaleType="fitCenter"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="Voice input"/>
 
         <!-- Send button -->
-        <Button
+        <ImageView
             android:id="@+id/btn_chat_send"
-            android:layout_width="64dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
-            android:text="Send"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#00695C"/>
+            android:padding="12dp"
+            android:src="@drawable/ic_send"
+            android:background="@drawable/bg_send_button"
+            android:backgroundTint="#3B6D11"
+            android:scaleType="fitCenter"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Send message"/>
 
     </LinearLayout>
 
@@ -128,38 +170,52 @@
         android:layout_below="@id/chat_topbar"
         android:layout_above="@id/layout_input"
         android:fillViewport="true"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Agent label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cyber Help Agent"
+                android:textSize="13sp"
+                android:textColor="#6B7280"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="6dp"/>
+
             <!-- Greeting bubble from agent -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#E0F2F1"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🤖 Cyber Help Agent"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#004D40"
-                    android:layout_marginBottom="6dp"/>
+                android:background="@drawable/bg_bubble_agent"
+                android:padding="18dp"
+                android:layout_marginBottom="18dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hello! I am your Cyber Help Agent.\n\nI can help you with:\n• 📝 Check if an SMS or link is a scam\n• 📸 Analyse a screenshot of a suspicious message\n• 🎤 Just speak your question — tap the mic\n\nType, speak, or attach a screenshot below."
+                    android:text="Hello! I'm your Cyber Help Agent."
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="#1A1A1A"
-                    android:lineSpacingExtra="4dp"/>
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="I can help you:\n\n•  Check if an SMS or link is a scam\n•  Look at a screenshot of a suspicious message\n•  Answer a spoken question — just tap the mic\n\nType, speak, or attach a screenshot below."
+                    android:textSize="16sp"
+                    android:textColor="#374151"
+                    android:lineSpacingExtra="5dp"/>
             </LinearLayout>
 
             <!-- Dynamic conversation thread appended here by code -->
