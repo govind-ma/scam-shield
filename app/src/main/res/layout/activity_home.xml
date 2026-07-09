@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    activity_home.xml
-    Refactored to a beautiful card-based layout for HomeActivity.
-    Light neutral background, white rounded cards, thin borders, chevron indicators.
-    Elderly-friendly: large text (>= 18sp), generous padding, high contrast.
+    activity_home.xml — SAFE MODE dashboard for HomeActivity.
+    Light neutral base (#F7F8F6), white rounded cards with thin borders,
+    coloured icon badges, and a glowing floating shield button.
+    Elderly-friendly: large text, generous padding, high contrast.
+    Alert-mode theming is applied at runtime in HomeActivity.applyHomeTheme().
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/home_root_layout"
@@ -11,7 +12,7 @@
     android:layout_height="match_parent"
     android:background="#F7F8F6">
 
-    <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
+    <!-- Bottom Navigation Bar -->
     <include
         android:id="@+id/bottom_navigation_bar"
         layout="@layout/layout_bottom_nav"
@@ -19,34 +20,55 @@
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"/>
 
-    <!-- ── Scrollable Dashboard ────────────────────────────────────────────── -->
+    <!-- Scrollable Dashboard -->
     <ScrollView
         android:id="@+id/home_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation_bar"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
 
-            <!-- ── App Header ──────────────────────────────────────────────────── -->
-            <TextView
-                android:id="@+id/tv_app_title"
-                android:layout_width="match_parent"
+            <!-- App Header: shield icon + title -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🛡  Scam Shield"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#1A1A1A"
-                android:gravity="center"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
                 android:paddingTop="12dp"
-                android:paddingBottom="8dp"/>
+                android:paddingBottom="12dp">
 
-            <!-- ── Protection Status Card ──────────────────────────────────────── -->
+                <ImageView
+                    android:id="@+id/iv_app_shield"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_shield_filled"
+                    android:tint="#3B6D11"
+                    android:contentDescription="Scam Shield logo"/>
+
+                <TextView
+                    android:id="@+id/tv_app_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scam Shield"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"
+                    android:letterSpacing="-0.01"/>
+            </LinearLayout>
+
+            <!-- Protection Status Card -->
             <LinearLayout
                 android:id="@+id/card_protection_status"
                 android:layout_width="match_parent"
@@ -55,51 +77,82 @@
                 android:background="@drawable/card_white"
                 android:gravity="center_vertical"
                 android:padding="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="20dp">
 
-                <TextView
-                    android:id="@+id/tv_protection_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🛡️"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="12dp"/>
+                <FrameLayout
+                    android:id="@+id/status_icon_badge"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_badge_green"
+                    android:layout_marginEnd="14dp">
 
-                <TextView
-                    android:id="@+id/tv_protection_status"
-                    android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/iv_protection_icon"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:tint="#3B6D11"
+                        android:contentDescription="Protection status"/>
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Scam Shield is protecting you"
-                    android:textSize="18sp"
-                    android:textColor="#2E7D32"
-                    android:textStyle="bold"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_protection_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="You're protected"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A"/>
+
+                    <TextView
+                        android:id="@+id/tv_protection_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="No threats found today"
+                        android:textSize="14sp"
+                        android:textColor="#6B7280"/>
+                </LinearLayout>
 
             </LinearLayout>
 
-            <!-- ── Primary Card-Based Action Rows ────────────────────────────── -->
-
-            <!-- Card 1: Check a message -->
+            <!-- Card 1: Check a message or link (blue) -->
             <LinearLayout
                 android:id="@+id/btn_check_something"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="72dp"
                 android:background="@drawable/card_white"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
+                android:paddingStart="14dp"
                 android:paddingEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true">
 
-                <TextView
-                    android:id="@+id/tv_btn_check_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔍"
-                    android:textSize="22sp"
-                    android:layout_marginEnd="12dp"/>
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_badge_blue"
+                    android:layout_marginEnd="14dp">
+
+                    <ImageView
+                        android:id="@+id/iv_btn_check_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_search"
+                        android:tint="#1565C0"
+                        android:contentDescription="Check icon"/>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_btn_check_text"
@@ -107,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Check a message or link"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:textColor="#1A1A1A"
                     android:textStyle="bold"/>
 
@@ -115,32 +168,40 @@
                     android:id="@+id/tv_btn_check_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="➔"
-                    android:textSize="20sp"
-                    android:textColor="#9E9E9E"/>
+                    android:text="›"
+                    android:textSize="28sp"
+                    android:textColor="#B0B3AC"/>
             </LinearLayout>
 
-            <!-- Card 2: Learn about scams -->
+            <!-- Card 2: Learn about scams (green) -->
             <LinearLayout
                 android:id="@+id/btn_learn"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="72dp"
                 android:background="@drawable/card_white"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
+                android:paddingStart="14dp"
                 android:paddingEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true">
 
-                <TextView
-                    android:id="@+id/tv_btn_learn_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📖"
-                    android:textSize="22sp"
-                    android:layout_marginEnd="12dp"/>
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_badge_green"
+                    android:layout_marginEnd="14dp">
+
+                    <ImageView
+                        android:id="@+id/iv_btn_learn_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_book"
+                        android:tint="#3B6D11"
+                        android:contentDescription="Learn icon"/>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_btn_learn_text"
@@ -148,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Learn about scams"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:textColor="#1A1A1A"
                     android:textStyle="bold"/>
 
@@ -156,32 +217,40 @@
                     android:id="@+id/tv_btn_learn_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="➔"
-                    android:textSize="20sp"
-                    android:textColor="#9E9E9E"/>
+                    android:text="›"
+                    android:textSize="28sp"
+                    android:textColor="#B0B3AC"/>
             </LinearLayout>
 
-            <!-- Card 3: I got scammed (Light Red Tint layout) -->
+            <!-- Card 3: I got scammed - help me (urgent, light red tint) -->
             <LinearLayout
                 android:id="@+id/btn_i_got_scammed"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="72dp"
                 android:background="@drawable/card_light_red"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
+                android:paddingStart="14dp"
                 android:paddingEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:clickable="true"
                 android:focusable="true">
 
-                <TextView
-                    android:id="@+id/tv_btn_scammed_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🆘"
-                    android:textSize="22sp"
-                    android:layout_marginEnd="12dp"/>
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_badge_red"
+                    android:layout_marginEnd="14dp">
+
+                    <ImageView
+                        android:id="@+id/iv_btn_scammed_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_help"
+                        android:tint="#E24B4A"
+                        android:contentDescription="Help icon"/>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_btn_scammed_text"
@@ -189,7 +258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="I got scammed — help me"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:textColor="#B71C1C"
                     android:textStyle="bold"/>
 
@@ -197,12 +266,12 @@
                     android:id="@+id/tv_btn_scammed_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="➔"
-                    android:textSize="20sp"
-                    android:textColor="#B71C1C"/>
+                    android:text="›"
+                    android:textSize="28sp"
+                    android:textColor="#E24B4A"/>
             </LinearLayout>
 
-            <!-- ── Recent Alerts Group Title ────────────────────────────────────── -->
+            <!-- Recent Alerts Group Title -->
             <TextView
                 android:id="@+id/tv_recent_alerts_title"
                 android:layout_width="match_parent"
@@ -211,7 +280,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#555555"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="10dp"/>
 
             <!-- Empty State Card -->
             <TextView
@@ -220,13 +289,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_white"
                 android:text="No alerts yet. Scam Shield is watching."
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textColor="#757575"
                 android:gravity="center"
                 android:padding="20dp"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- RecyclerView History Alert Cards -->
+            <!-- RecyclerView: recent detection alert cards -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_history"
                 android:layout_width="match_parent"
@@ -236,5 +305,39 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- Glowing Floating Shield Button (above the nav bar, bottom-right) -->
+    <FrameLayout
+        android:id="@+id/fab_shield"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_above="@id/bottom_navigation_bar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/fab_glow"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Quick scan">
+
+        <FrameLayout
+            android:id="@+id/fab_circle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/fab_circle_green"
+            android:elevation="8dp">
+
+            <ImageView
+                android:id="@+id/iv_fab_shield_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shield_filled"
+                android:tint="#FFFFFF"
+                android:contentDescription="Shield"/>
+        </FrameLayout>
+
+    </FrameLayout>
 
 </RelativeLayout>
