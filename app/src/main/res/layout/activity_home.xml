@@ -175,8 +175,7 @@
 
             </LinearLayout>
 
-            <!-- Card 1: Check a message or link (blue) -->
-            <LinearLayout
+
             <!-- ═══════════════════════════════════════════════════════════════
                  SMS INBOX SECTION  ← NEW
                  Reads the full device SMS inbox, labels each message SAFE or SCAM.
