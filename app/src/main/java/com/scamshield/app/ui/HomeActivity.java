@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -144,9 +145,11 @@ public class HomeActivity extends AppCompatActivity
      * Called in onResume() so it reflects any changes made in Settings.
      */
     private void updateProtectionStatus() {
-        TextView tvStatus = findViewById(R.id.tv_protection_status);
-        TextView tvIcon   = findViewById(R.id.tv_protection_icon);
-        View     cardView = findViewById(R.id.card_protection_status);
+        TextView  tvStatus   = findViewById(R.id.tv_protection_status);
+        TextView  tvSubtitle = findViewById(R.id.tv_protection_subtitle);
+        ImageView ivIcon     = findViewById(R.id.iv_protection_icon);
+        View      iconBadge  = findViewById(R.id.status_icon_badge);
+        View      cardView   = findViewById(R.id.card_protection_status);
 
         // Check if Alert Mode is active (scam detected)
         boolean isAlert = false;
@@ -157,30 +160,53 @@ public class HomeActivity extends AppCompatActivity
         applyHomeTheme(isAlert);
 
         if (isAlert) {
-            if (tvIcon != null) tvIcon.setText("🚨");
-            tvStatus.setText("ALERT ACTIVE — Tap for emergency help");
+            if (ivIcon != null) {
+                ivIcon.setImageResource(R.drawable.ic_warning);
+                ivIcon.setColorFilter(android.graphics.Color.parseColor("#FF5252"));
+            }
+            if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_alert);
+            tvStatus.setText("Alert active");
             tvStatus.setTextColor(android.graphics.Color.parseColor("#FF5252"));
+            if (tvSubtitle != null) {
+                tvSubtitle.setText("Tap for emergency help");
+                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
+            }
             cardView.setBackgroundResource(R.drawable.card_dark_gray);
-            cardView.setOnClickListener(v -> {
-                startActivity(new Intent(this, IGotScammedActivity.class));
-            });
+            cardView.setOnClickListener(v ->
+                startActivity(new Intent(this, IGotScammedActivity.class)));
             return;
         }
 
         boolean overlayOk = OverlayPermissionHelper.hasPermission(this);
 
         if (overlayOk) {
-            if (tvIcon != null) tvIcon.setText("🛡️");
-            tvStatus.setText("Scam Shield is protecting you");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#2E7D32"));
+            if (ivIcon != null) {
+                ivIcon.setImageResource(R.drawable.ic_check);
+                ivIcon.setColorFilter(android.graphics.Color.parseColor("#3B6D11"));
+            }
+            if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_green);
+            tvStatus.setText("You're protected");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
+            if (tvSubtitle != null) {
+                tvSubtitle.setText("No threats found today");
+                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#6B7280"));
+            }
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(null); // Clear click listener
             // Start the floating service if not already running
             startFloatingService();
         } else {
-            if (tvIcon != null) tvIcon.setText("⚠️");
-            tvStatus.setText("Action needed — tap to complete setup");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#E65100"));
+            if (ivIcon != null) {
+                ivIcon.setImageResource(R.drawable.ic_warning);
+                ivIcon.setColorFilter(android.graphics.Color.parseColor("#E65100"));
+            }
+            if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_amber);
+            tvStatus.setText("Finish setting up");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
+            if (tvSubtitle != null) {
+                tvSubtitle.setText("Tap to turn on protection");
+                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#E65100"));
+            }
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(v ->
                 OverlayPermissionHelper.requestPermission(this));
@@ -190,8 +216,12 @@ public class HomeActivity extends AppCompatActivity
     private void applyHomeTheme(boolean isAlert) {
         View root = findViewById(R.id.home_root_layout);
         TextView tvTitle = findViewById(R.id.tv_app_title);
+        ImageView ivShield = findViewById(R.id.iv_app_shield);
         TextView tvAlertsTitle = findViewById(R.id.tv_recent_alerts_title);
         TextView tvEmpty = findViewById(R.id.tv_history_empty);
+
+        View fab = findViewById(R.id.fab_shield);
+        View fabCircle = findViewById(R.id.fab_circle);
         
         View btnCheck = findViewById(R.id.btn_check_something);
         TextView tvCheckText = findViewById(R.id.tv_btn_check_text);
@@ -210,6 +240,9 @@ public class HomeActivity extends AppCompatActivity
         if (isAlert) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2A"));
             if (tvTitle != null) tvTitle.setTextColor(android.graphics.Color.WHITE);
+            if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#E24B4A"));
+            if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow_red);
+            if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_red);
             if (tvAlertsTitle != null) tvAlertsTitle.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
             if (tvEmpty != null) {
                 tvEmpty.setBackgroundResource(R.drawable.card_dark_gray);
@@ -230,6 +263,9 @@ public class HomeActivity extends AppCompatActivity
         } else {
             root.setBackgroundColor(android.graphics.Color.parseColor("#F7F8F6"));
             if (tvTitle != null) tvTitle.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
+            if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#3B6D11"));
+            if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow);
+            if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_green);
             if (tvAlertsTitle != null) tvAlertsTitle.setTextColor(android.graphics.Color.parseColor("#555555"));
             if (tvEmpty != null) {
                 tvEmpty.setBackgroundResource(R.drawable.card_white);
@@ -324,6 +360,12 @@ public class HomeActivity extends AppCompatActivity
         btnScammed.setOnClickListener(v -> {
             startActivity(new Intent(this, IGotScammedActivity.class));
         });
+
+        // ── Floating shield button — run a quick manual scan ──────────────────
+        View fabShield = findViewById(R.id.fab_shield);
+        if (fabShield != null) {
+            fabShield.setOnClickListener(v -> triggerScanNowGesture());
+        }
     }
 
     /**
