@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glow ring behind the FAB shield icon.
+     Pure oval with a semi-transparent colored stroke — no fill.
+     Color and alpha are animated at runtime by FloatingAssistantService. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#00000000"/>   <!-- transparent fill -->
+    <stroke
+        android:width="3dp"
+        android:color="#6600695C"/>      <!-- 40% alpha teal — set dynamically for alert mode -->
+</shape>

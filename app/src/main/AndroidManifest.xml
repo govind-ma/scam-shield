@@ -15,8 +15,7 @@
 ║    Dangerous permissions (RECEIVE_SMS, READ_SMS) require BOTH gates.       ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scamshield.app">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- ======================================================================
          PERMISSIONS — Gate 1 (manifest declarations)
@@ -67,6 +66,25 @@
         Required on API 34+ for starting a foreground service of type specialUse.
     -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!--
+        RECORD_AUDIO — Dangerous permission.
+        Required for SpeechRecognizer voice input in ChatAssistantActivity.
+        User approves at runtime when they first tap the mic button.
+    -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!--
+        READ_MEDIA_IMAGES — Dangerous permission (API 33+).
+        Lets the user pick a screenshot from their gallery in ChatAssistantActivity.
+        On API < 33, READ_EXTERNAL_STORAGE is used instead.
+    -->
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        android:minSdkVersion="33" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <!-- ======================================================================
          APPLICATION BLOCK
