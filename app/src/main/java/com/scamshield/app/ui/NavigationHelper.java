@@ -47,7 +47,7 @@ public class NavigationHelper {
         bottomNav.setBackgroundColor(Color.WHITE);
 
         // 3. Accent color: green in Safe Mode, red in Alert Mode
-        int activeColor  = isAlertMode ? Color.parseColor("#B71C1C") : Color.parseColor("#00695C");
+        int activeColor  = isAlertMode ? Color.parseColor("#E24B4A") : Color.parseColor("#3B6D11");
         int inactiveColor = Color.parseColor("#9E9E9E");
 
         // Helper arrays — order matches TAB_HOME=0, TAB_CHAT=1, TAB_LEARN=2, TAB_SETTINGS=3
@@ -131,7 +131,7 @@ public class NavigationHelper {
             isAlertMode = LocalDataStore.getInstance().isAlertModeActive();
         } catch (Exception ignored) {}
 
-        int color = isAlertMode ? Color.parseColor("#B71C1C") : Color.parseColor("#00695C");
+        int color = isAlertMode ? Color.parseColor("#E24B4A") : Color.parseColor("#3B6D11");
         topbarView.setBackgroundColor(color);
     }
 }

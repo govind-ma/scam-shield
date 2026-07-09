@@ -15,7 +15,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,9 +68,9 @@ public class ChatAssistantActivity extends AppCompatActivity {
     private LinearLayout layoutChatThread;
     private ScrollView   chatScrollView;
     private EditText     etInput;
-    private TextView     btnAttach;
-    private TextView     btnMic;
-    private Button       btnSend;
+    private ImageView    btnAttach;
+    private ImageView    btnMic;
+    private ImageView    btnSend;
     private View         chatTopbar;
 
     @Override
@@ -104,7 +103,7 @@ public class ChatAssistantActivity extends AppCompatActivity {
         try {
             boolean isAlert = LocalDataStore.getInstance().isAlertModeActive();
             btnSend.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
-                isAlert ? Color.parseColor("#B71C1C") : Color.parseColor("#00695C")
+                isAlert ? Color.parseColor("#E24B4A") : Color.parseColor("#3B6D11")
             ));
         } catch (Exception ignored) {}
     }
@@ -326,9 +325,9 @@ public class ChatAssistantActivity extends AppCompatActivity {
         TextView bubble = new TextView(this);
         bubble.setText(message);
         bubble.setTextSize(17);
-        bubble.setTextColor(Color.parseColor("#1A1A1A"));
-        bubble.setBackgroundColor(Color.parseColor("#E0E0E0"));
-        bubble.setPadding(16, 12, 16, 12);
+        bubble.setTextColor(Color.parseColor("#FFFFFF"));
+        bubble.setBackgroundResource(R.drawable.bg_bubble_user);
+        bubble.setPadding(36, 26, 36, 26);
 
         row.addView(label);
         row.addView(bubble);
