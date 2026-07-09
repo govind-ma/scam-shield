@@ -7,7 +7,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,23 +28,31 @@ import java.util.Locale;
  * Package: com.scamshield.app.ui
  *
  * RecyclerView adapter for the SMS inbox view on HomeActivity.
- * Each row shows a single SMS from the device inbox with a colour-coded
- * verdict pill (SCAM = dark red, SUSPICIOUS = orange, SAFE = teal-green).
+ *
+ * Features per row:
+ *   • Contact name (if in contacts) OR raw phone number
+ *   • Colour-coded verdict pill: SCAM = dark red, SUSPICIOUS = orange, SAFE = teal-green
+ *   • Trusted messages show a grey "Trusted ✓" badge instead of the verdict pill
+ *   • Truncated message preview (2 lines)
+ *   • Timestamp
+ *   • "✓ Trust this message" button — tapping it marks the message as trusted
+ *     (pill turns grey, button disappears, row tap no longer opens CheckSomethingActivity)
  *
  * Row tap → opens CheckSomethingActivity with the full message body pre-filled
- * in the input field (via EXTRA_PREFILL_TEXT intent extra).
- *
- * Layout: res/layout/item_sms_inbox.xml
+ * (EXTRA_PREFILL_TEXT intent extra) — unless the message is trusted.
  */
 public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHolder> {
 
-    // Colour constants — match the app's Safe/Alert Mode palette
-    private static final int COLOR_SCAM       = Color.parseColor("#B71C1C"); // Alert Mode dark red
-    private static final int COLOR_SUSPICIOUS = Color.parseColor("#E65100"); // deep orange
-    private static final int COLOR_SAFE       = Color.parseColor("#00695C"); // Safe Mode teal-green
-    private static final int COLOR_SAFE_BG    = Color.parseColor("#E8F5E9"); // light green tint for pill bg
-    private static final int COLOR_SCAM_BG    = Color.parseColor("#FFEBEE"); // light red tint for pill bg
-    private static final int COLOR_SUSP_BG    = Color.parseColor("#FBE9E7"); // light orange tint for pill bg
+    // Colour constants — Safe/Alert Mode palette
+    private static final int COLOR_SCAM        = Color.parseColor("#B71C1C");
+    private static final int COLOR_SUSPICIOUS  = Color.parseColor("#E65100");
+    private static final int COLOR_SAFE        = Color.parseColor("#00695C");
+    private static final int COLOR_TRUSTED     = Color.parseColor("#757575"); // grey
+    private static final int COLOR_SCAM_BG     = Color.parseColor("#FFEBEE");
+    private static final int COLOR_SUSP_BG     = Color.parseColor("#FBE9E7");
+    private static final int COLOR_SAFE_BG     = Color.parseColor("#E8F5E9");
+    private static final int COLOR_TRUSTED_BG  = Color.parseColor("#F5F5F5"); // light grey
+    private static final int COLOR_TRUST_BTN   = Color.parseColor("#E8F5E9"); // green tint for button bg
 
     private static final SimpleDateFormat DATE_FMT =
             new SimpleDateFormat("dd MMM, hh:mm a", Locale.getDefault());
@@ -76,52 +86,72 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
         SmsMessage msg = items.get(position);
         Context ctx = holder.itemView.getContext();
 
-        // ── Sender ───────────────────────────────────────────────────────────
-        holder.tvSender.setText(msg.address != null ? msg.address : "Unknown");
+        // ── Sender: contact name if available, else raw number ────────────────
+        holder.tvSender.setText(msg.getDisplayName());
 
-        // ── Preview (truncation handled by maxLines + ellipsize in XML) ───────
+        // ── Preview ───────────────────────────────────────────────────────────
         String preview = (msg.body != null && !msg.body.isEmpty())
-                ? msg.body
-                : "(empty message)";
+                ? msg.body : "(empty message)";
         holder.tvPreview.setText(preview);
 
         // ── Timestamp ─────────────────────────────────────────────────────────
-        if (msg.date > 0) {
-            holder.tvTimestamp.setText(DATE_FMT.format(new Date(msg.date)));
+        holder.tvTimestamp.setText(msg.date > 0 ? DATE_FMT.format(new Date(msg.date)) : "");
+
+        // ── Verdict pill + Trust button ───────────────────────────────────────
+        if (msg.trusted) {
+            // Trusted: grey pill, no action button, row tap does nothing
+            holder.tvVerdict.setText("Trusted ✓");
+            holder.tvVerdict.setTextColor(COLOR_TRUSTED);
+            setPillBackground(holder.tvVerdict, COLOR_TRUSTED_BG);
+            holder.llTrustRow.setVisibility(View.GONE);
+            holder.itemView.setOnClickListener(null);
         } else {
-            holder.tvTimestamp.setText("");
+            // Not yet trusted: show colour-coded verdict pill + trust button
+            DetectionResult.Verdict verdict =
+                    (msg.result != null) ? msg.result.verdict : DetectionResult.Verdict.SAFE;
+
+            switch (verdict) {
+                case SCAM:
+                    holder.tvVerdict.setText("⚠ SCAM");
+                    holder.tvVerdict.setTextColor(COLOR_SCAM);
+                    setPillBackground(holder.tvVerdict, COLOR_SCAM_BG);
+                    break;
+                case SUSPICIOUS:
+                    holder.tvVerdict.setText("⚡ SUSPICIOUS");
+                    holder.tvVerdict.setTextColor(COLOR_SUSPICIOUS);
+                    setPillBackground(holder.tvVerdict, COLOR_SUSP_BG);
+                    break;
+                case SAFE:
+                default:
+                    holder.tvVerdict.setText("✓ SAFE");
+                    holder.tvVerdict.setTextColor(COLOR_SAFE);
+                    setPillBackground(holder.tvVerdict, COLOR_SAFE_BG);
+                    break;
+            }
+
+            // Trust button — always visible for untrusted messages
+            holder.llTrustRow.setVisibility(View.VISIBLE);
+            setPillBackground(holder.btnTrust, COLOR_TRUST_BTN);
+
+            holder.btnTrust.setOnClickListener(v -> {
+                int adapterPos = holder.getAdapterPosition();
+                if (adapterPos == RecyclerView.NO_ID) return;
+                SmsMessage target = items.get(adapterPos);
+                target.trusted = true;
+                notifyItemChanged(adapterPos);
+                Toast.makeText(ctx,
+                        "Marked as trusted: " + target.getDisplayName(),
+                        Toast.LENGTH_SHORT).show();
+            });
+
+            // Row tap → open CheckSomethingActivity with body pre-filled
+            String body = msg.body;
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(ctx, CheckSomethingActivity.class);
+                intent.putExtra(CheckSomethingActivity.EXTRA_PREFILL_TEXT, body);
+                ctx.startActivity(intent);
+            });
         }
-
-        // ── Verdict pill ──────────────────────────────────────────────────────
-        DetectionResult.Verdict verdict =
-                (msg.result != null) ? msg.result.verdict : DetectionResult.Verdict.SAFE;
-
-        switch (verdict) {
-            case SCAM:
-                holder.tvVerdict.setText("⚠ SCAM");
-                holder.tvVerdict.setTextColor(COLOR_SCAM);
-                setPillBackground(holder.tvVerdict, COLOR_SCAM_BG);
-                break;
-            case SUSPICIOUS:
-                holder.tvVerdict.setText("⚡ SUSPICIOUS");
-                holder.tvVerdict.setTextColor(COLOR_SUSPICIOUS);
-                setPillBackground(holder.tvVerdict, COLOR_SUSP_BG);
-                break;
-            case SAFE:
-            default:
-                holder.tvVerdict.setText("✓ SAFE");
-                holder.tvVerdict.setTextColor(COLOR_SAFE);
-                setPillBackground(holder.tvVerdict, COLOR_SAFE_BG);
-                break;
-        }
-
-        // ── Row tap: open CheckSomethingActivity with body pre-filled ─────────
-        String body = msg.body;
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(ctx, CheckSomethingActivity.class);
-            intent.putExtra(CheckSomethingActivity.EXTRA_PREFILL_TEXT, body);
-            ctx.startActivity(intent);
-        });
     }
 
     @Override
@@ -134,14 +164,13 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
     // =========================================================================
 
     /**
-     * Applies a rounded-rectangle background with the given fill colour to a
-     * TextView pill. Using GradientDrawable programmatically preserves the
-     * corner radius that would be lost if we called setBackgroundColor() directly.
+     * Applies a rounded-rectangle background with the given fill colour.
+     * GradientDrawable preserves corner radius (setBackgroundColor would lose it).
      */
     private static void setPillBackground(TextView view, int fillColor) {
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.RECTANGLE);
-        shape.setCornerRadius(24f); // 24px radius → smooth pill on any screen density
+        shape.setCornerRadius(24f);
         shape.setColor(fillColor);
         view.setBackground(shape);
     }
@@ -151,10 +180,12 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
     // =========================================================================
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView tvSender;
-        final TextView tvVerdict;
-        final TextView tvPreview;
-        final TextView tvTimestamp;
+        final TextView    tvSender;
+        final TextView    tvVerdict;
+        final TextView    tvPreview;
+        final TextView    tvTimestamp;
+        final LinearLayout llTrustRow;
+        final TextView    btnTrust;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -162,6 +193,8 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
             tvVerdict   = itemView.findViewById(R.id.tv_sms_verdict);
             tvPreview   = itemView.findViewById(R.id.tv_sms_preview);
             tvTimestamp = itemView.findViewById(R.id.tv_sms_timestamp);
+            llTrustRow  = itemView.findViewById(R.id.ll_trust_row);
+            btnTrust    = itemView.findViewById(R.id.btn_trust_message);
         }
     }
 }

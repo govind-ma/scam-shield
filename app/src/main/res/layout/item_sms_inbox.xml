@@ -3,15 +3,14 @@
     item_sms_inbox.xml
     Row layout for SmsInboxAdapter — one SMS message in the home page inbox view.
 
-    Structured like a standard messaging app inbox row:
-      • Top row: sender (bold left) + verdict pill (coloured right)
-      • Bottom row: message preview (2-line ellipsis left) + timestamp (grey right)
+    Row structure:
+      ┌───────────────────────────────────────────────────┐
+      │  Sender / Contact name          [⚠ SCAM pill]    │
+      │  Message preview (2 lines)...      10:30 AM      │
+      │                         [✓ Trust this message]   │
+      └───────────────────────────────────────────────────┘
 
-    Verdict pill background colour is set programmatically in SmsInboxAdapter.
-    Rounded corners for pill are handled by android:background="@drawable/pill_bg"
-    which is a simple shape drawable — or by padding+background colour in code.
-
-    Elderly-friendly: minimum 16sp text, generous padding, clear contrast.
+    Trust button is hidden when message is already trusted (set in SmsInboxAdapter).
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -21,12 +20,12 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="12dp"
-    android:paddingBottom="12dp"
+    android:paddingBottom="10dp"
     android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Top row: sender + verdict pill -->
+    <!-- Top row: sender name + verdict pill -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +33,7 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="4dp">
 
-        <!-- Sender name / phone number -->
+        <!-- Contact name or phone number -->
         <TextView
             android:id="@+id/tv_sms_sender"
             android:layout_width="0dp"
@@ -47,7 +46,7 @@
             android:ellipsize="end"
             android:text="Unknown Sender"/>
 
-        <!-- Verdict pill (SCAM / SUSPICIOUS / SAFE) — background colour set in code -->
+        <!-- Verdict pill (SCAM / SUSPICIOUS / SAFE) -->
         <TextView
             android:id="@+id/tv_sms_verdict"
             android:layout_width="wrap_content"
@@ -65,12 +64,13 @@
 
     </LinearLayout>
 
-    <!-- Bottom row: message preview + timestamp -->
+    <!-- Middle row: message preview + timestamp -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="top">
+        android:gravity="top"
+        android:layout_marginBottom="6dp">
 
         <!-- Message body preview — capped at 2 lines with ellipsis -->
         <TextView
@@ -85,7 +85,7 @@
             android:lineSpacingMultiplier="1.3"
             android:text="Message preview goes here..."/>
 
-        <!-- Timestamp — right-aligned, grey, compact -->
+        <!-- Timestamp -->
         <TextView
             android:id="@+id/tv_sms_timestamp"
             android:layout_width="wrap_content"
@@ -94,6 +94,32 @@
             android:textSize="12sp"
             android:textColor="#9E9E9E"
             android:text="10:30 AM"/>
+
+    </LinearLayout>
+
+    <!-- Bottom row: Trust button — hidden when trusted, visible otherwise -->
+    <LinearLayout
+        android:id="@+id/ll_trust_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/btn_trust_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✓ Trust this message"
+            android:textSize="13sp"
+            android:textColor="#00695C"
+            android:textStyle="bold"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/pill_verdict"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </LinearLayout>
 

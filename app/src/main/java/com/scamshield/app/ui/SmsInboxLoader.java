@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.scamshield.app.ScamShieldApp;
@@ -20,20 +21,25 @@ import java.util.List;
  * Package: com.scamshield.app.ui
  *
  * Queries the device's SMS content provider (content://sms/inbox) on a
- * background thread, runs each message body through the existing DetectionEngine,
- * and posts the result list back to the main thread via a callback.
+ * background thread, resolves each sender's phone number to a contact name
+ * from the device Contacts app (if READ_CONTACTS is granted), runs each
+ * message body through the existing DetectionEngine, and posts the result
+ * list back to the main thread via a callback.
  *
  * Design choices:
- *   • Uses a plain Java Thread + main-thread Handler to avoid AsyncTask (deprecated
- *     in API 30) and to remain compatible with minSdk 24 without any extra libs.
- *   • Caps fetch at MAX_MESSAGES (150) sorted newest-first to bound memory use.
- *   • Calls ScamShieldApp.getEngine() — the same singleton RuleBasedEngine used
- *     everywhere else. Zero duplication of detection logic.
- *   • Does NOT write results to LocalDataStore — these are read-only, display-only
- *     labels for the inbox view. Only real new detections go to DataStore.
+ *   • Uses plain Java Thread + main-thread Handler — no deprecated AsyncTask,
+ *     no coroutines, compatible with minSdk 24.
+ *   • Caps fetch at MAX_MESSAGES (150) sorted newest-first.
+ *   • Calls ScamShieldApp.getEngine() — the same singleton RuleBasedEngine
+ *     used everywhere. Zero duplication of detection logic.
+ *   • Contact lookup: PhoneLookup.CONTENT_FILTER_URI is the official Android
+ *     API for number → name resolution. Falls back gracefully if denied.
+ *   • Does NOT write to LocalDataStore — inbox items are display-only.
  *
  * READ_SMS permission must be granted before calling load(); callers are
- * responsible for checking and requesting the permission first.
+ * responsible for checking and requesting permissions first.
+ * READ_CONTACTS is optional — if denied, contactName is left null and the
+ * raw number is shown instead.
  */
 public class SmsInboxLoader {
 
@@ -46,8 +52,8 @@ public class SmsInboxLoader {
     }
 
     /**
-     * Starts a background thread that reads the SMS inbox and analyses each
-     * message. Calls {@code callback.onLoaded()} on the main thread when done.
+     * Starts a background thread that reads the SMS inbox, resolves contact names,
+     * and analyses each message. Calls {@code callback.onLoaded()} on the main thread.
      *
      * @param context  Application or Activity context (used for ContentResolver).
      * @param callback Receives the result list on the main thread.
@@ -70,16 +76,13 @@ public class SmsInboxLoader {
             ContentResolver cr  = context.getContentResolver();
             Uri             uri = Uri.parse("content://sms/inbox");
 
-            // Projection — only the columns we need (keeps cursor lightweight)
             String[] projection = {"address", "body", "date"};
-
-            // Sort newest first, cap at MAX_MESSAGES via LIMIT
-            String sortOrder = "date DESC LIMIT " + MAX_MESSAGES;
+            String sortOrder    = "date DESC LIMIT " + MAX_MESSAGES;
 
             Cursor cursor = cr.query(uri, projection, null, null, sortOrder);
 
             if (cursor == null) {
-                Log.w(TAG, "SMS ContentProvider returned null cursor — READ_SMS denied or device unsupported.");
+                Log.w(TAG, "SMS ContentProvider returned null cursor.");
                 return messages;
             }
 
@@ -96,21 +99,20 @@ public class SmsInboxLoader {
 
                 SmsMessage msg = new SmsMessage(address, body, date);
 
-                // Run through the existing engine — pure string matching, fast even for 150 messages
+                // ── Resolve contact name ──────────────────────────────────────
+                msg.contactName = resolveContactName(cr, address);
+
+                // ── Run through detection engine ──────────────────────────────
                 try {
                     msg.result = engine.analyze(
                             (body != null ? body : ""),
                             "SMS"
                     );
                 } catch (Exception e) {
-                    Log.w(TAG, "Engine analysis failed for message from " + address + ": " + e.getMessage());
-                    // Treat engine failure as SAFE to avoid false positives
+                    Log.w(TAG, "Engine analysis failed for " + address + ": " + e.getMessage());
                     msg.result = new DetectionResult(
-                            DetectionResult.Verdict.SAFE,
-                            0,
-                            "Could not analyse message.",
-                            "SMS",
-                            date
+                            DetectionResult.Verdict.SAFE, 0,
+                            "Could not analyse message.", "SMS", date
                     );
                 }
 
@@ -127,5 +129,51 @@ public class SmsInboxLoader {
         }
 
         return messages;
+    }
+
+    /**
+     * Resolves a phone number or sender ID to a contact name from the device
+     * Contacts database using ContactsContract.PhoneLookup.
+     *
+     * Returns null if:
+     *   • READ_CONTACTS permission is not granted
+     *   • The number is not found in contacts (e.g. alphanumeric sender IDs like "VM-SBIBNK")
+     *   • Any exception occurs
+     *
+     * @param cr      ContentResolver from the caller's context
+     * @param address The raw phone number or sender ID from the SMS
+     * @return Contact display name, or null if not resolvable
+     */
+    private static String resolveContactName(ContentResolver cr, String address) {
+        if (address == null || address.isEmpty()) return null;
+
+        try {
+            Uri lookupUri = Uri.withAppendedPath(
+                    ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                    Uri.encode(address)
+            );
+
+            Cursor cursor = cr.query(
+                    lookupUri,
+                    new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME},
+                    null, null, null
+            );
+
+            if (cursor == null) return null;
+
+            String name = null;
+            if (cursor.moveToFirst()) {
+                name = cursor.getString(0);
+            }
+            cursor.close();
+            return (name != null && !name.isEmpty()) ? name : null;
+
+        } catch (SecurityException e) {
+            // READ_CONTACTS not granted — silently return null
+            return null;
+        } catch (Exception e) {
+            Log.w(TAG, "Contact lookup failed for " + address + ": " + e.getMessage());
+            return null;
+        }
     }
 }
