@@ -48,7 +48,8 @@
         android:text="Check this message"
         android:textSize="20sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#1565C0"
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"/>
 
@@ -70,7 +71,8 @@
         android:text="🆘  I got scammed — Get Help Now"
         android:textSize="19sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#B71C1C"
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"
         android:visibility="gone"/>
 
     </LinearLayout>

@@ -31,7 +31,8 @@
         android:text="🔍 Check something"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#1565C0"
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"
         android:layout_marginBottom="8dp"/>
 
     <!-- Button 2 -->
@@ -42,7 +43,8 @@
         android:text="📖 Learn about scams"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#00695C"
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"
         android:layout_marginBottom="8dp"/>
 
     <!-- Button 3 -->
@@ -53,6 +55,7 @@
         android:text="🆘 I got scammed"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#B71C1C"/>
+        android:background="@drawable/ripple_frosted"
+        android:backgroundTint="@null"/>
 
 </LinearLayout>
