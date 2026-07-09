@@ -186,6 +186,14 @@ public class ScamAlertManager implements DetectionListener {
                 Log.e(TAG, "Failed to log detection to DataStore: " + e.getMessage());
             }
 
+            // ── Part C+: Update centralized theme state ──────────────────────────
+            // When a scam/suspicious detection occurs, switch to Alert Mode (red theme).
+            // SAFE verdicts leave the theme unchanged (they don't clear Alert Mode).
+            if (result.verdict == DetectionResult.Verdict.SCAM
+                    || result.verdict == DetectionResult.Verdict.SUSPICIOUS) {
+                ThemeManager.setAlertMode(appContext, result.verdict);
+            }
+
             switch (result.verdict) {
                 case SCAM:
                     showScamOverlay(result);
@@ -428,6 +436,11 @@ public class ScamAlertManager implements DetectionListener {
         try {
             LocalDataStore.getInstance().setAlertModeActive(false);
         } catch (Exception ignored) {}
+
+        // ── Update centralized theme state ──────────────────────────────────────
+        // When an alert is dismissed, return to Safe Mode unless another alert
+        // is pending. ThemeManager handles persistence to SharedPreferences.
+        ThemeManager.dismissAlert(appContext);
 
         if (currentOverlayView != null) {
             try {

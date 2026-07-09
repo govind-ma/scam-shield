@@ -37,11 +37,8 @@ public class NavigationHelper {
         View bottomNav = activity.findViewById(R.id.bottom_nav_container);
         if (bottomNav == null) return;
 
-        // 1. Get alert mode status from DataStore
-        boolean isAlertMode = false;
-        try {
-            isAlertMode = LocalDataStore.getInstance().isAlertModeActive();
-        } catch (Exception ignored) {}
+        // 1. Get alert mode status from centralized ThemeManager
+        boolean isAlertMode = ThemeManager.isAlertMode(activity);
 
         // 2. Nav bar always white — accent goes on the active tab's icon + label text
         bottomNav.setBackgroundColor(Color.WHITE);
@@ -126,10 +123,9 @@ public class NavigationHelper {
      */
     public static void applyTopBarTheme(Activity activity, View topbarView) {
         if (topbarView == null) return;
-        boolean isAlertMode = false;
-        try {
-            isAlertMode = LocalDataStore.getInstance().isAlertModeActive();
-        } catch (Exception ignored) {}
+        
+        // Use centralized ThemeManager to determine current theme
+        boolean isAlertMode = ThemeManager.isAlertMode(activity);
 
         int color = isAlertMode ? Color.parseColor("#E24B4A") : Color.parseColor("#3B6D11");
         topbarView.setBackgroundColor(color);

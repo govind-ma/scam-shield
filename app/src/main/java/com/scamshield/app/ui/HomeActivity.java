@@ -68,6 +68,11 @@ public class HomeActivity extends AppCompatActivity
 
         Log.d(TAG, "HomeActivity created.");
 
+        // ── Apply theme based on current app state ──────────────────────────────
+        // If an alert is pending, show Alert Mode (red); otherwise show Safe Mode (green).
+        boolean isAlertMode = ThemeManager.isAlertMode(this);
+        applyHomeTheme(isAlertMode);
+
         setupProtectionStatusCard();
         // setupHistoryList() already calls refreshHistory() once internally.
         // Do NOT call refreshHistory() again here — it would produce 2x display entries.
