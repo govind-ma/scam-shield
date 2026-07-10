@@ -164,10 +164,12 @@ public class FloatingAssistantService extends Service {
         applyGlowColor(isAlert ? COLOR_ALERT : COLOR_SAFE);
         startGlowAnimation();
 
-        // Window params — bottom-right corner, above the 64dp nav bar
+        // Window params — bottom-right corner, safely above the 64dp nav bar.
+        // x = distance from RIGHT edge, y = distance from BOTTOM edge (Gravity.BOTTOM|END).
+        // 24dp right margin keeps it off the edge; 80dp bottom = 64dp nav + 16dp gap.
         float density      = getResources().getDisplayMetrics().density;
-        int marginRightPx  = (int) (16 * density);
-        int marginBottomPx = (int) ((72 + 64) * density);   // 72dp margin + 64dp nav bar
+        int marginRightPx  = (int) (24 * density);   // 24dp from right edge
+        int marginBottomPx = (int) (80 * density);   // 64dp nav bar + 16dp breathing room
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -175,7 +177,8 @@ public class FloatingAssistantService extends Service {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
                 ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 : WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
             PixelFormat.TRANSLUCENT
         );
         params.gravity = Gravity.BOTTOM | Gravity.END;
@@ -284,13 +287,15 @@ public class FloatingAssistantService extends Service {
                         if (targetX < 0) targetX = 0;
 
                         float density = getResources().getDisplayMetrics().density;
-                        int minBottomMargin = (int) (76 * density);
+                        // Minimum Y from bottom: keep bubble above the nav bar (80dp)
+                        int minBottomMargin = (int) (80 * density);
                         if (targetY < minBottomMargin) targetY = minBottomMargin;
 
+                        // Maximum Y from bottom: don't let bubble go off the top of screen
                         try {
                             android.graphics.Point displaySize = new android.graphics.Point();
                             windowManager.getDefaultDisplay().getSize(displaySize);
-                            int maxY = displaySize.y - (int) (80 * density);
+                            int maxY = displaySize.y - (int) (100 * density);
                             if (targetY > maxY) targetY = maxY;
                         } catch (Exception ignored) {}
 
