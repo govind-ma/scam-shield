@@ -40,6 +40,13 @@
     <uses-permission android:name="android.permission.READ_SMS" />
 
     <!--
+        SEND_SMS — Dangerous permission.
+        Required to send the Family Alert test SMS from SettingsActivity.
+        User must approve this at runtime.
+    -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!--
         READ_CONTACTS — Dangerous permission.
         Lets SmsInboxLoader resolve phone numbers to contact names in the SMS inbox.
         Shows "Priya" instead of "+919876543210" for known contacts.
