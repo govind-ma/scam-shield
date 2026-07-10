@@ -69,6 +69,22 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--
+        READ_CALL_LOG — Dangerous permission.
+        Required for future call-log scanning features (detecting spoofed or
+        premium-rate numbers that appear in call history).
+        User approves at runtime alongside SMS permissions.
+    -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
+    <!--
+        READ_PHONE_STATE — Dangerous permission.
+        Required to detect incoming call events and inspect caller ID for scam
+        numbers (e.g., detecting "Missed call from +92..." refund scams).
+        User approves at runtime.
+    -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!--
         SYSTEM_ALERT_WINDOW — Special permission.
         Lets ScamAlertManager draw overlays above other apps (scam warnings).
         Unlike normal runtime permissions, this requires sending the user to

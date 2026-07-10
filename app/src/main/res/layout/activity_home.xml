@@ -94,7 +94,7 @@
                             android:layout_height="wrap_content"
                             android:text="Your Digital Guardian"
                             android:textSize="12sp"
-                            android:textColor="#E8F5E9"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginTop="2dp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -176,7 +176,7 @@
                             android:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"
-                            android:textColor="#FF1744"/>
+                            android:textColor="@color/scam_red"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Today"
+                            android:text="Scanned Today"
                             android:textSize="12sp"
                             android:textColor="@color/text_secondary"
                             android:layout_marginTop="4dp"/>
@@ -294,7 +294,7 @@
 
             <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
                  QUICK ACTIONS SECTION  â† MOVED DOWN (was between header and alerts)
-                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•��â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 
             <TextView
                 android:id="@+id/tv_quick_actions_title"
@@ -358,7 +358,7 @@
                         android:layout_height="wrap_content"
                         android:text="Verify links and content"
                         android:textSize="12sp"
-                        android:textColor="#9CA3AF"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
 
@@ -368,7 +368,7 @@
                     android:layout_height="wrap_content"
                     android:text="â€º"
                     android:textSize="32sp"
-                    android:textColor="#D1D5DB"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginStart="12dp"/>
             </LinearLayout>
 
@@ -424,7 +424,7 @@
                         android:layout_height="wrap_content"
                         android:text="Stay informed and protected"
                         android:textSize="12sp"
-                        android:textColor="#9CA3AF"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
 
@@ -434,7 +434,7 @@
                     android:layout_height="wrap_content"
                     android:text="â€º"
                     android:textSize="32sp"
-                    android:textColor="#D1D5DB"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginStart="12dp"/>
             </LinearLayout>
 
@@ -490,7 +490,7 @@
                         android:layout_height="wrap_content"
                         android:text="Get emergency help now"
                         android:textSize="12sp"
-                        android:textColor="#991B1B"
+                        android:textColor="@color/scam_red"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
 
@@ -500,7 +500,7 @@
                     android:layout_height="wrap_content"
                     android:text="â€º"
                     android:textSize="32sp"
-                    android:textColor="#F87171"
+                    android:textColor="@color/scam_red"
                     android:layout_marginStart="12dp"/>
             </LinearLayout>
 
@@ -522,7 +522,7 @@
                         android:text="Recent Scam Alerts"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#1F2937"/>
+                        android:textColor="@color/text_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -560,7 +560,7 @@
                         android:layout_weight="1"
                         android:text="All clear! No threats detected yet."
                         android:textSize="15sp"
-                        android:textColor="#374151"
+                        android:textColor="@color/text_secondary"
                         android:textStyle="bold"/>
                 </LinearLayout>
 

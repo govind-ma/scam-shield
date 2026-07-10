@@ -99,14 +99,36 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
 
         // ── Verdict pill + Trust button ───────────────────────────────────────
         if (msg.trusted) {
-            // Trusted: grey pill, no action button, row tap does nothing
-            holder.tvVerdict.setText("Trusted ✓");
-            holder.tvVerdict.setTextColor(COLOR_TRUSTED);
-            setPillBackground(holder.tvVerdict, COLOR_TRUSTED_BG);
+            // Trusted: show the real verdict pill but dimmed to 50% alpha so the
+            // user still sees SAFE/SUSPICIOUS/SCAM — exactly 3 label states exist.
+            DetectionResult.Verdict trustedVerdict =
+                    (msg.result != null) ? msg.result.verdict : DetectionResult.Verdict.SAFE;
+            switch (trustedVerdict) {
+                case SCAM:
+                    holder.tvVerdict.setText("SCAM");
+                    holder.tvVerdict.setTextColor(COLOR_SCAM);
+                    setPillBackground(holder.tvVerdict, COLOR_SCAM_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SCAM);
+                    break;
+                case SUSPICIOUS:
+                    holder.tvVerdict.setText("SUSPICIOUS");
+                    holder.tvVerdict.setTextColor(COLOR_SUSPICIOUS);
+                    setPillBackground(holder.tvVerdict, COLOR_SUSP_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SUSPICIOUS);
+                    break;
+                default:
+                    holder.tvVerdict.setText("SAFE");
+                    holder.tvVerdict.setTextColor(COLOR_SAFE);
+                    setPillBackground(holder.tvVerdict, COLOR_SAFE_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SAFE);
+                    break;
+            }
+            // Dim the whole row to signal "already reviewed / trusted"
+            holder.itemView.setAlpha(0.5f);
             holder.llTrustRow.setVisibility(View.GONE);
-            holder.vAccentStripe.setBackgroundColor(COLOR_TRUSTED);
             holder.itemView.setOnClickListener(null);
         } else {
+            holder.itemView.setAlpha(1.0f);
             // Not yet trusted: show colour-coded verdict pill + trust button
             DetectionResult.Verdict verdict =
                     (msg.result != null) ? msg.result.verdict : DetectionResult.Verdict.SAFE;
