@@ -88,6 +88,12 @@ public class FloatingAssistantService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // Guard: if bubbleView is already attached, a redundant startService()
+        // call must not add a second bubble. Just return and stay alive.
+        if (bubbleView != null && bubbleView.isAttachedToWindow()) {
+            Log.d(TAG, "onStartCommand: bubble already attached — ignoring duplicate start.");
+            return START_STICKY;
+        }
         return START_STICKY;
     }
 

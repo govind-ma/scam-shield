@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
     activity_quiz.xml
     Layout for QuizActivity.
@@ -12,7 +12,7 @@
     android:orientation="vertical"
     android:background="#FAFAFA">
 
-    <!-- ── Top Bar ─────────────────────────────────────────────────────────── -->
+    <!-- â”€â”€ Top Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <LinearLayout
         android:id="@+id/quiz_topbar"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="✍️  Spot the Scam"
+            android:text="âœï¸  Spot the Scam"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"/>
@@ -49,9 +49,9 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             SCREEN 0 — Scenario Question & Feedback View
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 0 â€” Scenario Question & Feedback View
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -87,7 +87,7 @@
                         android:text="URGENT: Your bank account is locked! Share your OTP immediately to verify: http://fake-bank.xyz"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:lineSpacingExtra="6dp"/>
 
                 </LinearLayout>
@@ -97,7 +97,7 @@
                     android:id="@+id/btn_answer_scam"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="🚨  SCAM"
+                    android:text="ðŸš¨  SCAM"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
@@ -110,7 +110,7 @@
                     android:id="@+id/btn_answer_safe"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="✓  SAFE"
+                    android:text="âœ“  SAFE"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
@@ -156,7 +156,7 @@
                         android:id="@+id/btn_next_scenario"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Next Scenario  ➔"
+                        android:text="Next Scenario  âž”"
                         android:textSize="18sp"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/ripple_frosted"
@@ -167,9 +167,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             SCREEN 1 — Quiz Results Screen
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 1 â€” Quiz Results Screen
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🎉  Quiz Finished!"
+                    android:text="ðŸŽ‰  Quiz Finished!"
                     android:textSize="26sp"
                     android:textStyle="bold"
                     android:textColor="#00796B"
@@ -199,7 +199,7 @@
                     android:text="You scored 7 / 10"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A1A"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Dynamic feedback text based on score -->
@@ -219,7 +219,7 @@
                     android:id="@+id/btn_retake_quiz"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="🔄  Try Again"
+                    android:text="ðŸ”„  Try Again"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     android:background="@drawable/ripple_frosted"
@@ -231,9 +231,9 @@
                     android:id="@+id/btn_exit_quiz"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="📖  Browse Learning Topics"
+                    android:text="ðŸ“–  Browse Learning Topics"
                     android:textSize="18sp"
-                    android:textColor="#1A1A1A"
+                    android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"/>
 
@@ -243,3 +243,4 @@
     </ViewFlipper>
 
 </LinearLayout>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Background layers (dark-first) ──────────────────────────────────── -->
+    <color name="bg_primary">#0D1B2A</color>      <!-- deep dark navy — main screen bg -->
+    <color name="bg_secondary">#1A2744</color>     <!-- slightly lighter — card surfaces -->
+    <color name="bg_tertiary">#243354</color>      <!-- elevated surfaces — dialogs -->
+
+    <!-- ── Safe Mode (green) ───────────────────────────────────────────────── -->
+    <color name="safe_green">#00E676</color>
+    <color name="safe_green_dark">#00C853</color>
+
+    <!-- ── Alert / Scam Mode (red) ─────────────────────────────────────────── -->
+    <color name="scam_red">#FF1744</color>
+    <color name="scam_red_dark">#D50000</color>
+
+    <!-- ── Suspicious (amber) ──────────────────────────────────────────────── -->
+    <color name="suspicious_amber">#FFC107</color>
+
+    <!-- ── Text ────────────────────────────────────────────────────────────── -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
+
+    <!-- ── Surfaces / Borders ──────────────────────────────────────────────── -->
+    <color name="surface_border">#1AFFFFFF</color> <!-- 10% white border -->
+</resources>

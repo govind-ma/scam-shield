@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
     activity_learn.xml
     Refactored to a beautiful card-based layout for LearnAboutScamsActivity.
@@ -10,14 +10,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F7F8F6">
+    android:background="@color/bg_primary">
 
-    <!-- ── Top Bar ─────────────────────────────────────────────────────────── -->
+    <!-- â”€â”€ Top Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <LinearLayout
         android:id="@+id/learn_topbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#00695C"
+        android:background="@color/safe_green"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="12dp">
@@ -26,23 +26,23 @@
             android:id="@+id/tv_learn_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📖  Learn &amp; Protect"
+            android:text="ðŸ“–  Learn &amp; Protect"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 
-    <!-- ── ViewFlipper for browsing topics ────────────────────────────────── -->
+    <!-- â”€â”€ ViewFlipper for browsing topics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <ViewFlipper
         android:id="@+id/learn_view_flipper"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             SCREEN 0 — Main Topics Menu
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 0 â€” Main Topics Menu
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -63,7 +63,7 @@
                     android:text="Select a topic to read:"
                     android:textSize="19sp"
                     android:textStyle="bold"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginBottom="12dp"/>
 
                 <!-- Topic 1 Card -->
@@ -83,7 +83,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🛡️"
+                        android:text="ðŸ›¡ï¸"
                         android:textSize="22sp"
                         android:layout_marginEnd="12dp"/>
 
@@ -93,13 +93,13 @@
                         android:layout_weight="1"
                         android:text="How to make a safe payment"
                         android:textSize="19sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➔"
+                        android:text="âž”"
                         android:textSize="20sp"
                         android:textColor="#9E9E9E"/>
                 </LinearLayout>
@@ -121,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🤔"
+                        android:text="ðŸ¤”"
                         android:textSize="22sp"
                         android:layout_marginEnd="12dp"/>
 
@@ -131,13 +131,13 @@
                         android:layout_weight="1"
                         android:text="Before you transfer money"
                         android:textSize="19sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➔"
+                        android:text="âž”"
                         android:textSize="20sp"
                         android:textColor="#9E9E9E"/>
                 </LinearLayout>
@@ -159,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🆘"
+                        android:text="ðŸ†˜"
                         android:textSize="22sp"
                         android:layout_marginEnd="12dp"/>
 
@@ -169,15 +169,15 @@
                         android:layout_weight="1"
                         android:text="What to do if scammed"
                         android:textSize="19sp"
-                        android:textColor="#B71C1C"
+                        android:textColor="@color/scam_red"
                         android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➔"
+                        android:text="âž”"
                         android:textSize="20sp"
-                        android:textColor="#B71C1C"/>
+                        android:textColor="@color/scam_red"/>
                 </LinearLayout>
 
                 <!-- Topic 4 Card -->
@@ -197,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🔍"
+                        android:text="ðŸ”"
                         android:textSize="22sp"
                         android:layout_marginEnd="12dp"/>
 
@@ -207,13 +207,13 @@
                         android:layout_weight="1"
                         android:text="Common scam patterns"
                         android:textSize="19sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➔"
+                        android:text="âž”"
                         android:textSize="20sp"
                         android:textColor="#9E9E9E"/>
                 </LinearLayout>
@@ -232,7 +232,7 @@
                         android:id="@+id/tv_quiz_card_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="✍️  Test your knowledge!"
+                        android:text="âœï¸  Test your knowledge!"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -244,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:text="Take our quick quiz to see if you can spot common scam messages."
                         android:textSize="17sp"
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="16dp"/>
 
                     <Button
@@ -263,9 +263,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             SCREEN 1 — How to make a safe payment (checklist steps)
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 1 â€” How to make a safe payment (checklist steps)
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -288,10 +288,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="🛡️ How to make a safe payment"
+                        android:text="ðŸ›¡ï¸ How to make a safe payment"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="#00695C"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="12dp"/>
 
                     <TextView
@@ -299,7 +299,7 @@
                         android:layout_height="wrap_content"
                         android:text="Follow these plain-language steps whenever sending money online:"
                         android:textSize="18sp"
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="16dp"/>
 
                     <TextView
@@ -307,7 +307,7 @@
                         android:layout_height="wrap_content"
                         android:text="1. Always double-check the receiver's name\nBefore hitting pay, read the official name shown by your UPI app. Confirm it matches who you want to pay.\n\n2. Never enter your UPI PIN to RECEIVE money\nEntering your PIN only withdraws money from your account. You do NOT need to enter your PIN to receive money.\n\n3. Do not trust Caller ID names completely\nScammers can fake official names like 'Bank Support' or 'Electricity Dept' on Caller ID apps. Verify with trusted numbers.\n\n4. Never click payment links from unknown SMS\nLinks in SMS claiming 'refunds', 'cashback', or 'bill unpaid' are designed to steal your bank details.\n\n5. Call the official bank customer care number\nIf you get an alert about your account being blocked, call the official number on your physical card, not a number sent in SMS."
                         android:textSize="18sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:lineSpacingExtra="6dp"/>
                 </LinearLayout>
 
@@ -315,9 +315,9 @@
                     android:id="@+id/btn_back_from_safe_payment"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="← Back to topics"
+                    android:text="â† Back to topics"
                     android:textSize="18sp"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="16dp"/>
@@ -325,9 +325,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ════���══════════════════════════════════════════════════════════════
-             SCREEN 2 — What to keep in mind before paying (tick-style checklist)
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•ï¿½ï¿½ï¿½â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 2 â€” What to keep in mind before paying (tick-style checklist)
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -350,10 +350,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="🤔 What to keep in mind"
+                        android:text="ðŸ¤” What to keep in mind"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="#00695C"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="12dp"/>
 
                     <TextView
@@ -361,15 +361,15 @@
                         android:layout_height="wrap_content"
                         android:text="Before you transfer any money or scan a QR code, ask yourself:"
                         android:textSize="18sp"
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="16dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="☑  Are they rushing you?\nScammers create false urgency (e.g., 'Pay in 5 minutes or get blocked'). Take a deep breath and pause.\n\n☑  Did they ask for your OTP or UPI PIN?\nNO legitimate customer care, bank executive, or police officer will ever ask for your OTP or PIN.\n\n☑  Is the deal too good to be true?\nLottery winnings, free cash gifts, or highly discounted items are standard tricks to get your attention.\n\n☑  Are they asking you to download a screen-sharing app?\nApps like AnyDesk or TeamViewer let scammers see your PINs and password as you type them. Never install these for strangers.\n\n☑  Have you spoken to a trusted family member first?\nIf you feel confused, stop and call a child, sibling, or trusted friend before hitting pay."
+                        android:text="â˜‘  Are they rushing you?\nScammers create false urgency (e.g., 'Pay in 5 minutes or get blocked'). Take a deep breath and pause.\n\nâ˜‘  Did they ask for your OTP or UPI PIN?\nNO legitimate customer care, bank executive, or police officer will ever ask for your OTP or PIN.\n\nâ˜‘  Is the deal too good to be true?\nLottery winnings, free cash gifts, or highly discounted items are standard tricks to get your attention.\n\nâ˜‘  Are they asking you to download a screen-sharing app?\nApps like AnyDesk or TeamViewer let scammers see your PINs and password as you type them. Never install these for strangers.\n\nâ˜‘  Have you spoken to a trusted family member first?\nIf you feel confused, stop and call a child, sibling, or trusted friend before hitting pay."
                         android:textSize="18sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:lineSpacingExtra="6dp"/>
                 </LinearLayout>
 
@@ -377,9 +377,9 @@
                     android:id="@+id/btn_back_from_check_before_pay"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="← Back to topics"
+                    android:text="â† Back to topics"
                     android:textSize="18sp"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="16dp"/>
@@ -387,9 +387,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             SCREEN 3 — Common scam patterns (Cards explaining flags)
-             ═══════════════════════════════════════════════════════════════════ -->
+        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+             SCREEN 3 â€” Common scam patterns (Cards explaining flags)
+             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -403,10 +403,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🔍 Common scam patterns"
+                    android:text="ðŸ” Common scam patterns"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="#00695C"
+                    android:textColor="@color/safe_green"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Card 1: Fake Bank SMS -->
@@ -422,7 +422,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="💬 Fake Bank SMS"
+                        android:text="ðŸ’¬ Fake Bank SMS"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -449,7 +449,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="🎉 Lottery / Prize Scam"
+                        android:text="ðŸŽ‰ Lottery / Prize Scam"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -476,7 +476,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="🆘 Relative in Emergency"
+                        android:text="ðŸ†˜ Relative in Emergency"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -503,7 +503,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="💸 Fake Payment Request"
+                        android:text="ðŸ’¸ Fake Payment Request"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -521,9 +521,9 @@
                     android:id="@+id/btn_back_from_common_patterns"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="← Back to topics"
+                    android:text="â† Back to topics"
                     android:textSize="18sp"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="16dp"/>
@@ -533,7 +533,7 @@
 
     </ViewFlipper>
 
-    <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
+    <!-- â”€â”€ Bottom Navigation Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <include
         android:id="@+id/bottom_navigation_bar"
         layout="@layout/layout_bottom_nav"
@@ -541,3 +541,4 @@
         android:layout_height="64dp"/>
 
 </LinearLayout>
+

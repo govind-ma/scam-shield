@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.ScamShield" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#1565C0</item>
-        <item name="colorPrimaryDark">#0D47A1</item>
-        <item name="colorAccent">#82B1FF</item>
+    <!-- Dark-first theme for Scam Shield — default for ALL devices/modes. -->
+    <style name="Theme.ScamShield" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Brand primary = safe green -->
+        <item name="colorPrimary">@color/safe_green</item>
+        <item name="colorPrimaryVariant">@color/safe_green_dark</item>
+        <item name="colorOnPrimary">@color/bg_primary</item>
+
+        <!-- Surface / background tokens -->
+        <item name="colorSurface">@color/bg_secondary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
+        <item name="android:windowBackground">@color/bg_primary</item>
+
+        <!-- Secondary / accent -->
+        <item name="colorSecondary">@color/safe_green_dark</item>
+        <item name="colorOnSecondary">@color/bg_primary</item>
     </style>
 </resources>
+

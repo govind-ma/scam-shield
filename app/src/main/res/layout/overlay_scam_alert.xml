@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
     overlay_scam_alert.xml
     Shown by ScamAlertManager when verdict = SCAM.
     Design intent: STOP THE USER. Big, red, impossible to ignore.
-    They must consciously tap a button to dismiss — no auto-dismiss.
+    They must consciously tap a button to dismiss â€” no auto-dismiss.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#B71C1C"
+    android:background="@color/scam_red"
     android:padding="24dp"
     android:elevation="16dp">
 
@@ -18,7 +18,7 @@
         android:id="@+id/tv_alert_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="⚠  SMS SCAM ALERT"
+        android:text="âš   SMS SCAM ALERT"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
@@ -60,7 +60,7 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <!-- "I'll be careful" — primary action -->
+        <!-- "I'll be careful" â€” primary action -->
         <Button
             android:id="@+id/btn_alert_safe"
             android:layout_width="0dp"
@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:text="I'll be careful"
             android:textSize="18sp"
-            android:textColor="#B71C1C"
+            android:textColor="@color/scam_red"
             android:background="@drawable/ripple_frosted"
             android:backgroundTint="@null"
             android:layout_marginEnd="8dp"/>
@@ -88,3 +88,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

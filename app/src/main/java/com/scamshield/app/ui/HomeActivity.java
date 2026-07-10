@@ -1,6 +1,8 @@
 package com.scamshield.app.ui;
 
 import android.Manifest;
+ import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ClipboardManager;
 import android.content.ClipData;
@@ -473,8 +475,11 @@ public class HomeActivity extends AppCompatActivity
         });
     }
     private void startFloatingService() {
-        if (floatingServiceStarted) {
-            Log.d(TAG, "FloatingAssistantService already started — skipping.");
+        // Double-guard: check session flag first, then fall back to ActivityManager
+        // so we never spawn two bubbles even if the flag was reset.
+        if (floatingServiceStarted || isServiceRunning(FloatingAssistantService.class)) {
+            Log.d(TAG, "FloatingAssistantService already running — skipping.");
+            floatingServiceStarted = true; // sync the flag
             return;
         }
         Intent serviceIntent = new Intent(this, FloatingAssistantService.class);
@@ -485,6 +490,24 @@ public class HomeActivity extends AppCompatActivity
         }
         floatingServiceStarted = true;
         Log.d(TAG, "FloatingAssistantService start requested.");
+    }
+
+    /**
+     * Checks if a given Service class is currently running in this process.
+     * Used as a belt-and-suspenders guard against duplicate service starts.
+     */
+    @SuppressWarnings("deprecation")
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager =
+                (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        if (manager == null) return false;
+        for (ActivityManager.RunningServiceInfo info :
+                manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(info.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // =========================================================================

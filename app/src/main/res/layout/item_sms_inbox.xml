@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
     item_sms_inbox.xml
-    Row layout for SmsInboxAdapter — one SMS message in the home page inbox view.
+    Row layout for SmsInboxAdapter â€” one SMS message in the home page inbox view.
 
     Row structure:
-      ┌───────────────────────────────────────────────────┐
-      │  Sender / Contact name          [⚠ SCAM pill]    │
-      │  Message preview (2 lines)...      10:30 AM      │
-      │                         [✓ Trust this message]   │
-      └───────────────────────────────────────────────────┘
+      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+      â”‚  Sender / Contact name          [âš  SCAM pill]    â”‚
+      â”‚  Message preview (2 lines)...      10:30 AM      â”‚
+      â”‚                         [âœ“ Trust this message]   â”‚
+      â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
     Trust button is hidden when message is already trusted (set in SmsInboxAdapter).
 -->
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#1A1A1A"
+            android:textColor="@color/text_primary"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Unknown Sender"/>
@@ -54,13 +54,13 @@
             android:layout_marginStart="8dp"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#00695C"
+            android:textColor="@color/safe_green"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:background="@drawable/pill_verdict"
-            android:text="✓ SAFE"/>
+            android:text="âœ“ SAFE"/>
 
     </LinearLayout>
 
@@ -72,7 +72,7 @@
         android:gravity="top"
         android:layout_marginBottom="6dp">
 
-        <!-- Message body preview — capped at 2 lines with ellipsis -->
+        <!-- Message body preview â€” capped at 2 lines with ellipsis -->
         <TextView
             android:id="@+id/tv_sms_preview"
             android:layout_width="0dp"
@@ -97,7 +97,7 @@
 
     </LinearLayout>
 
-    <!-- Bottom row: Trust button — hidden when trusted, visible otherwise -->
+    <!-- Bottom row: Trust button â€” hidden when trusted, visible otherwise -->
     <LinearLayout
         android:id="@+id/ll_trust_row"
         android:layout_width="match_parent"
@@ -109,9 +109,9 @@
             android:id="@+id/btn_trust_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="✓ Trust this message"
+            android:text="âœ“ Trust this message"
             android:textSize="13sp"
-            android:textColor="#00695C"
+            android:textColor="@color/safe_green"
             android:textStyle="bold"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -124,3 +124,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

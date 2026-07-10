@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
     item_history.xml
     Refactored to card design: rounded card, 1dp border, 10dp bottom margin.
@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Verdict (e.g. "⚠ SCAM") — colour set in HistoryAdapter -->
+        <!-- Verdict (e.g. "âš  SCAM") â€” colour set in HistoryAdapter -->
         <TextView
             android:id="@+id/tv_history_verdict"
             android:layout_width="0dp"
@@ -31,8 +31,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#B71C1C"
-            android:text="⚠ SCAM"/>
+            android:textColor="@color/scam_red"
+            android:text="âš  SCAM"/>
 
         <!-- Source badge (SMS / PAYMENT / CALL) -->
         <TextView
@@ -57,14 +57,15 @@
 
     </LinearLayout>
 
-    <!-- Reason text — full plain-language explanation -->
+    <!-- Reason text â€” full plain-language explanation -->
     <TextView
         android:id="@+id/tv_history_reason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
-        android:textColor="#1A1A1A"
+        android:textColor="@color/text_primary"
         android:text="Urgency language and OTP request detected."/>
 
 </LinearLayout>
+

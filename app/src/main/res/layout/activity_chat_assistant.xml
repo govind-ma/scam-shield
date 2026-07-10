@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-    activity_chat_assistant.xml — Cyber Help Agent chat screen (Safe Mode)
-    Design system: bg #F7F8F6, card #FFFFFF, border #E5E7E0, green #3B6D11, red #E24B4A.
+    activity_chat_assistant.xml â€” Cyber Help Agent chat screen (Safe Mode)
+    Design system: bg @color/bg_primary, card #FFFFFF, border #E5E7E0, green #3B6D11, red #E24B4A.
     Glowing shield header, rounded chat bubbles, pill input bar with
     paperclip + mic + send icons. Elderly-friendly: large text, generous padding.
 -->
@@ -9,14 +9,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8F6">
+    android:background="@color/bg_primary">
 
-    <!-- ── Top bar with glowing shield ─────────────────────────────────────── -->
+    <!-- â”€â”€ Top bar with glowing shield â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <LinearLayout
         android:id="@+id/chat_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3B6D11"
+        android:background="@color/safe_green"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="20dp"
@@ -35,7 +35,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_shield_filled"
-                app:tint="#3B6D11"
+                app:tint="@color/safe_green"
                 android:contentDescription="Shield"/>
         </FrameLayout>
 
@@ -53,7 +53,7 @@
                 android:text="Cyber Help Agent"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
+                android:textColor="@color/bg_secondary"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,14 +71,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Online · Powered by Gemini AI"
+                    android:text="Online Â· Powered by Gemini AI"
                     android:textSize="13sp"
-                    android:textColor="#D7E7C6"/>
+                    android:textColor="@color/text_secondary"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- ── Bottom Navigation Bar ───────────────────────────────────────────── -->
+    <!-- â”€â”€ Bottom Navigation Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <include
         android:id="@+id/bottom_navigation_bar"
         layout="@layout/layout_bottom_nav"
@@ -86,7 +86,7 @@
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"/>
 
-    <!-- ── Input Area (above bottom nav) ────────────────────────────────────── -->
+    <!-- â”€â”€ Input Area (above bottom nav) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <LinearLayout
         android:id="@+id/layout_input"
         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
         android:paddingEnd="12dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="#FFFFFF"
+        android:background="@color/bg_secondary"
         android:layout_above="@id/bottom_navigation_bar"
         android:elevation="8dp"
         android:gravity="center_vertical">
@@ -120,10 +120,10 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Ask about a message, link, or image…"
+            android:hint="Ask about a message, link, or imageâ€¦"
             android:textSize="16sp"
-            android:textColor="#1A1A1A"
-            android:textColorHint="#9AA398"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
             android:background="@drawable/bg_input_field"
@@ -154,7 +154,7 @@
             android:padding="12dp"
             android:src="@drawable/ic_send"
             android:background="@drawable/bg_send_button"
-            android:backgroundTint="#3B6D11"
+            android:backgroundTint="@color/safe_green"
             android:scaleType="fitCenter"
             android:clickable="true"
             android:focusable="true"
@@ -162,7 +162,7 @@
 
     </LinearLayout>
 
-    <!-- ── Scrollable chat area ───────────────────────────────────────────── -->
+    <!-- â”€â”€ Scrollable chat area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <ScrollView
         android:id="@+id/chat_scroll_view"
         android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cyber Help Agent"
                 android:textSize="13sp"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="6dp"/>
 
@@ -206,15 +206,15 @@
                     android:text="Hello! I'm your Cyber Help Agent."
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A1A"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="10dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="I can help you:\n\n•  Check if an SMS or link is a scam\n•  Look at a screenshot of a suspicious message\n•  Answer a spoken question — just tap the mic\n\nType, speak, or attach a screenshot below."
+                    android:text="I can help you:\n\nâ€¢  Check if an SMS or link is a scam\nâ€¢  Look at a screenshot of a suspicious message\nâ€¢  Answer a spoken question â€” just tap the mic\n\nType, speak, or attach a screenshot below."
                     android:textSize="16sp"
-                    android:textColor="#374151"
+                    android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="5dp"/>
             </LinearLayout>
 
@@ -230,3 +230,4 @@
     </ScrollView>
 
 </RelativeLayout>
+

@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-    activity_home.xml — Restructured Home dashboard for HomeActivity.
+    activity_home.xml â€” Restructured Home dashboard for HomeActivity.
 
-    New structure (top → bottom inside the ScrollView):
-      1. App header (shield + title)        — unchanged
-      2. Protection status card             — unchanged
-      3. ── SMS Inbox section ──            — NEW: full device SMS list with scam labels
-      4. ── Quick Actions section ──        — MOVED: was between header and alerts
-      5. ── Recent Scam Alerts section ──   — MOVED: was above quick actions
+    New structure (top â†’ bottom inside the ScrollView):
+      1. App header (shield + title)        â€” unchanged
+      2. Protection status card             â€” unchanged
+      3. â”€â”€ SMS Inbox section â”€â”€            â€” NEW: full device SMS list with scam labels
+      4. â”€â”€ Quick Actions section â”€â”€        â€” MOVED: was between header and alerts
+      5. â”€â”€ Recent Scam Alerts section â”€â”€   â€” MOVED: was above quick actions
 
     The floating shield FAB and bottom nav bar remain outside the ScrollView,
     unchanged from before. FloatingAssistantService is completely unrelated to
@@ -19,9 +19,9 @@
     android:id="@+id/home_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8F6">
+    android:background="@color/bg_primary">
 
-    <!-- Bottom Navigation Bar — unchanged, still anchored to bottom -->
+    <!-- Bottom Navigation Bar â€” unchanged, still anchored to bottom -->
     <include
         android:id="@+id/bottom_navigation_bar"
         layout="@layout/layout_bottom_nav"
@@ -160,7 +160,7 @@
                             android:text="You're protected"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A1A"/>
+                            android:textColor="@color/text_primary"/>
 
                         <TextView
                             android:id="@+id/tv_protection_subtitle"
@@ -176,10 +176,10 @@
             </LinearLayout>
 
 
-            <!-- ═══════════════════════════════════════════════════════════════
-                 SMS INBOX SECTION  ← NEW
+            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+                 SMS INBOX SECTION  â† NEW
                  Reads the full device SMS inbox, labels each message SAFE or SCAM.
-                 ═══════════════════════════════════════════════════════════════ -->
+                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 
             <!-- Section heading -->
             <TextView
@@ -202,7 +202,7 @@
                 android:textColor="#9E9E9E"
                 android:layout_marginBottom="10dp"/>
 
-            <!-- Loading indicator — shown while SmsInboxLoader is running -->
+            <!-- Loading indicator â€” shown while SmsInboxLoader is running -->
             <ProgressBar
                 android:id="@+id/pb_sms_loading"
                 android:layout_width="wrap_content"
@@ -225,7 +225,7 @@
                 android:layout_marginBottom="10dp"
                 android:visibility="gone"/>
 
-            <!-- The main inbox RecyclerView — filled by SmsInboxAdapter -->
+            <!-- The main inbox RecyclerView â€” filled by SmsInboxAdapter -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sms_inbox"
                 android:layout_width="match_parent"
@@ -234,10 +234,10 @@
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone"/>
 
-            <!-- ═══════════════════════════════════════════════════════════════
+            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
                  DIVIDER
                  Visual separator between inbox and the action buttons below.
-                 ═══════════════════════════════════════════════════════════════ -->
+                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -245,9 +245,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- ═══════════════════════════════════════════════════════════════
-                 QUICK ACTIONS SECTION  ← MOVED DOWN (was between header and alerts)
-                 ═══════════════════════════════════════════════════════════════ -->
+            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+                 QUICK ACTIONS SECTION  â† MOVED DOWN (was between header and alerts)
+                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 
             <TextView
                 android:id="@+id/tv_quick_actions_title"
@@ -303,7 +303,7 @@
                         android:layout_height="wrap_content"
                         android:text="Check a message"
                         android:textSize="17sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -319,7 +319,7 @@
                     android:id="@+id/tv_btn_check_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="›"
+                    android:text="â€º"
                     android:textSize="32sp"
                     android:textColor="#D1D5DB"
                     android:layout_marginStart="12dp"/>
@@ -369,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:text="Learn about scams"
                         android:textSize="17sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -385,13 +385,13 @@
                     android:id="@+id/tv_btn_learn_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="›"
+                    android:text="â€º"
                     android:textSize="32sp"
                     android:textColor="#D1D5DB"
                     android:layout_marginStart="12dp"/>
             </LinearLayout>
 
-            <!-- Card 3: I got scammed — urgent, light red tint -->
+            <!-- Card 3: I got scammed â€” urgent, light red tint -->
             <LinearLayout
                 android:id="@+id/btn_i_got_scammed"
                 android:layout_width="match_parent"
@@ -435,7 +435,7 @@
                         android:layout_height="wrap_content"
                         android:text="I got scammed"
                         android:textSize="17sp"
-                        android:textColor="#B71C1C"
+                        android:textColor="@color/scam_red"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -451,7 +451,7 @@
                     android:id="@+id/tv_btn_scammed_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="›"
+                    android:text="â€º"
                     android:textSize="32sp"
                     android:textColor="#F87171"
                     android:layout_marginStart="12dp"/>
@@ -480,9 +480,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View all ›"
+                        android:text="View all â€º"
                         android:textSize="13sp"
-                        android:textColor="#3B6D11"
+                        android:textColor="@color/safe_green"
                         android:visibility="gone"/> <!-- Hidden unless needed -->
                 </LinearLayout>
 
@@ -502,7 +502,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/ic_check"
-                        android:tint="#3B6D11"
+                        android:tint="@color/safe_green"
                         android:layout_marginEnd="12dp"
                         android:contentDescription="All clear"/>
 
@@ -530,7 +530,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Glowing Floating Shield Button — unchanged, still above nav bar at bottom-right -->
+    <!-- Glowing Floating Shield Button â€” unchanged, still above nav bar at bottom-right -->
     <FrameLayout
         android:id="@+id/fab_shield"
         android:layout_width="92dp"
@@ -565,3 +565,4 @@
     </FrameLayout>
 
 </RelativeLayout>
+

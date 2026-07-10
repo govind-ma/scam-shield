@@ -2,5 +2,5 @@
 // Declares the Android Gradle Plugin (AGP) version for all modules.
 
 plugins {
-    id 'com.android.application' version '8.7.3' apply false
+    id 'com.android.application' version '9.2.1' apply false
 }
