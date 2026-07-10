@@ -52,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final int RC_SMS_PERMISSIONS = 2001;
 
+    // Permissions we ask for together on first launch
+    private static final String[] REQUIRED_PERMISSIONS = {
+        Manifest.permission.RECEIVE_SMS,
+        Manifest.permission.READ_SMS,
+        Manifest.permission.READ_CONTACTS
+    };
+
     // -------------------------------------------------------------------------
     // Lifecycle
     // -------------------------------------------------------------------------
@@ -80,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void checkAndRequestSmsPermissions() {
 
-        boolean hasReceive = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED;
+        boolean hasReceive   = ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS)  == PackageManager.PERMISSION_GRANTED;
+        boolean hasRead      = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)      == PackageManager.PERMISSION_GRANTED;
+        // READ_CONTACTS is optional — if already granted, great; if not, we request it now.
+        // Even if the user denies contacts, the app still works (numbers shown instead of names).
+        boolean hasContacts  = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
 
-        boolean hasRead = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-
-        if (hasReceive && hasRead) {
-            Log.d(TAG, "SMS permissions already granted.");
+        if (hasReceive && hasRead && hasContacts) {
+            Log.d(TAG, "All permissions already granted.");
             onPermissionsGranted();
             return;
         }
@@ -120,14 +127,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showRationaleDialog() {
         new AlertDialog.Builder(this)
-            .setTitle("Scam Shield needs to see your messages")
+            .setTitle("Scam Shield needs a few permissions")
             .setMessage(
-                "Scam Shield checks every new text message you receive to "
-                + "see if it looks like a scam — for example, someone pretending "
-                + "to be your bank or asking for a secret code.\n\n"
-                + "Your messages are checked right here on your phone. "
-                + "They are never stored, never sent to anyone, and never shared.\n\n"
-                + "Tap \"Allow\" on the next screen to switch on protection."
+                "To protect you from scams, Scam Shield needs:\n\n"
+                + "• SMS access — to check messages for scam patterns\n"
+                + "• Contacts access — to show your contacts' names in the inbox\n\n"
+                + "Your messages and contacts are checked right here on your phone. "
+                + "Nothing is ever sent to anyone or shared.\n\n"
+                + "Tap \"Allow\" on the next screens to switch on protection."
             )
             .setPositiveButton("Allow", (dialog, which) -> requestSmsPermissions())
             .setNegativeButton("Not now", (dialog, which) -> {
@@ -144,14 +151,7 @@ public class MainActivity extends AppCompatActivity {
      * We request both permissions in a single call so they appear together.
      */
     private void requestSmsPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            new String[]{
-                Manifest.permission.RECEIVE_SMS,
-                Manifest.permission.READ_SMS
-            },
-            RC_SMS_PERMISSIONS
-        );
+        ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, RC_SMS_PERMISSIONS);
     }
 
     /**
@@ -170,15 +170,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode != RC_SMS_PERMISSIONS) return;
 
-        boolean allGranted = true;
-        for (int r : grantResults) {
-            if (r != PackageManager.PERMISSION_GRANTED) {
-                allGranted = false;
-                break;
-            }
+        // We require SMS permissions (RECEIVE + READ) to function.
+        // Contacts is optional — denied contacts is still OK, we just show numbers.
+        boolean hasSmsReceive = false, hasSmsRead = false;
+        for (int i = 0; i < permissions.length; i++) {
+            if (Manifest.permission.RECEIVE_SMS.equals(permissions[i]))
+                hasSmsReceive = (grantResults[i] == PackageManager.PERMISSION_GRANTED);
+            if (Manifest.permission.READ_SMS.equals(permissions[i]))
+                hasSmsRead = (grantResults[i] == PackageManager.PERMISSION_GRANTED);
         }
 
-        if (allGranted) {
+        if (hasSmsReceive && hasSmsRead) {
             Log.d(TAG, "SMS permissions granted — SmsReceiver is live.");
             onPermissionsGranted();
             return;

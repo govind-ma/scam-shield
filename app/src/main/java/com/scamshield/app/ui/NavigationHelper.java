@@ -34,7 +34,11 @@ public class NavigationHelper {
      * @param currentTab The active tab ID (TAB_HOME, TAB_CHAT, TAB_LEARN, TAB_SETTINGS).
      */
     public static void setupBottomNavigation(final Activity activity, final int currentTab) {
-        View bottomNav = activity.findViewById(R.id.bottom_nav_container);
+        // NOTE: The <include> in each activity sets android:id="bottom_navigation_bar",
+        // which overrides the root element's id="bottom_nav_container" in layout_bottom_nav.xml.
+        // We look for bottom_navigation_bar first; fall back to bottom_nav_container for safety.
+        View bottomNav = activity.findViewById(R.id.bottom_navigation_bar);
+        if (bottomNav == null) bottomNav = activity.findViewById(R.id.bottom_nav_container);
         if (bottomNav == null) return;
 
         // 1. Get alert mode status from centralized ThemeManager
