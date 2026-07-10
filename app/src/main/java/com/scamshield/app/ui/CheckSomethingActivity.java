@@ -110,8 +110,16 @@ public class CheckSomethingActivity extends AppCompatActivity {
             startActivity(new Intent(this, IGotScammedActivity.class));
         });
 
-        // ── Wire bottom navigation ──────────────────────────────────────────────
-        // Highlight Home tab since this screen is accessed from Home
+        // Bottom nav wired in onResume() so theme updates correctly on re-entry.
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Highlight Home tab — this screen is accessed from Home.
+        // Called here (not just onCreate) so the nav bar accent color updates
+        // correctly if the theme switches between Safe Mode and Alert Mode while
+        // the user was on another screen.
         NavigationHelper.setupBottomNavigation(this, NavigationHelper.TAB_HOME);
     }
 }

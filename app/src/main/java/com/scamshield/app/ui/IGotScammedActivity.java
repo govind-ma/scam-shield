@@ -89,6 +89,14 @@ public class IGotScammedActivity extends AppCompatActivity {
         showScreen(0);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // IGotScammedActivity is not a bottom-nav tab but it still needs to show
+        // the nav bar with correct theme colors. Highlight Home tab (closest parent).
+        NavigationHelper.setupBottomNavigation(this, NavigationHelper.TAB_HOME);
+    }
+
     // =========================================================================
     // Screen 0 — Bank picker
     // =========================================================================
@@ -233,49 +241,68 @@ public class IGotScammedActivity extends AppCompatActivity {
                 + "or on your bank's official website. Tell them to block all transfers.");
         }
 
-        // ── Situation-specific advice ──────────────────────────────────────────
+        // ── Situation-specific advice (includes universal steps at the top) ──────
         TextView tvAdvice = findViewById(R.id.tv_situation_advice);
         tvAdvice.setText(getAdviceForSituation(selectedSituation));
     }
 
     /**
+     * Universal 5-step checklist that appears at the TOP of ALL situations.
+     * Matches the audit spec exactly (Section 4, Recovery Mode Step 3).
+     */
+    private static final String UNIVERSAL_STEPS =
+        "1.  Call your bank immediately and say:\n"
+        + "    \"I have been scammed, please freeze my account.\"\n\n"
+        + "2.  Do NOT share any more OTPs or PINs with anyone,\n"
+        + "    not even someone claiming to be from the bank.\n\n"
+        + "3.  Take screenshots of all suspicious messages\n"
+        + "    as evidence.\n\n"
+        + "4.  File a complaint at cybercrime.gov.in or call 1930.\n\n"
+        + "5.  Tell a trusted family member what happened.\n";
+
+    /**
      * Returns plain-language, situation-specific advice for elderly users.
+     * The universal 5-step checklist is always prepended; the situation-specific
+     * section then gives additional targeted guidance for that specific case.
      * Written calmly — the goal is to reassure and guide, not to alarm.
      */
     private String getAdviceForSituation(String situation) {
+        String situationExtra;
         switch (situation) {
             case "call":
-                return "• Do not call back the number that called you — it may be fake.\n\n"
-                     + "• Do not give your OTP, PIN, or Aadhaar number to anyone on the phone"
-                     + " — your bank will NEVER ask for these.\n\n"
-                     + "• Tell a trusted family member what happened as soon as possible.";
+                situationExtra =
+                    "\nFor suspicious calls:\n"
+                    + "• Do not call back the number that called you — it may be fake.\n"
+                    + "• Your bank will NEVER ask for your OTP, PIN, or Aadhaar over the phone.";
+                break;
 
             case "message":
-                return "• Do not tap any links in the message.\n\n"
-                     + "• Do not reply to the message.\n\n"
-                     + "• Screenshot the message — you may need it for your complaint.\n\n"
-                     + "• Tell a trusted family member what happened.";
+                situationExtra =
+                    "\nFor suspicious messages:\n"
+                    + "• Do not tap any links in the message.\n"
+                    + "• Do not reply to the message.";
+                break;
 
             case "money":
-                return "• Call your bank RIGHT NOW — the faster you call,"
-                     + " the higher the chance the bank can reverse the transfer.\n\n"
-                     + "• Note the exact amount, time, and the account number you sent it to"
-                     + " — you will need this for the complaint.\n\n"
-                     + "• Do NOT send any more money, even if someone says it will get your"
-                     + " money back — this is another scam.";
+                situationExtra =
+                    "\nBecause you sent money:\n"
+                    + "• The FASTER you call your bank, the higher the chance they can reverse it.\n"
+                    + "• Note the exact amount, time, and the account you sent to.\n"
+                    + "• Do NOT send any more money — even if someone promises to get your money back.";
+                break;
 
             case "otp":
-                return "• Call your bank RIGHT NOW and ask them to block your card and account.\n\n"
-                     + "• Change your UPI PIN and banking app password immediately.\n\n"
-                     + "• Check your account for any transactions you did not make.\n\n"
-                     + "• Do not share another OTP with anyone — not even someone claiming"
-                     + " to be from the bank.";
+                situationExtra =
+                    "\nBecause you shared your OTP:\n"
+                    + "• Call your bank NOW and ask them to block your card and account.\n"
+                    + "• Change your UPI PIN and banking app password immediately.\n"
+                    + "• Check your account statement for transactions you did not make.";
+                break;
 
             default:
-                return "• Do not share any more personal information or money with anyone.\n\n"
-                     + "• Call your bank immediately.\n\n"
-                     + "• Tell a trusted family member what happened.";
+                situationExtra = "";
         }
+        return UNIVERSAL_STEPS + situationExtra;
     }
 
     // =========================================================================

@@ -1,6 +1,8 @@
 package com.scamshield.app.ui;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +12,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.RecognizerIntent;
 import android.util.Base64;
 import android.util.Log;
@@ -383,8 +387,9 @@ public class ChatAssistantActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds a temporary "thinking" bubble while the Gemini API call is in flight.
-     * Returns the View so it can be replaced when the response arrives.
+     * Adds a temporary "typing indicator" bubble while the Gemini API call is in flight.
+     * Shows three animated dots that pulse in a staggered wave pattern (dot1 → dot2 → dot3).
+     * Returns the container View so it can be replaced when the response arrives.
      */
     private View addThinkingBubble() {
         LinearLayout row = new LinearLayout(this);
@@ -393,20 +398,66 @@ public class ChatAssistantActivity extends AppCompatActivity {
         row.setPadding(0, 4, 0, 14);
         row.setTag("thinking_bubble");
 
-        TextView label = makeLabel("🤖 Cyber Help Agent", Gravity.START);
+        TextView label = makeLabel("Cyber Help Agent", Gravity.START);
         label.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
 
-        TextView bubble = new TextView(this);
-        bubble.setText("●●●");
-        bubble.setTextSize(17);
-        bubble.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
-        bubble.setBackgroundColor(getResources().getColor(R.color.bg_secondary, getTheme()));
-        bubble.setPadding(16, 12, 16, 12);
-        // Add fade animation
-        bubble.setAlpha(0.6f);
+        // Three dots inside a horizontal row for the typing indicator
+        LinearLayout dotRow = new LinearLayout(this);
+        dotRow.setOrientation(LinearLayout.HORIZONTAL);
+        dotRow.setBackgroundColor(getResources().getColor(R.color.bg_secondary, getTheme()));
+        dotRow.setPadding(24, 18, 24, 18);
+        dotRow.setGravity(android.view.Gravity.CENTER_VERTICAL);
+
+        int dotColor = getResources().getColor(R.color.text_secondary, getTheme());
+        float dotSize = 8 * getResources().getDisplayMetrics().density;
+        int dotMarginPx = (int)(6 * getResources().getDisplayMetrics().density);
+
+        TextView[] dots = new TextView[3];
+        for (int i = 0; i < 3; i++) {
+            TextView dot = new TextView(this);
+            dot.setText("●");
+            dot.setTextSize(14);
+            dot.setTextColor(dotColor);
+            dot.setAlpha(0.3f); // start dim
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            if (i > 0) lp.setMarginStart(dotMarginPx);
+            dot.setLayoutParams(lp);
+            dotRow.addView(dot);
+            dots[i] = dot;
+        }
+
+        // Staggered alpha pulse: each dot brightens then dims in sequence
+        Handler animHandler = new Handler(Looper.getMainLooper());
+        final boolean[] running = {true};
+        Runnable pulse = new Runnable() {
+            int step = 0;
+            @Override
+            public void run() {
+                if (!running[0]) return;
+                for (int i = 0; i < 3; i++) {
+                    final float alpha = (i == (step % 3)) ? 1.0f : 0.3f;
+                    final int idx = i;
+                    animHandler.post(() -> {
+                        if (dots[idx] != null && dots[idx].isAttachedToWindow()) {
+                            dots[idx].animate().alpha(alpha).setDuration(200).start();
+                        }
+                    });
+                }
+                step++;
+                animHandler.postDelayed(this, 350);
+            }
+        };
+        animHandler.post(pulse);
+
+        // Store the stop-flag in the row's tag so replaceThinkingBubble can stop it
+        row.setTag(running);
 
         row.addView(label);
-        row.addView(bubble);
+        row.addView(dotRow);
         layoutChatThread.addView(row);
         scrollToBottom();
         return row;
@@ -414,9 +465,18 @@ public class ChatAssistantActivity extends AppCompatActivity {
 
     /**
      * Replaces the thinking bubble View with the actual Gemini response.
+     * Also stops the dot animation loop stored in the bubble's tag.
      * If isError=true, uses a muted warning style.
      */
     private void replaceThinkingBubble(View thinkingBubble, String responseText, boolean isError) {
+        // Stop the staggered-dot animation
+        try {
+            Object tag = thinkingBubble.getTag();
+            if (tag instanceof boolean[]) {
+                ((boolean[]) tag)[0] = false;
+            }
+        } catch (Exception ignored) {}
+
         int index = layoutChatThread.indexOfChild(thinkingBubble);
         layoutChatThread.removeView(thinkingBubble);
 

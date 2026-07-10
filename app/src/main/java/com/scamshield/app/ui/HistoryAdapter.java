@@ -13,6 +13,7 @@ import com.scamshield.app.R;
 import com.scamshield.app.engine.DetectionResult;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -41,6 +42,9 @@ import java.util.Locale;
  *   (which would leak memory if the Activity is closed).
  */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+
+    /** Filter options for the history list. */
+    public enum Filter { ALL, SCAM, SUSPICIOUS, SAFE }
 
     /** Callback interface — HomeActivity implements this to refresh the list. */
     public interface HistoryRefreshListener {
@@ -73,18 +77,60 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     // ── Adapter data ──────────────────────────────────────────────────────────
+    /** Full unfiltered list — always kept intact so switching filter never loses data. */
+    private List<DetectionResult> allItems;
+    /** Currently displayed (filtered) list. */
     private List<DetectionResult> items;
+    /** Active filter — defaults to ALL. */
+    private Filter currentFilter = Filter.ALL;
 
     private static final SimpleDateFormat DATE_FMT =
             new SimpleDateFormat("dd MMM, hh:mm a", Locale.getDefault());
 
     public HistoryAdapter(List<DetectionResult> items) {
-        this.items = items;
+        this.allItems = items != null ? new ArrayList<>(items) : new ArrayList<>();
+        this.items    = this.allItems;
     }
 
-    /** Replace the list and redraw all items (called on refresh). */
+    /** Replace the full list, applying the current filter, and redraw. */
     public void setItems(List<DetectionResult> newItems) {
-        this.items = newItems;
+        this.allItems = newItems != null ? new ArrayList<>(newItems) : new ArrayList<>();
+        applyFilter();
+    }
+
+    /**
+     * Set the active filter and redraw the list.
+     * @param filter One of Filter.ALL, Filter.SCAM, Filter.SUSPICIOUS, Filter.SAFE
+     */
+    public void setFilter(Filter filter) {
+        this.currentFilter = filter;
+        applyFilter();
+    }
+
+    /** Returns the current active filter. */
+    public Filter getFilter() {
+        return currentFilter;
+    }
+
+    /** Rebuilds the displayed items list from allItems according to currentFilter. */
+    private void applyFilter() {
+        if (currentFilter == Filter.ALL) {
+            items = allItems;
+        } else {
+            items = new ArrayList<>();
+            DetectionResult.Verdict target;
+            switch (currentFilter) {
+                case SCAM:       target = DetectionResult.Verdict.SCAM;       break;
+                case SUSPICIOUS: target = DetectionResult.Verdict.SUSPICIOUS; break;
+                case SAFE:       target = DetectionResult.Verdict.SAFE;       break;
+                default:         target = null; break;
+            }
+            if (target != null) {
+                for (DetectionResult r : allItems) {
+                    if (r.verdict == target) items.add(r);
+                }
+            }
+        }
         notifyDataSetChanged();
     }
 

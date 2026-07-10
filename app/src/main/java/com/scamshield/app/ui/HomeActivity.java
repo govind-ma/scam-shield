@@ -267,6 +267,7 @@ public class HomeActivity extends AppCompatActivity
         View      cardView   = findViewById(R.id.card_protection_status);
         TextView  tvScamsBlocked = findViewById(R.id.tv_scams_blocked_count);
         TextView  tvMessagesScanned = findViewById(R.id.tv_messages_scanned_count);
+        TextView  tvProtectedDays = findViewById(R.id.tv_protected_days_count);
 
         boolean isAlert = false;
         try {
@@ -280,6 +281,12 @@ public class HomeActivity extends AppCompatActivity
         int messagesTodayCount = getTodayMessageCount();
         if (tvScamsBlocked != null) tvScamsBlocked.setText(String.valueOf(scamsBlockedCount));
         if (tvMessagesScanned != null) tvMessagesScanned.setText(String.valueOf(messagesTodayCount));
+
+        // "Protected since X days" counter
+        try {
+            int days = LocalDataStore.getInstance().getProtectedDays();
+            if (tvProtectedDays != null) tvProtectedDays.setText(String.valueOf(days));
+        } catch (Exception ignored) {}
 
         if (isAlert) {
             if (ivIcon != null) {
@@ -441,8 +448,76 @@ public class HomeActivity extends AppCompatActivity
         historyAdapter = new HistoryAdapter(new ArrayList<>());
         recyclerView.setAdapter(historyAdapter);
 
+        setupHistoryFilterChips();
         refreshHistory();
         Log.d(TAG, "History RecyclerView wired with HistoryAdapter.");
+    }
+
+    /**
+     * Wires the filter chips (All / Scams / Suspicious / Safe) above the history list.
+     * The active chip gets a solid green/red tint; inactive chips are dimmed.
+     */
+    private void setupHistoryFilterChips() {
+        android.widget.TextView chipAll        = findViewById(R.id.chip_filter_all);
+        android.widget.TextView chipScam       = findViewById(R.id.chip_filter_scam);
+        android.widget.TextView chipSuspicious = findViewById(R.id.chip_filter_suspicious);
+        android.widget.TextView chipSafe       = findViewById(R.id.chip_filter_safe);
+
+        if (chipAll == null) return; // layout doesn't have chips yet — safe guard
+
+        View.OnClickListener chipClick = v -> {
+            HistoryAdapter.Filter filter;
+            if (v.getId() == R.id.chip_filter_scam) {
+                filter = HistoryAdapter.Filter.SCAM;
+            } else if (v.getId() == R.id.chip_filter_suspicious) {
+                filter = HistoryAdapter.Filter.SUSPICIOUS;
+            } else if (v.getId() == R.id.chip_filter_safe) {
+                filter = HistoryAdapter.Filter.SAFE;
+            } else {
+                filter = HistoryAdapter.Filter.ALL;
+            }
+            historyAdapter.setFilter(filter);
+            updateFilterChipHighlight(filter);
+
+            // Show empty state if filtered list is now empty
+            List<DetectionResult> history = historyAdapter.getItemCount() == 0
+                    ? new java.util.ArrayList<>()
+                    : LocalDataStore.getInstance().getHistory(); // just to check
+            View cardEmpty = findViewById(R.id.card_history_empty);
+            RecyclerView rv = findViewById(R.id.rv_history);
+            if (historyAdapter.getItemCount() == 0) {
+                if (cardEmpty != null) cardEmpty.setVisibility(View.VISIBLE);
+                if (rv != null) rv.setVisibility(View.GONE);
+            } else {
+                if (cardEmpty != null) cardEmpty.setVisibility(View.GONE);
+                if (rv != null) rv.setVisibility(View.VISIBLE);
+            }
+        };
+
+        chipAll.setOnClickListener(chipClick);
+        chipScam.setOnClickListener(chipClick);
+        chipSuspicious.setOnClickListener(chipClick);
+        chipSafe.setOnClickListener(chipClick);
+
+        // Initial highlight — "All" is active by default
+        updateFilterChipHighlight(HistoryAdapter.Filter.ALL);
+    }
+
+    /**
+     * Visually highlights the active filter chip by changing its alpha.
+     * Active = full opacity; inactive = 50% opacity.
+     */
+    private void updateFilterChipHighlight(HistoryAdapter.Filter active) {
+        android.widget.TextView chipAll        = findViewById(R.id.chip_filter_all);
+        android.widget.TextView chipScam       = findViewById(R.id.chip_filter_scam);
+        android.widget.TextView chipSuspicious = findViewById(R.id.chip_filter_suspicious);
+        android.widget.TextView chipSafe       = findViewById(R.id.chip_filter_safe);
+
+        if (chipAll == null) return;
+        chipAll.setAlpha(        active == HistoryAdapter.Filter.ALL        ? 1.0f : 0.45f);
+        chipScam.setAlpha(       active == HistoryAdapter.Filter.SCAM       ? 1.0f : 0.45f);
+        chipSuspicious.setAlpha( active == HistoryAdapter.Filter.SUSPICIOUS ? 1.0f : 0.45f);
+        chipSafe.setAlpha(       active == HistoryAdapter.Filter.SAFE       ? 1.0f : 0.45f);
     }
 
     @Override

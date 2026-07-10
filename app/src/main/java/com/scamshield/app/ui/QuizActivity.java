@@ -60,6 +60,13 @@ public class QuizActivity extends AppCompatActivity {
     private TextView tvScoreFeedback;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // Quiz is accessed from Learn tab — highlight Learn in the bottom nav.
+        NavigationHelper.setupBottomNavigation(this, NavigationHelper.TAB_LEARN);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);

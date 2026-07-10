@@ -47,10 +47,11 @@ import java.util.Map;
 public class LocalDataStore implements DataStore {
 
     private static final String TAG              = "ScamShield.DataStore";
-    private static final String PREFS_NAME       = "scamshield_prefs";
-    private static final String KEY_HISTORY      = "detection_history";
-    private static final String KEY_ALERT_MODE   = "alert_mode_active";
-    private static final int    MAX_HISTORY_ITEMS = 50;
+    private static final String PREFS_NAME           = "scamshield_prefs";
+    private static final String KEY_HISTORY          = "detection_history";
+    private static final String KEY_ALERT_MODE       = "alert_mode_active";
+    private static final String KEY_INSTALL_TIMESTAMP = "install_timestamp_ms";
+    private static final int    MAX_HISTORY_ITEMS    = 50;
 
     // ── Singleton ─────────────────────────────────────────────────────────────
     private static volatile LocalDataStore instance;
@@ -290,6 +291,32 @@ public class LocalDataStore implements DataStore {
     }
 
     /**
+     * Returns the raw stored detection entries as pipe-delimited strings for
+     * lightweight stats calculations (e.g. counting today's scams in HomeActivity).
+     *
+     * Format of each entry: "<verdict>|<sourceType>|<timestamp>"
+     *
+     * Consumers must handle malformed entries gracefully (try/catch around split).
+     * Prefer getHistory() when full DetectionResult objects are needed.
+     */
+    public List<String> getDetectionHistory() {
+        JSONArray array = loadHistoryArray();
+        List<String> results = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject obj = array.getJSONObject(i);
+                String verdict   = obj.optString("verdict", "SAFE");
+                String source    = obj.optString("sourceType", "");
+                long   timestamp = obj.optLong("timestamp", 0L);
+                results.add(verdict + "|" + source + "|" + timestamp);
+            } catch (JSONException e) {
+                Log.w(TAG, "Skipping malformed entry at getDetectionHistory() index " + i);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Clears all stored detection history.
      * Called from Settings if the user wants to reset their history.
      */
@@ -314,6 +341,23 @@ public class LocalDataStore implements DataStore {
             Log.e(TAG, "History JSON corrupted — resetting: " + e.getMessage());
             return new JSONArray();
         }
+    }
+
+    /**
+     * Returns the number of whole days since Scam Shield was first set up on this device.
+     * On first call ever, records the current timestamp and returns 0.
+     * Used by HomeActivity to display "Protected for X days".
+     */
+    public int getProtectedDays() {
+        long installTs = prefs.getLong(KEY_INSTALL_TIMESTAMP, 0L);
+        if (installTs == 0L) {
+            // First launch — record install time and show day 0 → "Today"
+            installTs = System.currentTimeMillis();
+            prefs.edit().putLong(KEY_INSTALL_TIMESTAMP, installTs).apply();
+            return 0;
+        }
+        long diffMs = System.currentTimeMillis() - installTs;
+        return (int) (diffMs / 86_400_000L); // ms → whole days
     }
 
     /** Returns whether the application is in Alert Mode (scam detected). */
