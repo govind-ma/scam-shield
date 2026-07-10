@@ -109,6 +109,11 @@ public class HomeActivity extends AppCompatActivity
         // Re-check overlay permission and alert mode on every screen return.
         updateProtectionStatus();
 
+        // Restart the shield breathing animation with the current mode's style.
+        boolean isAlert = false;
+        try { isAlert = LocalDataStore.getInstance().isAlertModeActive(); } catch (Exception ignored) {}
+        updateShieldAnimation(isAlert);
+
         // Register as history refresh listener so live detections update the list.
         HistoryAdapter.setRefreshListener(this);
 
@@ -120,6 +125,9 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
+        // Stop the shield pulse so it does not keep running in the background.
+        ImageView shieldIcon = findViewById(R.id.iv_app_shield);
+        if (shieldIcon != null) shieldIcon.clearAnimation();
         // Prevent ScamAlertManager from holding a reference to a paused Activity.
         HistoryAdapter.clearRefreshListener();
     }
@@ -375,6 +383,9 @@ public class HomeActivity extends AppCompatActivity
 
         if (root == null) return;
 
+        // Keep shield pulse in sync with whichever mode is being applied.
+        updateShieldAnimation(isAlert);
+
         if (isAlert) {
             root.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2A"));
             if (tvTitle != null) tvTitle.setTextColor(android.graphics.Color.WHITE);
@@ -460,6 +471,29 @@ public class HomeActivity extends AppCompatActivity
             if (cardEmpty != null) cardEmpty.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
         }
+    }
+
+    // =========================================================================
+    // Shield Pulse Animation
+    // =========================================================================
+
+    /**
+     * Starts a continuous breathing animation on the header shield icon.
+     * Safe mode: slow gentle pulse (1500 ms, 8% scale, safe_green tint).
+     * Alert mode: fast aggressive flash (400 ms, 15% scale, scam_red tint).
+     * Calling clearAnimation() before loading the new anim prevents stacking.
+     */
+    private void updateShieldAnimation(boolean isAlertMode) {
+        ImageView shieldIcon = findViewById(R.id.iv_app_shield);
+        if (shieldIcon == null) return;
+        shieldIcon.clearAnimation();
+        int animRes = isAlertMode ? R.anim.shield_pulse_scam : R.anim.shield_pulse_safe;
+        Animation anim = AnimationUtils.loadAnimation(this, animRes);
+        shieldIcon.startAnimation(anim);
+        int tint = isAlertMode
+                ? ContextCompat.getColor(this, R.color.scam_red)
+                : ContextCompat.getColor(this, R.color.safe_green);
+        shieldIcon.setColorFilter(tint);
     }
 
     // =========================================================================
