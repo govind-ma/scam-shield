@@ -5,81 +5,196 @@
     android:orientation="vertical"
     android:background="@color/bg_primary">
 
-    <!-- Main content area with padding -->
+    <!-- ══════════════════════════════════════════════════════════════════════
+         SHARE INTENT BANNER — shown when the activity is opened via ACTION_SEND.
+         Dismissed (GONE) as soon as the detection result is ready.
+         ══════════════════════════════════════════════════════════════════════ -->
     <LinearLayout
+        android:id="@+id/banner_shared"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/bg_tertiary"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checking shared message..."
+            android:textSize="14sp"
+            android:textColor="@color/safe_green"
+            android:textStyle="bold"/>
+
+        <!-- Inline progress dots using animated ellipsis via android:ellipsize -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&#8226;&#8226;&#8226;"
+            android:textSize="18sp"
+            android:textColor="@color/safe_green"/>
+    </LinearLayout>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         SCROLLABLE MAIN CONTENT
+         ══════════════════════════════════════════════════════════════════════ -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:fillViewport="true">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Check a message"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:paddingBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Paste or type the message you want to check:"
-        android:textSize="18sp"
-        android:textColor="@color/text_secondary"
-        android:paddingBottom="8dp"/>
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check This Message"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp"/>
 
-    <EditText
-        android:id="@+id/et_check_input"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:hint="Type or paste the message here..."
-        android:textSize="18sp"
-        android:textColor="@color/text_primary"
-        android:gravity="top"
-        android:padding="12dp"
-        android:background="@color/bg_secondary"
-        android:inputType="textMultiLine"/>
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We&#8217;ll tell you if this is a scam."
+                android:textSize="15sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:id="@+id/btn_run_check"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Check this message"
-        android:textSize="20sp"
-        android:textColor="@color/text_primary"
-        android:background="@drawable/ripple_frosted"
-        android:backgroundTint="@null"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+            <!-- ── Input field ─────────────────────────────────────────────── -->
+            <EditText
+                android:id="@+id/et_check_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="5"
+                android:gravity="top"
+                android:hint="Paste or type a message to check..."
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:padding="14dp"
+                android:background="@drawable/bg_input_field"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/tv_check_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="18sp"
-        android:textColor="@color/text_primary"
-        android:lineSpacingExtra="4dp"
-        android:paddingBottom="20dp"/>
+            <!-- ── Check button ────────────────────────────────────────────── -->
+            <Button
+                android:id="@+id/btn_run_check"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Check Now"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/bg_primary"
+                android:background="@drawable/bg_btn_safe_green"
+                android:backgroundTint="@null"
+                android:layout_marginBottom="20dp"/>
 
-    <!-- "Get Help Now" â€” shown after a SCAM or SUSPICIOUS result -->
-    <Button
-        android:id="@+id/btn_get_help_now"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:text="I got scammed - Get Help Now"
-        android:textSize="19sp"
-        android:textColor="@color/text_primary"
-        android:background="@drawable/ripple_frosted"
-        android:backgroundTint="@null"
-        android:visibility="gone"/>
+            <!-- ══════════════════════════════════════════════════════════════
+                 RESULT CARD — hidden until a check completes.
+                 Verdict colour (safe_green / suspicious_amber / scam_red)
+                 is applied programmatically via setBackgroundColor on
+                 tv_result_verdict_pill and v_result_accent_bar.
+                 ══════════════════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/card_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_bento_card"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
 
-    </LinearLayout>
+                <!-- Accent bar (top strip coloured by verdict) -->
+                <View
+                    android:id="@+id/v_result_accent_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginBottom="14dp"/>
 
-    <!-- Bottom navigation bar â€” included from layout_bottom_nav.xml -->
+                <!-- Verdict row: icon label + pill badge -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Detection Result"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:textAllCaps="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_result_verdict_pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/bg_primary"
+                        android:background="@drawable/bg_badge_green"
+                        android:text="SAFE"/>
+                </LinearLayout>
+
+                <!-- Reason text -->
+                <TextView
+                    android:id="@+id/tv_result_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <!-- Confidence score -->
+                <TextView
+                    android:id="@+id/tv_result_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"/>
+
+            </LinearLayout>
+
+            <!-- "Get Help Now" — shown after SCAM or SUSPICIOUS result -->
+            <Button
+                android:id="@+id/btn_get_help_now"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="I got scammed — Get Help Now"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_btn_scam_red"
+                android:backgroundTint="@null"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom navigation bar -->
     <include layout="@layout/layout_bottom_nav" />
 
 </LinearLayout>
-

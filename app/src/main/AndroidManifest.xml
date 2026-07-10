@@ -179,10 +179,20 @@
 
         <!-- ==================================================================
              CHECKSOMETHINGACTIVITY — manual text checking screen.
+             android:exported="true" is required here: the activity must be
+             reachable from external apps (WhatsApp, Gmail, browser, etc.)
+             that fire a standard ACTION_SEND share intent.
              ================================================================== -->
         <activity
             android:name=".ui.CheckSomethingActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <!-- Appears in the system share sheet for any plain-text selection -->
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
 
         <!-- ==================================================================
              LEARNABOUTSCAMSACTIVITY — educational content screen.
