@@ -10,14 +10,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/bg_primary">
 
     <!-- â”€â”€ Top Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <LinearLayout
         android:id="@+id/quiz_topbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#00796B"
+        android:background="@color/safe_green"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="12dp">
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Scenario 1 of 10"
             android:textSize="14sp"
-            android:textColor="#E0F2F1"/>
+            android:textColor="@color/text_secondary"/>
 
     </LinearLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#FFF9C4"
+                    android:background="@color/bg_tertiary"
                     android:padding="16dp"
                     android:visibility="gone"
                     android:layout_marginBottom="16dp">
@@ -137,7 +137,7 @@
                         android:text="Correct!"
                         android:textSize="19sp"
                         android:textStyle="bold"
-                        android:textColor="#F57F17"
+                        android:textColor="@color/suspicious_amber"
                         android:layout_marginBottom="8dp"/>
 
                     <!-- Short explanation -->
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:text="This is a scam. Banks will never ask you to click a non-official link."
                         android:textSize="17sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_primary"
                         android:lineSpacingExtra="4dp"
                         android:layout_marginBottom="16dp"/>
 
@@ -187,7 +187,7 @@
                     android:text="ðŸŽ‰  Quiz Finished!"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textColor="#00796B"
+                    android:textColor="@color/safe_green"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="24dp"/>
 

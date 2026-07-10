@@ -277,14 +277,20 @@ public class HomeActivity extends AppCompatActivity
         if (tvScamsBlocked != null) tvScamsBlocked.setText(String.valueOf(scamsBlockedCount));
         if (tvMessagesScanned != null) tvMessagesScanned.setText(String.valueOf(messagesTodayCount));
 
+        int colorScamRed    = ContextCompat.getColor(this, R.color.scam_red);
+        int colorAmber      = ContextCompat.getColor(this, R.color.suspicious_amber);
+        int colorTextPrim   = ContextCompat.getColor(this, R.color.text_primary);
+        int colorTextSec    = ContextCompat.getColor(this, R.color.text_secondary);
+        int colorSafeGreen  = ContextCompat.getColor(this, R.color.safe_green);
+
         if (isAlert) {
             if (ivIcon != null) {
                 ivIcon.setImageResource(R.drawable.ic_warning);
-                ivIcon.setColorFilter(android.graphics.Color.parseColor("#FF5252"));
+                ivIcon.setColorFilter(colorScamRed);
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_alert);
             tvStatus.setText("THREAT DETECTED");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#FF5252"));
+            tvStatus.setTextColor(colorScamRed);
             cardView.setBackgroundResource(R.drawable.card_dark_gray);
             cardView.setOnClickListener(v ->
                 startActivity(new Intent(this, IGotScammedActivity.class)));
@@ -296,23 +302,22 @@ public class HomeActivity extends AppCompatActivity
         if (overlayOk) {
             if (ivIcon != null) {
                 ivIcon.setImageResource(R.drawable.ic_shield_filled);
-                ivIcon.setColorFilter(android.graphics.Color.parseColor("#FFFFFF"));
+                ivIcon.setColorFilter(colorTextPrim);
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_green);
             tvStatus.setText("YOU'RE PROTECTED");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+            tvStatus.setTextColor(colorSafeGreen);
             cardView.setBackgroundResource(R.drawable.card_elevated);
             cardView.setOnClickListener(null);
             startFloatingService();
         } else {
             if (ivIcon != null) {
                 ivIcon.setImageResource(R.drawable.ic_warning);
-                ivIcon.setColorFilter(android.graphics.Color.parseColor("#E65100"));
+                ivIcon.setColorFilter(colorAmber);
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_amber);
             tvStatus.setText("FINISH SETUP");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
-            }
+            tvStatus.setTextColor(colorAmber);
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(v ->
                 startActivity(new Intent(this, OverlayPermissionHelper.launchOverlaySettings(this))));
@@ -386,48 +391,47 @@ public class HomeActivity extends AppCompatActivity
         // Keep shield pulse in sync with whichever mode is being applied.
         updateShieldAnimation(isAlert);
 
+        int cBgAlert   = ContextCompat.getColor(this, R.color.bg_primary);
+        int cBgSafe    = ContextCompat.getColor(this, R.color.bg_primary);
+        int cTextPrim  = ContextCompat.getColor(this, R.color.text_primary);
+        int cTextSec   = ContextCompat.getColor(this, R.color.text_secondary);
+        int cScamRed   = ContextCompat.getColor(this, R.color.scam_red);
+        int cSafeGreen = ContextCompat.getColor(this, R.color.safe_green);
+
         if (isAlert) {
-            root.setBackgroundColor(android.graphics.Color.parseColor("#2C2C2A"));
-            if (tvTitle != null) tvTitle.setTextColor(android.graphics.Color.WHITE);
-            if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#E24B4A"));
+            root.setBackgroundColor(cBgAlert);
+            if (tvTitle != null) tvTitle.setTextColor(cTextPrim);
+            if (ivShield != null) ivShield.setColorFilter(cScamRed);
             if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow_red);
             if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_red);
-            if (cardEmpty != null) {
-                cardEmpty.setBackgroundResource(R.drawable.card_dark_gray);
-            }
-            if (tvEmpty != null) {
-                tvEmpty.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
-            }
+            if (cardEmpty != null) cardEmpty.setBackgroundResource(R.drawable.card_dark_gray);
+            if (tvEmpty != null) tvEmpty.setTextColor(cTextSec);
             if (btnCheck != null) btnCheck.setBackgroundResource(R.drawable.card_dark_gray);
-            if (tvCheckText != null) tvCheckText.setTextColor(android.graphics.Color.WHITE);
-            if (tvCheckChevron != null) tvCheckChevron.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
+            if (tvCheckText != null) tvCheckText.setTextColor(cTextPrim);
+            if (tvCheckChevron != null) tvCheckChevron.setTextColor(cTextSec);
             if (btnLearn != null) btnLearn.setBackgroundResource(R.drawable.card_dark_gray);
-            if (tvLearnText != null) tvLearnText.setTextColor(android.graphics.Color.WHITE);
-            if (tvLearnChevron != null) tvLearnChevron.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
+            if (tvLearnText != null) tvLearnText.setTextColor(cTextPrim);
+            if (tvLearnChevron != null) tvLearnChevron.setTextColor(cTextSec);
             if (btnScammed != null) btnScammed.setBackgroundResource(R.drawable.card_dark_gray);
-            if (tvScammedText != null) tvScammedText.setTextColor(android.graphics.Color.parseColor("#FF5252"));
-            if (tvScammedChevron != null) tvScammedChevron.setTextColor(android.graphics.Color.parseColor("#FF5252"));
+            if (tvScammedText != null) tvScammedText.setTextColor(cScamRed);
+            if (tvScammedChevron != null) tvScammedChevron.setTextColor(cScamRed);
         } else {
-            root.setBackgroundColor(android.graphics.Color.parseColor("#F7F8F6"));
-            if (tvTitle != null) tvTitle.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
-            if (ivShield != null) ivShield.setColorFilter(android.graphics.Color.parseColor("#3B6D11"));
+            root.setBackgroundColor(cBgSafe);
+            if (tvTitle != null) tvTitle.setTextColor(cTextPrim);
+            if (ivShield != null) ivShield.setColorFilter(cSafeGreen);
             if (fab != null) fab.setBackgroundResource(R.drawable.fab_glow);
             if (fabCircle != null) fabCircle.setBackgroundResource(R.drawable.fab_circle_green);
-            if (cardEmpty != null) {
-                cardEmpty.setBackgroundResource(R.drawable.card_elevated);
-            }
-            if (tvEmpty != null) {
-                tvEmpty.setTextColor(android.graphics.Color.parseColor("#757575"));
-            }
+            if (cardEmpty != null) cardEmpty.setBackgroundResource(R.drawable.card_elevated);
+            if (tvEmpty != null) tvEmpty.setTextColor(cTextSec);
             if (btnCheck != null) btnCheck.setBackgroundResource(R.drawable.card_white);
-            if (tvCheckText != null) tvCheckText.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
-            if (tvCheckChevron != null) tvCheckChevron.setTextColor(android.graphics.Color.parseColor("#9E9E9E"));
+            if (tvCheckText != null) tvCheckText.setTextColor(cTextPrim);
+            if (tvCheckChevron != null) tvCheckChevron.setTextColor(cTextSec);
             if (btnLearn != null) btnLearn.setBackgroundResource(R.drawable.card_white);
-            if (tvLearnText != null) tvLearnText.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
-            if (tvLearnChevron != null) tvLearnChevron.setTextColor(android.graphics.Color.parseColor("#9E9E9E"));
+            if (tvLearnText != null) tvLearnText.setTextColor(cTextPrim);
+            if (tvLearnChevron != null) tvLearnChevron.setTextColor(cTextSec);
             if (btnScammed != null) btnScammed.setBackgroundResource(R.drawable.card_light_red);
-            if (tvScammedText != null) tvScammedText.setTextColor(android.graphics.Color.parseColor("#B71C1C"));
-            if (tvScammedChevron != null) tvScammedChevron.setTextColor(android.graphics.Color.parseColor("#B71C1C"));
+            if (tvScammedText != null) tvScammedText.setTextColor(cScamRed);
+            if (tvScammedChevron != null) tvScammedChevron.setTextColor(cScamRed);
         }
     }
 

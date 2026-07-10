@@ -426,7 +426,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="&#8594;"
                                 android:textSize="14sp"
-                                android:textColor="#64B5F6"/>
+                                android:textColor="@color/text_secondary"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -639,7 +639,7 @@
                         android:text="&#128172; Fake Bank SMS"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#004D40"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
@@ -647,7 +647,7 @@
                         android:layout_height="wrap_content"
                         android:text="A message claiming your account or credit card is blocked. It provides a link or phone number.\nRed Flags: Asks you to call a mobile number or click a link that does not end in .com or .in representing your bank."
                         android:textSize="17sp"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/text_primary"/>
                 </LinearLayout>
 
                 <!-- Card 2: Lottery / Prize scams -->
@@ -666,7 +666,7 @@
                         android:text="&#127881; Lottery / Prize Scam"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#004D40"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
@@ -674,7 +674,7 @@
                         android:layout_height="wrap_content"
                         android:text="You won Rs 25 Lakhs or a car in a lucky draw you never entered.\nRed Flags: They ask you to pay a processing fee or tax first before sending you the money. You never have to pay money to get lottery winnings."
                         android:textSize="17sp"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/text_primary"/>
                 </LinearLayout>
 
                 <!-- Card 3: Fake relative emergency -->
@@ -693,7 +693,7 @@
                         android:text="&#128250; Relative in Emergency"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#004D40"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
@@ -701,7 +701,7 @@
                         android:layout_height="wrap_content"
                         android:text="A caller pretending to be police claiming your grandchild has been arrested, or a relative in a hospital needing immediate payment.\nRed Flags: They ask for transfer via UPI immediately and ask you not to tell anyone. Call the relative directly on their known number to verify."
                         android:textSize="17sp"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/text_primary"/>
                 </LinearLayout>
 
                 <!-- Card 4: Fake Payment request -->
@@ -720,7 +720,7 @@
                         android:text="&#128184; Fake Payment Request"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#004D40"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
@@ -728,7 +728,7 @@
                         android:layout_height="wrap_content"
                         android:text="Someone sends you a payment request on UPI or scans a QR code claiming they are sending you money.\nRed Flags: The app asks you to enter your UPI PIN. Entering your PIN always takes money OUT of your bank account."
                         android:textSize="17sp"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/text_primary"/>
                 </LinearLayout>
 
                 <Button

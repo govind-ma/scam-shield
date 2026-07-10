@@ -9,7 +9,7 @@
     android:layout_width="220dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#EE1A237E"
+    android:background="@color/bg_secondary"
     android:padding="12dp"
     android:elevation="16dp">
 

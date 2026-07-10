@@ -110,9 +110,10 @@ public class ChatAssistantActivity extends AppCompatActivity {
         // Tint send button to match mode
         try {
             boolean isAlert = LocalDataStore.getInstance().isAlertModeActive();
-            btnSend.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
-                isAlert ? Color.parseColor("#E24B4A") : Color.parseColor("#3B6D11")
-            ));
+            int tint = isAlert
+                ? ContextCompat.getColor(this, R.color.scam_red)
+                : ContextCompat.getColor(this, R.color.safe_green);
+            btnSend.setBackgroundTintList(android.content.res.ColorStateList.valueOf(tint));
         } catch (Exception ignored) {}
     }
 
@@ -348,8 +349,8 @@ public class ChatAssistantActivity extends AppCompatActivity {
         TextView bubble = new TextView(this);
         bubble.setText(message);
         bubble.setTextSize(17);
-        bubble.setTextColor(Color.parseColor("#FFFFFF"));
-        bubble.setBackgroundColor(getResources().getColor(R.color.bg_tertiary, getTheme()));
+        bubble.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        bubble.setBackgroundColor(ContextCompat.getColor(this, R.color.bg_tertiary));
         bubble.setPadding(36, 26, 36, 26);
 
         row.addView(label);

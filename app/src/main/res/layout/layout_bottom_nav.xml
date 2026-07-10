@@ -16,7 +16,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E5E7E0"/>
+        android:background="@color/surface_border"/>
 
     <!-- Tab row -->
     <LinearLayout

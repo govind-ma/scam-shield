@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Step 1 of 3"
             android:textSize="14sp"
-            android:textColor="#FFCDD2"/>
+            android:textColor="@color/text_secondary"/>
 
     </LinearLayout>
 
@@ -405,7 +405,7 @@
                         android:layout_height="wrap_content"
                         android:text="Tell them what happened and ask them to block any transfers or freeze your account."
                         android:textSize="17sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_primary"
                         android:layout_marginBottom="16dp"/>
 
                     <!-- Bank call button -->
@@ -444,7 +444,7 @@
                         android:layout_height="wrap_content"
                         android:text="Dial 1930 â€” free, 24 hours a day, 7 days a week. They can help stop the money."
                         android:textSize="17sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_primary"
                         android:layout_marginBottom="16dp"/>
 
                     <Button
@@ -482,7 +482,7 @@
                         android:layout_height="wrap_content"
                         android:text="Go to cybercrime.gov.in and fill in the complaint form. Keep your transaction details ready."
                         android:textSize="17sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_primary"
                         android:layout_marginBottom="16dp"/>
 
                     <Button
@@ -511,7 +511,7 @@
                         android:text="âš   Important â€” do these things now"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:textColor="#E65100"
+                        android:textColor="@color/suspicious_amber"
                         android:layout_marginBottom="12dp"/>
 
                     <TextView
@@ -519,7 +519,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_primary"
                         android:lineSpacingExtra="6dp"/>
 
                 </LinearLayout>
