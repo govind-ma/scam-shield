@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    shield_pulse_safe.xml
+    Slow, gentle pulse for the shield icon in Safe Mode (green state).
+    Scale: 1.0 → 1.08 over 1500ms, reverses, repeats infinitely.
+    Alpha: 0.85 → 1.0 in sync — gives a soft breathing glow effect.
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <scale
+        android:fromXScale="1.0"
+        android:toXScale="1.08"
+        android:fromYScale="1.0"
+        android:toYScale="1.08"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="1500"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+
+    <alpha
+        android:fromAlpha="0.85"
+        android:toAlpha="1.0"
+        android:duration="1500"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+
+</set>

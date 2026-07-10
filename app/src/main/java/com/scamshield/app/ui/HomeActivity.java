@@ -74,9 +74,7 @@ public class HomeActivity extends AppCompatActivity
      */
     private boolean floatingServiceStarted = false;
 
-    // ── Diagnostic call counter (remove after debugging) ──────────────────────
-    private static final java.util.concurrent.atomic.AtomicInteger REFRESH_COUNT =
-            new java.util.concurrent.atomic.AtomicInteger(0);
+
 
     // =========================================================================
     // Lifecycle
@@ -109,17 +107,31 @@ public class HomeActivity extends AppCompatActivity
         // Re-check overlay permission and alert mode on every screen return.
         updateProtectionStatus();
 
+        // Start shield pulse animation
+        ImageView shieldIcon = findViewById(R.id.iv_app_shield);
+        if (shieldIcon != null) {
+            boolean alertMode = ThemeManager.isAlertMode(this);
+            android.view.animation.Animation pulse = AnimationUtils.loadAnimation(this,
+                    alertMode ? R.anim.shield_pulse_scam : R.anim.shield_pulse_safe);
+            shieldIcon.startAnimation(pulse);
+            shieldIcon.setColorFilter(alertMode
+                    ? getResources().getColor(R.color.scam_red, getTheme())
+                    : getResources().getColor(R.color.safe_green, getTheme()));
+        }
+
         // Register as history refresh listener so live detections update the list.
         HistoryAdapter.setRefreshListener(this);
 
         // Do NOT call refreshHistory() here — setupHistoryList() already did it once in onCreate().
         // Live updates go via: logDetection() → notifyHistoryChanged() → onHistoryChanged() → refreshHistory().
-        Log.d(TAG, "[DIAG] onResume() — skipping redundant refreshHistory().");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        // Stop shield pulse animation so it doesn't leak while off screen
+        ImageView shieldIcon = findViewById(R.id.iv_app_shield);
+        if (shieldIcon != null) shieldIcon.clearAnimation();
         // Prevent ScamAlertManager from holding a reference to a paused Activity.
         HistoryAdapter.clearRefreshListener();
     }
@@ -304,10 +316,9 @@ public class HomeActivity extends AppCompatActivity
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_amber);
             tvStatus.setText("FINISH SETUP");
             tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
-            }
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(v ->
-                startActivity(new Intent(this, OverlayPermissionHelper.launchOverlaySettings(this))));
+                OverlayPermissionHelper.launchOverlaySettings(this));
         }
     }
 
@@ -348,7 +359,6 @@ public class HomeActivity extends AppCompatActivity
             Log.w(TAG, "Error calculating messages scanned: " + e.getMessage());
         }
         return 0;
-    }
     }
 
     private void applyHomeTheme(boolean isAlert) {
@@ -441,14 +451,9 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void refreshHistory() {
-        int callNum = REFRESH_COUNT.incrementAndGet();
-        Log.d(TAG, "[DIAG] refreshHistory() called — call #" + callNum
-                + " | thread=" + Thread.currentThread().getName());
-
         if (historyAdapter == null) return;
 
         List<DetectionResult> history = LocalDataStore.getInstance().getHistory();
-        Log.d(TAG, "[DIAG] refreshHistory #" + callNum + " — DataStore returned " + history.size() + " entries");
         historyAdapter.setItems(history);
 
         View cardEmpty = findViewById(R.id.card_history_empty);

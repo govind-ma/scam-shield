@@ -56,8 +56,19 @@ public class CheckSomethingActivity extends AppCompatActivity {
         String prefill = getIntent().getStringExtra(EXTRA_PREFILL_TEXT);
         if (prefill != null && !prefill.isEmpty()) {
             etInput.setText(prefill);
-            // Move cursor to end for easier editing
             etInput.setSelection(etInput.getText().length());
+        }
+
+        // ── Handle Share-to-Check: text shared from another app via ACTION_SEND ─
+        if (Intent.ACTION_SEND.equals(getIntent().getAction())
+                && "text/plain".equals(getIntent().getType())) {
+            String shared = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+            if (shared != null && !shared.isEmpty()) {
+                etInput.setText(shared);
+                etInput.setSelection(shared.length());
+                // Auto-trigger the check so the result appears immediately
+                btnCheck.performClick();
+            }
         }
 
         // ── Run check ─────────────────────────────────────────────────────────
