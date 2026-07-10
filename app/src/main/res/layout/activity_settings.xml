@@ -23,7 +23,7 @@
             android:id="@+id/tv_settings_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="âš™  Settings &amp; Permissions"
+            android:text="Settings &amp; Permissions"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"/>
@@ -234,7 +234,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ””"
+                    android:text=""
                     android:textSize="22sp"
                     android:layout_marginEnd="12dp"/>
 
@@ -252,7 +252,7 @@
                     android:id="@+id/tv_btn_permission_notifications_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="âž”"
+                    android:text=""
                     android:textSize="20sp"
                     android:textColor="@color/text_secondary"/>
             </LinearLayout>
@@ -274,7 +274,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="âš™"
+                    android:text=""
                     android:textSize="22sp"
                     android:layout_marginEnd="12dp"/>
 
@@ -292,7 +292,7 @@
                     android:id="@+id/tv_btn_system_settings_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="âž”"
+                    android:text=""
                     android:textSize="20sp"
                     android:textColor="@color/text_secondary"/>
             </LinearLayout>
@@ -325,7 +325,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ—‘ï¸"
+                    android:text="&#x2014;"
                     android:textSize="22sp"
                     android:layout_marginEnd="12dp"/>
 
@@ -343,7 +343,7 @@
                     android:id="@+id/tv_btn_clear_history_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="âž”"
+                    android:text=""
                     android:textSize="20sp"
                     android:textColor="@color/scam_red"/>
             </LinearLayout>

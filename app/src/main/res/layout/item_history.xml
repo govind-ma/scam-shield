@@ -32,7 +32,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/scam_red"
-            android:text="âš  SCAM"/>
+            android:text="SCAM"/>
 
         <!-- Source badge (SMS / PAYMENT / CALL) -->
         <TextView

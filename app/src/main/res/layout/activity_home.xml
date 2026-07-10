@@ -109,124 +109,126 @@
                 android:paddingEnd="16dp"
                 android:paddingTop="16dp">
 
-            <!-- Guardian Status Card - Centered with stats -->
+            <!--
+                FIX 6: Proper "You're protected" status card.
+                Horizontal layout: green left border accent | shield icon badge |
+                text column (title + subtitle + small counters row).
+                The large centred circle/counter hero element is removed.
+            -->
             <LinearLayout
                 android:id="@+id/card_protection_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:background="@drawable/card_elevated"
-                android:gravity="center"
-                android:padding="24dp"
+                android:gravity="center_vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
                 android:layout_marginTop="0dp"
-                android:layout_marginBottom="28dp"
+                android:layout_marginBottom="20dp"
                 android:elevation="4dp">
 
-                <!-- Centered Shield Icon -->
+                <!-- Green left-border accent bar -->
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/safe_green"
+                    android:layout_marginEnd="14dp"/>
+
+                <!-- Shield icon badge -->
                 <FrameLayout
                     android:id="@+id/status_icon_badge"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_badge_green"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="14dp"
                     android:elevation="2dp">
 
                     <ImageView
                         android:id="@+id/iv_protection_icon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_shield_filled"
                         android:tint="@color/text_primary"
                         android:contentDescription="Guardian shield"/>
                 </FrameLayout>
 
-                <!-- Status Text -->
-                <TextView
-                    android:id="@+id/tv_protection_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="YOU'RE PROTECTED"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp"/>
-
-                <!-- Stats Row -->
+                <!-- Text column -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:baselineAligned="false">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <!-- Scams Blocked -->
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <!-- Main status title -->
+                    <TextView
+                        android:id="@+id/tv_protection_status"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="12dp">
+                        android:text="You're protected"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
 
+                    <!-- Subtitle — updated dynamically by updateProtectionStatus() -->
+                    <TextView
+                        android:id="@+id/tv_protection_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No threats found today"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <!-- Compact counters row inside the card -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Scams blocked badge -->
                         <TextView
                             android:id="@+id/tv_scams_blocked_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:textColor="#FF1744"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Scams Blocked"
+                            android:text="0 blocked"
                             android:textSize="12sp"
-                            android:textColor="@color/text_secondary"
-                            android:layout_marginTop="4dp"/>
-                    </LinearLayout>
+                            android:textStyle="bold"
+                            android:textColor="#FF1744"
+                            android:background="@drawable/chip_background"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_marginEnd="8dp"/>
 
-                    <!-- Divider -->
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="40dp"
-                        android:background="@color/surface_border"/>
-
-                    <!-- Messages Scanned -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="12dp">
-
+                        <!-- Messages scanned badge -->
                         <TextView
                             android:id="@+id/tv_messages_scanned_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/safe_green"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Today"
+                            android:text="0 scanned"
                             android:textSize="12sp"
-                            android:textColor="@color/text_secondary"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/safe_green"
+                            android:background="@drawable/chip_background"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
 
-            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+            <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
                  SMS INBOX SECTION  â† NEW
                  Reads the full device SMS inbox, labels each message SAFE or SCAM.
-                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+                 â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
 
             <!-- Section heading -->
             <TextView
@@ -281,10 +283,10 @@
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone"/>
 
-            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+            <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
                  DIVIDER
                  Visual separator between inbox and the action buttons below.
-                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+                 â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;��&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -292,9 +294,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+            <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
                  QUICK ACTIONS SECTION  â† MOVED DOWN (was between header and alerts)
-                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•��â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•�� -->
+                 â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;��â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;�� -->
 
             <TextView
                 android:id="@+id/tv_quick_actions_title"
@@ -366,7 +368,7 @@
                     android:id="@+id/tv_btn_check_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="â€º"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="#D1D5DB"
                     android:layout_marginStart="12dp"/>
@@ -432,7 +434,7 @@
                     android:id="@+id/tv_btn_learn_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="â€º"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="#D1D5DB"
                     android:layout_marginStart="12dp"/>
@@ -498,7 +500,7 @@
                     android:id="@+id/tv_btn_scammed_chevron"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="â€º"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="#F87171"
                     android:layout_marginStart="12dp"/>
@@ -527,7 +529,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View all â€º"
+                        android:text="View all"
                         android:textSize="13sp"
                         android:textColor="@color/safe_green"
                         android:visibility="gone"/> <!-- Hidden unless needed -->

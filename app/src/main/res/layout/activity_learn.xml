@@ -26,7 +26,7 @@
             android:id="@+id/tv_learn_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ðŸ“–  Learn &amp; Protect"
+            android:text="&#x2013; Learn &amp; Protect"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"/>
@@ -40,9 +40,9 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 0 â€” Main Topics Menu
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -148,7 +148,7 @@
                     android:useDefaultMargins="false"
                     android:layout_marginBottom="16dp">
 
-                    <!-- Topic 1: Safe Payments (col 0, row 0) — green tint -->
+                    <!-- Topic 1: Safe Payments (col 0, row 0) &#x2014; green tint -->
                     <LinearLayout
                         android:id="@+id/btn_topic_safe_payment"
                         android:layout_width="0dp"
@@ -182,7 +182,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- Topic 2: Before You Pay (col 1, row 0) — amber tint -->
+                    <!-- Topic 2: Before You Pay (col 1, row 0) &#x2014; amber tint -->
                     <LinearLayout
                         android:id="@+id/btn_topic_check_before_pay"
                         android:layout_width="0dp"
@@ -216,7 +216,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- Topic 3: I Got Scammed (col 0, row 1) — red tint -->
+                    <!-- Topic 3: I Got Scammed (col 0, row 1) &#x2014; red tint -->
                     <LinearLayout
                         android:id="@+id/btn_topic_scam_recovery"
                         android:layout_width="0dp"
@@ -250,7 +250,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- Topic 4: Scam Patterns (col 1, row 1) — blue tint -->
+                    <!-- Topic 4: Scam Patterns (col 1, row 1) &#x2014; blue tint -->
                     <LinearLayout
                         android:id="@+id/btn_topic_common_patterns"
                         android:layout_width="0dp"
@@ -331,9 +331,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 1 â€” How to make a safe payment (checklist steps)
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -356,7 +356,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸ›¡ï¸ How to make a safe payment"
+                        android:text="&#x203A; How to make a safe payment"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/safe_green"
@@ -383,7 +383,7 @@
                     android:id="@+id/btn_back_from_safe_payment"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="â† Back to topics"
+                    android:text="Back to topics"
                     android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
@@ -393,9 +393,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•ï¿½ï¿½ï¿½â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;ï¿½ï¿½ï¿½â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 2 â€” What to keep in mind before paying (tick-style checklist)
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -418,7 +418,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸ¤” What to keep in mind"
+                        android:text="What to keep in mind"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/safe_green"
@@ -435,7 +435,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="â˜‘  Are they rushing you?\nScammers create false urgency (e.g., 'Pay in 5 minutes or get blocked'). Take a deep breath and pause.\n\nâ˜‘  Did they ask for your OTP or UPI PIN?\nNO legitimate customer care, bank executive, or police officer will ever ask for your OTP or PIN.\n\nâ˜‘  Is the deal too good to be true?\nLottery winnings, free cash gifts, or highly discounted items are standard tricks to get your attention.\n\nâ˜‘  Are they asking you to download a screen-sharing app?\nApps like AnyDesk or TeamViewer let scammers see your PINs and password as you type them. Never install these for strangers.\n\nâ˜‘  Have you spoken to a trusted family member first?\nIf you feel confused, stop and call a child, sibling, or trusted friend before hitting pay."
+                        android:text="Are they rushing you?\nScammers create false urgency (e.g., 'Pay in 5 minutes or get blocked'). Take a deep breath and pause.\n\n Did they ask for your OTP or UPI PIN?\nNO legitimate customer care, bank executive, or police officer will ever ask for your OTP or PIN.\n\n Is the deal too good to be true?\nLottery winnings, free cash gifts, or highly discounted items are standard tricks to get your attention.\n\n Are they asking you to download a screen-sharing app?\nApps like AnyDesk or TeamViewer let scammers see your PINs and password as you type them. Never install these for strangers.\n\n Have you spoken to a trusted family member first?\nIf you feel confused, stop and call a child, sibling, or trusted friend before hitting pay."
                         android:textSize="18sp"
                         android:textColor="@color/text_primary"
                         android:lineSpacingExtra="6dp"/>
@@ -445,7 +445,7 @@
                     android:id="@+id/btn_back_from_check_before_pay"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="â† Back to topics"
+                    android:text="Back to topics"
                     android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
@@ -455,9 +455,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 3 â€” Common scam patterns (Cards explaining flags)
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -471,7 +471,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ” Common scam patterns"
+                    android:text="Common scam patterns"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/safe_green"
@@ -490,7 +490,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸ’¬ Fake Bank SMS"
+                        android:text="Fake Bank SMS"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -517,7 +517,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸŽ‰ Lottery / Prize Scam"
+                        android:text="Lottery / Prize Scam"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -544,7 +544,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸ†˜ Relative in Emergency"
+                        android:text="Relative in Emergency"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -571,7 +571,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ðŸ’¸ Fake Payment Request"
+                        android:text="Fake Payment Request"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#004D40"
@@ -589,7 +589,7 @@
                     android:id="@+id/btn_back_from_common_patterns"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="â† Back to topics"
+                    android:text="Back to topics"
                     android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"

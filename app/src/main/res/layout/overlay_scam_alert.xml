@@ -18,7 +18,7 @@
         android:id="@+id/tv_alert_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="âš   SMS SCAM ALERT"
+        android:text="SMS SCAM ALERT"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"

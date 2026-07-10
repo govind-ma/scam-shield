@@ -30,6 +30,7 @@ import com.scamshield.app.BuildConfig;
 import com.scamshield.app.R;
 import com.scamshield.app.data.LocalDataStore;
 import com.scamshield.app.engine.DetectionResult;
+import com.scamshield.app.ui.ThemeManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -95,17 +96,39 @@ public class ChatAssistantActivity extends AppCompatActivity {
         btnAttach.setOnClickListener(v -> handleAttachImage());
         btnMic.setOnClickListener(v -> handleVoiceInput());
 
+        // FIX 3: Apply correct theme immediately in onCreate so the screen
+        // doesn't flicker dark before onResume. Default to light/Safe Mode
+        // (white background, dark text) unless a scam is genuinely active.
+        applyThemeFromState();
+
         // Quick action chips
         findViewById(R.id.chip_check_message).setOnClickListener(v -> handleChipTap("Check a message: "));
         findViewById(R.id.chip_got_scammed).setOnClickListener(v -> handleChipTap("I got scammed. Help me: "));
         findViewById(R.id.chip_teach_me).setOnClickListener(v -> handleChipTap("Teach me about scams"));
     }
 
+    /**
+     * FIX 3: Apply the correct background theme based on whether a scam is
+     * currently active. Only shows Alert Mode (red) when ThemeManager confirms
+     * it — otherwise defaults to Safe Mode (white background, green top bar).
+     * Called in both onCreate() and onResume() to ensure consistency.
+     */
+    private void applyThemeFromState() {
+        boolean isAlert = ThemeManager.isAlertMode(this);
+        // Top bar: green (safe) or red (alert)
+        if (chatTopbar != null) {
+            chatTopbar.setBackgroundColor(android.graphics.Color.parseColor(
+                isAlert ? "#E24B4A" : "#3B6D11"));
+        }
+        // Root layout background: always keep bg_primary (light) regardless of alert
+        // The alert state is shown through the top bar color only, not the full screen.
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         NavigationHelper.setupBottomNavigation(this, NavigationHelper.TAB_CHAT);
-        NavigationHelper.applyTopBarTheme(this, chatTopbar);
+        applyThemeFromState(); // replaces NavigationHelper.applyTopBarTheme for chat
 
         // Tint send button to match mode
         try {

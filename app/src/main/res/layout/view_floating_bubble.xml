@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    view_floating_bubble.xml — Cyber Help Agent FAB
+    view_floating_bubble.xml &#x2014; Cyber Help Agent FAB
     Three layers in a FrameLayout (all centred):
       1. Outer glow ring (larger, slower pulse)
       2. Inner glow ring (tighter, slightly faster phase)
@@ -12,7 +12,7 @@
     android:layout_width="72dp"
     android:layout_height="72dp">
 
-    <!-- Outer glow ring — starts at scale 1.0, animates to 1.5 -->
+    <!-- Outer glow ring &#x2014; starts at scale 1.0, animates to 1.5 -->
     <View
         android:id="@+id/glow_ring_outer"
         android:layout_width="72dp"
@@ -21,7 +21,7 @@
         android:background="@drawable/glow_ring"
         android:alpha="0.0"/>
 
-    <!-- Inner glow ring — starts at scale 1.0, animates to 1.3 (tighter) -->
+    <!-- Inner glow ring &#x2014; starts at scale 1.0, animates to 1.3 (tighter) -->
     <View
         android:id="@+id/glow_ring_inner"
         android:layout_width="72dp"
@@ -30,13 +30,13 @@
         android:background="@drawable/glow_ring"
         android:alpha="0.0"/>
 
-    <!-- Shield FAB button — 56dp solid circle (standard FAB), centred in the 72dp frame -->
+    <!-- Shield FAB button &#x2014; 56dp solid circle (standard FAB), centred in the 72dp frame -->
     <TextView
         android:id="@+id/fab_shield_icon"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="center"
-        android:text="🛡"
+        android:text=""
         android:textSize="26sp"
         android:textColor="@color/text_primary"
         android:gravity="center"

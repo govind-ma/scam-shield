@@ -275,11 +275,15 @@ public class HomeActivity extends AppCompatActivity
 
         applyHomeTheme(isAlert);
 
+        // FIX 6: New subtitle view
+        TextView tvSubtitle = findViewById(R.id.tv_protection_subtitle);
+
         // Calculate today's stats
         int scamsBlockedCount = getTodayScamCount();
         int messagesTodayCount = getTodayMessageCount();
-        if (tvScamsBlocked != null) tvScamsBlocked.setText(String.valueOf(scamsBlockedCount));
-        if (tvMessagesScanned != null) tvMessagesScanned.setText(String.valueOf(messagesTodayCount));
+        // Counter labels: "N blocked" and "N scanned"
+        if (tvScamsBlocked != null) tvScamsBlocked.setText(scamsBlockedCount + " blocked");
+        if (tvMessagesScanned != null) tvMessagesScanned.setText(messagesTodayCount + " scanned");
 
         if (isAlert) {
             if (ivIcon != null) {
@@ -287,9 +291,10 @@ public class HomeActivity extends AppCompatActivity
                 ivIcon.setColorFilter(android.graphics.Color.parseColor("#FF5252"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_alert);
-            tvStatus.setText("THREAT DETECTED");
+            tvStatus.setText("Threat detected");
             tvStatus.setTextColor(android.graphics.Color.parseColor("#FF5252"));
-            cardView.setBackgroundResource(R.drawable.card_dark_gray);
+            if (tvSubtitle != null) tvSubtitle.setText("Tap to get help now");
+            cardView.setBackgroundResource(R.drawable.card_elevated);
             cardView.setOnClickListener(v ->
                 startActivity(new Intent(this, IGotScammedActivity.class)));
             return;
@@ -303,8 +308,13 @@ public class HomeActivity extends AppCompatActivity
                 ivIcon.setColorFilter(android.graphics.Color.parseColor("#FFFFFF"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_green);
-            tvStatus.setText("YOU'RE PROTECTED");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+            tvStatus.setText("You're protected");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
+            if (tvSubtitle != null) {
+                tvSubtitle.setText(scamsBlockedCount > 0
+                    ? scamsBlockedCount + " threat" + (scamsBlockedCount == 1 ? "" : "s") + " blocked today"
+                    : "No threats found today");
+            }
             cardView.setBackgroundResource(R.drawable.card_elevated);
             cardView.setOnClickListener(null);
             startFloatingService();
@@ -314,8 +324,9 @@ public class HomeActivity extends AppCompatActivity
                 ivIcon.setColorFilter(android.graphics.Color.parseColor("#E65100"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_amber);
-            tvStatus.setText("FINISH SETUP");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+            tvStatus.setText("Finish setup");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#E65100"));
+            if (tvSubtitle != null) tvSubtitle.setText("Tap to enable full protection");
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(v ->
                 OverlayPermissionHelper.launchOverlaySettings(this));
@@ -327,18 +338,16 @@ public class HomeActivity extends AppCompatActivity
      */
     private int getTodayScamCount() {
         try {
-            List<String> allDetections = LocalDataStore.getInstance().getDetectionHistory();
+            List<DetectionResult> allDetections = LocalDataStore.getInstance().getHistory();
             if (allDetections == null || allDetections.isEmpty()) return 0;
 
             int count = 0;
-            long today = System.currentTimeMillis() - (System.currentTimeMillis() % 86400000);
-            for (String entry : allDetections) {
-                try {
-                    long timestamp = Long.parseLong(entry.split("\\|")[2]);
-                    if (timestamp >= today && entry.contains("SCAM")) {
-                        count++;
-                    }
-                } catch (Exception ignored) {}
+            long todayStart = System.currentTimeMillis() - (System.currentTimeMillis() % 86400000L);
+            for (DetectionResult result : allDetections) {
+                if (result.timestamp >= todayStart
+                        && result.verdict == DetectionResult.Verdict.SCAM) {
+                    count++;
+                }
             }
             return count;
         } catch (Exception e) {

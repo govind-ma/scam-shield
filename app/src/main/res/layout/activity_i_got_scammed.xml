@@ -2,6 +2,8 @@
 <!--
     activity_i_got_scammed.xml
     Refactored to card design: rounded cards, border, neutral background.
+    FIX: Removed all garbled emoji from bank list items. Bank names use plain text only.
+    FIX: Added Punjab National Bank (PNB) row.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,7 +11,7 @@
     android:orientation="vertical"
     android:background="@color/bg_primary">
 
-    <!-- â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Top bar -->
     <LinearLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -24,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ðŸ†˜  I Got Scammed"
+            android:text="I Got Scammed"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"/>
@@ -40,16 +42,16 @@
 
     </LinearLayout>
 
-    <!-- â”€â”€ ViewFlipper â€” contains the 3 screens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- ViewFlipper &#x2014; contains the 3 screens -->
     <ViewFlipper
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-             SCREEN 0 â€” Which bank do you use?
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             SCREEN 0 &#x2014; Which bank do you use?
+             ═══════════════════════════════════════════════════════════════════ -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -80,7 +82,7 @@
                     android:textColor="@color/text_secondary"
                     android:layout_marginBottom="20dp"/>
 
-                <!-- Bank Card Rows -->
+                <!-- SBI -->
                 <LinearLayout android:id="@+id/btn_bank_sbi"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -89,17 +91,15 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ¦" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="SBI (State Bank of India)"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- HDFC -->
                 <LinearLayout android:id="@+id/btn_bank_hdfc"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -108,17 +108,15 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ¦" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="HDFC Bank"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- ICICI -->
                 <LinearLayout android:id="@+id/btn_bank_icici"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -127,17 +125,15 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ¦" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="ICICI Bank"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- Axis -->
                 <LinearLayout android:id="@+id/btn_bank_axis"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -146,18 +142,16 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ¦" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Axis Bank"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
-                <LinearLayout android:id="@+id/btn_bank_paytm"
+                <!-- PNB &#x2014; NEW -->
+                <LinearLayout android:id="@+id/btn_bank_pnb"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
                     android:orientation="horizontal" android:gravity="center_vertical"
@@ -165,17 +159,15 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ“±" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Paytm"
+                        android:layout_weight="1" android:text="Punjab National Bank (PNB)"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- Google Pay -->
                 <LinearLayout android:id="@+id/btn_bank_gpay"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -184,17 +176,15 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ“±" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Google Pay"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- PhonePe -->
                 <LinearLayout android:id="@+id/btn_bank_phonepe"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -203,17 +193,32 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ“±" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="PhonePe"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
+                <!-- Paytm -->
+                <LinearLayout android:id="@+id/btn_bank_paytm"
+                    android:layout_width="match_parent" android:layout_height="64dp"
+                    android:background="@drawable/card_white"
+                    android:orientation="horizontal" android:gravity="center_vertical"
+                    android:paddingStart="16dp" android:paddingEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true" android:focusable="true">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Paytm"
+                        android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
+                <!-- Other -->
                 <LinearLayout android:id="@+id/btn_bank_other"
                     android:layout_width="match_parent" android:layout_height="64dp"
                     android:background="@drawable/card_white"
@@ -222,23 +227,20 @@
                     android:layout_marginBottom="24dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ¦" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Other bank / Not sure"
+                        android:layout_weight="1" android:text="Other / Not sure"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•��•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â���â•â•â•â•â•â•â•â•â•â•â•
-             SCREEN 1 â€” What happened?
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             SCREEN 1 &#x2014; What happened?
+             ═══════════════════════════════════════════════════════════════════ -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -277,15 +279,12 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ“ž" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="I received a suspicious call"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/btn_what_message"
@@ -296,15 +295,12 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ’¬" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="I received a suspicious message"
                         android:textSize="19sp" android:textColor="@color/text_primary" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/text_secondary"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/btn_what_money"
@@ -315,15 +311,12 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ’¸" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="I sent money by mistake"
                         android:textSize="19sp" android:textColor="@color/scam_red" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/scam_red"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/scam_red"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/btn_what_otp"
@@ -334,21 +327,18 @@
                     android:layout_marginBottom="24dp"
                     android:clickable="true" android:focusable="true">
                     <TextView
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="ðŸ”‘" android:textSize="22sp" android:layout_marginEnd="12dp"/>
-                    <TextView
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="I shared my OTP or PIN"
                         android:textSize="19sp" android:textColor="@color/scam_red" android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="âž”" android:textSize="20sp" android:textColor="@color/scam_red"/>
+                        android:text="&#x203A;" android:textSize="24sp" android:textColor="@color/scam_red"/>
                 </LinearLayout>
 
                 <!-- Back button -->
                 <Button android:id="@+id/btn_back_to_bank"
                     android:layout_width="match_parent" android:layout_height="56dp"
-                    android:text="â† Go back"
+                    android:text="&#x2190; Go back"
                     android:textSize="17sp" android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null" android:layout_marginTop="8dp"/>
@@ -356,9 +346,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-             SCREEN 2 â€” Results: call buttons + next steps
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             SCREEN 2 &#x2014; Results: call buttons + next steps
+             ═══════════════════════════════════════════════════════════════════ -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -375,13 +365,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ“‹  What to do right now"
+                    android:text="What to do right now"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
                     android:layout_marginBottom="20dp"/>
 
-                <!-- â”€â”€ Section: Call your bank â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+                <!-- Section: Call your bank -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -393,7 +383,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="STEP 1 â€” Call your bank immediately"
+                        android:text="STEP 1 &#x2013; Call your bank immediately"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="@color/scam_red"
@@ -408,12 +398,11 @@
                         android:textColor="#333333"
                         android:layout_marginBottom="16dp"/>
 
-                    <!-- Bank call button -->
                     <Button
                         android:id="@+id/btn_call_bank"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:text="ðŸ“ž  Call Bank Helpline"
+                        android:text="Call Bank Helpline"
                         android:textSize="19sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
@@ -421,7 +410,7 @@
                         android:backgroundTint="@null"/>
                 </LinearLayout>
 
-                <!-- â”€â”€ Section: Cyber Crime helpline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+                <!-- Section: Cyber Crime helpline -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -433,7 +422,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="STEP 2 â€” Call Cyber Crime Helpline"
+                        android:text="STEP 2 &#x2013; Call Cyber Crime Helpline"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="@color/scam_red"
@@ -442,7 +431,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dial 1930 â€” free, 24 hours a day, 7 days a week. They can help stop the money."
+                        android:text="Dial 1930 &#x2013; free, 24 hours a day, 7 days a week. They can help stop the money."
                         android:textSize="17sp"
                         android:textColor="#333333"
                         android:layout_marginBottom="16dp"/>
@@ -451,7 +440,7 @@
                         android:id="@+id/btn_call_1930"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:text="ðŸ“ž  Call 1930"
+                        android:text="Call 1930 (Cyber Crime)"
                         android:textSize="19sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
@@ -459,7 +448,7 @@
                         android:backgroundTint="@null"/>
                 </LinearLayout>
 
-                <!-- â”€â”€ Section: Report online â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+                <!-- Section: Report online -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -471,7 +460,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="STEP 3 â€” File an online complaint"
+                        android:text="STEP 3 &#x2013; File an online complaint"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="@color/scam_red"
@@ -489,14 +478,14 @@
                         android:id="@+id/btn_report_online"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="ðŸŒ  Open cybercrime.gov.in"
+                        android:text="Open cybercrime.gov.in"
                         android:textSize="18sp"
                         android:textColor="@color/text_primary"
                         android:background="@drawable/ripple_frosted"
                         android:backgroundTint="@null"/>
                 </LinearLayout>
 
-                <!-- â”€â”€ Important reminders card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+                <!-- Important reminders card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -508,7 +497,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="âš   Important â€” do these things now"
+                        android:text="Important &#x2013; do these things now"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="#E65100"
@@ -527,7 +516,7 @@
                 <!-- Back button -->
                 <Button android:id="@+id/btn_back_to_what"
                     android:layout_width="match_parent" android:layout_height="56dp"
-                    android:text="â† Go back"
+                    android:text="&#x2190; Go back"
                     android:textSize="17sp" android:textColor="@color/text_secondary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"/>
@@ -538,4 +527,3 @@
     </ViewFlipper>
 
 </LinearLayout>
-

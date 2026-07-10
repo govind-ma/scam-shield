@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="âœï¸  Spot the Scam"
+            android:text="Spot the Scam"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"/>
@@ -49,9 +49,9 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 0 â€” Scenario Question & Feedback View
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -97,7 +97,7 @@
                     android:id="@+id/btn_answer_scam"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="ðŸš¨  SCAM"
+                    android:text="SCAM"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
@@ -110,7 +110,7 @@
                     android:id="@+id/btn_answer_safe"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="âœ“  SAFE"
+                    android:text="SAFE"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
@@ -156,7 +156,7 @@
                         android:id="@+id/btn_next_scenario"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Next Scenario  âž”"
+                        android:text="Next Scenario"
                         android:textSize="18sp"
                         android:textColor="@color/text_primary"
                         android:background="@drawable/ripple_frosted"
@@ -167,9 +167,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;
              SCREEN 1 â€” Quiz Results Screen
-             â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+             â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022;â&#x2022; -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ðŸŽ‰  Quiz Finished!"
+                    android:text="Quiz Finished!"
                     android:textSize="26sp"
                     android:textStyle="bold"
                     android:textColor="#00796B"
@@ -219,7 +219,7 @@
                     android:id="@+id/btn_retake_quiz"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="ðŸ”„  Try Again"
+                    android:text="Try Again"
                     android:textSize="18sp"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"
@@ -231,7 +231,7 @@
                     android:id="@+id/btn_exit_quiz"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="ðŸ“–  Browse Learning Topics"
+                    android:text="&#x2013; Browse Learning Topics"
                     android:textSize="18sp"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"

@@ -2,7 +2,7 @@
 <!--
     view_floating_menu.xml
     Popup menu shown when the user taps the floating bubble.
-    Three large, clearly labelled buttons — no icons without text.
+    Three large, clearly labelled buttons &#x2014; no icons without text.
     Semi-transparent dark background so the app underneath is still visible.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
         android:id="@+id/btn_menu_check"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="🔍 Check something"
+        android:text="Check something"
         android:textSize="16sp"
         android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"
@@ -40,7 +40,7 @@
         android:id="@+id/btn_menu_learn"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="📖 Learn about scams"
+        android:text="Learn about scams"
         android:textSize="16sp"
         android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"
@@ -52,7 +52,7 @@
         android:id="@+id/btn_menu_scammed"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="🆘 I got scammed"
+        android:text="I got scammed"
         android:textSize="16sp"
         android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"

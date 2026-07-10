@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    layout_bottom_nav.xml  — Part F redesign
+    layout_bottom_nav.xml  &#x2014; Part F redesign
     White background, 1dp top border. Active tab uses theme accent color on icon+label.
     Inactive tabs are neutral gray. No solid colored background block.
 -->
@@ -42,7 +42,7 @@
                 android:id="@+id/tv_nav_home_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🏠"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/text_secondary"/>
             <TextView
@@ -70,7 +70,7 @@
                 android:id="@+id/tv_nav_chat_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="💬"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/text_secondary"/>
             <TextView
@@ -98,7 +98,7 @@
                 android:id="@+id/tv_nav_learn_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📖"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/text_secondary"/>
             <TextView
@@ -126,7 +126,7 @@
                 android:id="@+id/tv_nav_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⚙"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/text_secondary"/>
             <TextView

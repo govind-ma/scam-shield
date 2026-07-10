@@ -98,10 +98,11 @@ public class IGotScammedActivity extends AppCompatActivity {
         wireBankButton(R.id.btn_bank_hdfc,    "HDFC");
         wireBankButton(R.id.btn_bank_icici,   "ICICI");
         wireBankButton(R.id.btn_bank_axis,    "Axis");
-        wireBankButton(R.id.btn_bank_paytm,   "Paytm");
+        wireBankButton(R.id.btn_bank_pnb,     "PNB");    // FIX 5: added PNB
         wireBankButton(R.id.btn_bank_gpay,    "Google Pay");
         wireBankButton(R.id.btn_bank_phonepe, "PhonePe");
-        wireBankButton(R.id.btn_bank_other,   null);   // null → "Other / Not sure"
+        wireBankButton(R.id.btn_bank_paytm,   "Paytm");
+        wireBankButton(R.id.btn_bank_other,   null);     // null → "Other / Not sure"
     }
 
     /**

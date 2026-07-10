@@ -74,7 +74,7 @@
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:background="@drawable/pill_verdict"
-            android:text="âœ“ SAFE"/>
+            android:text="SAFE"/>
 
     </LinearLayout>
 
@@ -123,7 +123,7 @@
             android:id="@+id/btn_trust_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="âœ" Trust this message"
+            android:text="" Trust this message"
             android:textSize="13sp"
             android:textColor="@color/safe_green"
             android:textStyle="bold"

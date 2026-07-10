@@ -19,7 +19,7 @@
         android:id="@+id/tv_suspicious_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="⚠  Please Check This Message"
+        android:text="&#x26A0; Please Check This Message"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
