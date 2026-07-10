@@ -80,13 +80,25 @@ public class QuizActivity extends AppCompatActivity {
         tvFinalScore = findViewById(R.id.tv_final_score);
         tvScoreFeedback = findViewById(R.id.tv_score_feedback);
 
-        btnScam.setOnClickListener(v -> handleAnswer(true));
-        btnSafe.setOnClickListener(v -> handleAnswer(false));
+        btnScam.setOnClickListener(v -> {
+            HapticManager.buttonTap(v);
+            handleAnswer(true);
+        });
+        btnSafe.setOnClickListener(v -> {
+            HapticManager.buttonTap(v);
+            handleAnswer(false);
+        });
 
-        btnNext.setOnClickListener(v -> showNextScenario());
+        btnNext.setOnClickListener(v -> {
+            HapticManager.buttonTap(v);
+            showNextScenario();
+        });
 
         Button btnRetake = findViewById(R.id.btn_retake_quiz);
-        btnRetake.setOnClickListener(v -> resetQuiz());
+        btnRetake.setOnClickListener(v -> {
+            HapticManager.buttonTap(v);
+            resetQuiz();
+        });
 
         Button btnExit = findViewById(R.id.btn_exit_quiz);
         btnExit.setOnClickListener(v -> finish());

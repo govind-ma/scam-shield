@@ -62,6 +62,7 @@ public class CheckSomethingActivity extends AppCompatActivity {
 
         // ── Run check ─────────────────────────────────────────────────────────
         btnCheck.setOnClickListener(v -> {
+            HapticManager.buttonTap(v);
             String input = etInput.getText().toString().trim();
             if (input.isEmpty()) {
                 tvResult.setText("Please type or paste the message you want to check.");

@@ -82,6 +82,9 @@ public class IGotScammedActivity extends AppCompatActivity {
         tvScreenTitle   = findViewById(R.id.tv_screen_title);
         tvStepIndicator = findViewById(R.id.tv_step_indicator);
 
+        // Medium double-pulse: signals "help is here" as soon as Recovery Mode opens.
+        HapticManager.recoveryModeOpened(findViewById(android.R.id.content));
+
         wireScreen0_BankPicker();
         wireScreen1_WhatHappened();
         wireScreen2_Results();

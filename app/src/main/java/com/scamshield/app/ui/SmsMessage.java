@@ -48,6 +48,14 @@ public class SmsMessage {
      */
     public boolean trusted = false;
 
+    /**
+     * True once HapticManager.safeConfirmed() has been fired for this item.
+     * Prevents the safe haptic from re-triggering every time the user scrolls
+     * the RecyclerView and the view holder is rebound.
+     * Transient — in-memory only.
+     */
+    public boolean hapticFired = false;
+
     public SmsMessage(String address, String body, long date) {
         this.address = (address != null) ? address : "Unknown";
         this.body    = (body    != null) ? body    : "";

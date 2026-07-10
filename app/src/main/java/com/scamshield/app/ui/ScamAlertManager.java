@@ -294,6 +294,10 @@ public class ScamAlertManager implements DetectionListener {
         mainHandler.post(activeCountdownRunnable);
 
         addOverlayToWindow(overlayView, true /* fullAttention */);
+
+        // Trigger strong triple-pulse haptic so the user feels the alert
+        // even if the phone is face-down or the screen is locked.
+        HapticManager.scamDetected(overlayView);
     }
 
     // =========================================================================

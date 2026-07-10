@@ -134,6 +134,11 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
                     holder.vAccentStripe.setBackgroundColor(COLOR_SAFE);
                     // Hide trust button for SAFE messages
                     holder.llTrustRow.setVisibility(View.GONE);
+                    // Fire light confirmation haptic once per item (not on every scroll rebind)
+                    if (!msg.hapticFired) {
+                        msg.hapticFired = true;
+                        HapticManager.safeConfirmed(holder.itemView);
+                    }
                     break;
             }
 
