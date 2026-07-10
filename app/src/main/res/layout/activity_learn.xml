@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
     activity_learn.xml
     Refactored to a beautiful card-based layout for LearnAboutScamsActivity.
@@ -56,6 +56,80 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="88dp">
 
+                <!-- Daily Challenge Card (full-width, above the grid) -->
+                <LinearLayout
+                    android:id="@+id/card_daily_challenge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_white"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_daily_challenge_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Challenge"
+                        android:textSize="13sp"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/safe_green"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_daily_challenge_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp"
+                        android:text="Loading today's challenge..."/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_challenge_scam"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:text="It's a Scam"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:background="@drawable/card_light_red"
+                            android:backgroundTint="@null"
+                            android:layout_marginEnd="8dp"/>
+
+                        <Button
+                            android:id="@+id/btn_challenge_safe"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:text="It's Safe"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:background="@drawable/card_elevated"
+                            android:backgroundTint="@null"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_challenge_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/safe_green"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <!-- 2-column grid for the 4 topic cards -->
                 <TextView
                     android:id="@+id/tv_learn_menu_subtitle"
                     android:layout_width="match_parent"
@@ -66,157 +140,151 @@
                     android:textColor="@color/text_secondary"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Topic 1 Card -->
-                <LinearLayout
-                    android:id="@+id/btn_topic_safe_payment"
+                <GridLayout
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="@drawable/card_white"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginBottom="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="false"
+                    android:layout_marginBottom="16dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ðŸ›¡ï¸"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="12dp"/>
-
-                    <TextView
+                    <!-- Topic 1: Safe Payments (col 0, row 0) — green tint -->
+                    <LinearLayout
+                        android:id="@+id/btn_topic_safe_payment"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="How to make a safe payment"
-                        android:textSize="19sp"
-                        android:textColor="@color/text_primary"
-                        android:textStyle="bold"/>
+                        android:layout_height="120dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/card_white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="âž”"
-                        android:textSize="20sp"
-                        android:textColor="@color/text_secondary"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[S]"
+                            android:textSize="30sp"
+                            android:textColor="@color/safe_green"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"/>
 
-                <!-- Topic 2 Card -->
-                <LinearLayout
-                    android:id="@+id/btn_topic_check_before_pay"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="@drawable/card_white"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginBottom="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Safe Payments"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ðŸ¤”"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="12dp"/>
-
-                    <TextView
+                    <!-- Topic 2: Before You Pay (col 1, row 0) — amber tint -->
+                    <LinearLayout
+                        android:id="@+id/btn_topic_check_before_pay"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Before you transfer money"
-                        android:textSize="19sp"
-                        android:textColor="@color/text_primary"
-                        android:textStyle="bold"/>
+                        android:layout_height="120dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/card_white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="âž”"
-                        android:textSize="20sp"
-                        android:textColor="@color/text_secondary"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[?]"
+                            android:textSize="30sp"
+                            android:textColor="@color/suspicious_amber"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"/>
 
-                <!-- Topic 3 Card (Emergency - Light Red Tint) -->
-                <LinearLayout
-                    android:id="@+id/btn_topic_scam_recovery"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="@drawable/card_light_red"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginBottom="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Before You Pay"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ðŸ†˜"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="12dp"/>
-
-                    <TextView
+                    <!-- Topic 3: I Got Scammed (col 0, row 1) — red tint -->
+                    <LinearLayout
+                        android:id="@+id/btn_topic_scam_recovery"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="What to do if scammed"
-                        android:textSize="19sp"
-                        android:textColor="@color/scam_red"
-                        android:textStyle="bold"/>
+                        android:layout_height="120dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/card_light_red"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="âž”"
-                        android:textSize="20sp"
-                        android:textColor="@color/scam_red"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[!]"
+                            android:textSize="30sp"
+                            android:textColor="@color/scam_red"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"/>
 
-                <!-- Topic 4 Card -->
-                <LinearLayout
-                    android:id="@+id/btn_topic_common_patterns"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="@drawable/card_white"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="I Got Scammed"
+                            android:textSize="15sp"
+                            android:textColor="@color/scam_red"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ðŸ”"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="12dp"/>
-
-                    <TextView
+                    <!-- Topic 4: Scam Patterns (col 1, row 1) — blue tint -->
+                    <LinearLayout
+                        android:id="@+id/btn_topic_common_patterns"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Common scam patterns"
-                        android:textSize="19sp"
-                        android:textColor="@color/text_primary"
-                        android:textStyle="bold"/>
+                        android:layout_height="120dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/card_white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="âž”"
-                        android:textSize="20sp"
-                        android:textColor="@color/text_secondary"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[~]"
+                            android:textSize="30sp"
+                            android:textColor="@color/text_secondary"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Scam Patterns"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                </GridLayout>
 
                 <!-- QUIZ ACTION BANNER -->
                 <LinearLayout
@@ -232,10 +300,10 @@
                         android:id="@+id/tv_quiz_card_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="âœï¸  Test your knowledge!"
+                        android:text="Test your knowledge!"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="#004D40"
+                        android:textColor="@color/safe_green"
                         android:layout_marginBottom="8dp"/>
 
                     <TextView
@@ -251,7 +319,7 @@
                         android:id="@+id/btn_take_quiz"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Start Quiz"
+                        android:text="Start Quiz ->"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"

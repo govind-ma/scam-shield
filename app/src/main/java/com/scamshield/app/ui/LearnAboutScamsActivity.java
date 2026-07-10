@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.scamshield.app.R;
 
+import java.util.Calendar;
+
 /**
  * LearnAboutScamsActivity
  * Package: com.scamshield.app.ui
@@ -39,6 +41,7 @@ public class LearnAboutScamsActivity extends AppCompatActivity {
 
         setupTopicButtons();
         setupBackButtons();
+        setupDailyChallenge();
 
         // Take the Quiz button
         Button btnTakeQuiz = findViewById(R.id.btn_take_quiz);
@@ -46,6 +49,86 @@ public class LearnAboutScamsActivity extends AppCompatActivity {
             Intent quizIntent = new Intent(this, QuizActivity.class);
             startActivity(quizIntent);
         });
+    }
+
+    // =========================================================================
+    // Daily Challenge — rotates by day of week (7 messages, 7 days)
+    // =========================================================================
+
+    /** One challenge entry: the sample message, whether it is a scam, and the explanation. */
+    private static final String[][] DAILY_CHALLENGES = {
+        // { message, "true"=scam/"false"=safe, explanation }
+        {
+            "URGENT: Your SBI account has been blocked. Click http://sbi-verify-now.xyz to unblock.",
+            "true",
+            "Correct! This is a SCAM. Real banks never ask you to click unknown links to unblock accounts."
+        },
+        {
+            "Your OTP for SBI NetBanking login is 847392. Valid for 10 minutes. Do not share with anyone.",
+            "false",
+            "Correct! This is SAFE. It is a standard OTP message from your bank."
+        },
+        {
+            "Congratulations! You have won Rs 15 Lakhs in the BSNL Lucky Draw. Call 9988776655 to claim.",
+            "true",
+            "Correct! This is a SCAM. You cannot win a lottery you never entered — and real prizes don't require you to call."
+        },
+        {
+            "Your electricity bill of Rs 1,240 is due. Pay at mahavitaran.in or via MSEB app before 5th.",
+            "false",
+            "Correct! This is SAFE. The link matches the official Maharashtra electricity board domain."
+        },
+        {
+            "Hi, I'm from Amazon support. Your order has a payment issue. Share your card OTP to resolve.",
+            "true",
+            "Correct! This is a SCAM. No company will ever ask for your OTP over SMS or phone."
+        },
+        {
+            "Your HDFC Credit Card statement for July is ready. Log in at hdfcbank.com or use the app.",
+            "false",
+            "Correct! This is SAFE. The message directs you to the official bank website, no link tricks."
+        },
+        {
+            "Police: A case has been filed against you. Pay Rs 5,000 bail immediately to avoid arrest. UPI: fake@ybl",
+            "true",
+            "Correct! This is a SCAM. Police never demand bail money via UPI. This is a fear-based extortion scam."
+        }
+    };
+
+    private void setupDailyChallenge() {
+        // Use day of week (1=Sunday … 7=Saturday) to pick the challenge
+        int dayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1; // 0–6
+        String[] challenge = DAILY_CHALLENGES[dayIndex];
+
+        TextView tvMessage   = findViewById(R.id.tv_daily_challenge_message);
+        TextView tvResult    = findViewById(R.id.tv_challenge_result);
+        Button   btnScam     = findViewById(R.id.btn_challenge_scam);
+        Button   btnSafe     = findViewById(R.id.btn_challenge_safe);
+
+        if (tvMessage == null || tvResult == null || btnScam == null || btnSafe == null) return;
+
+        tvMessage.setText("\"" + challenge[0] + "\"");
+        boolean isScam = "true".equals(challenge[1]);
+        String explanation = challenge[2];
+
+        View.OnClickListener answerListener = v -> {
+            boolean choseScam = (v.getId() == R.id.btn_challenge_scam);
+            boolean correct = (choseScam == isScam);
+
+            tvResult.setText(correct ? explanation
+                    : "Not quite. " + explanation);
+            tvResult.setTextColor(correct
+                    ? getResources().getColor(R.color.safe_green, getTheme())
+                    : getResources().getColor(R.color.scam_red, getTheme()));
+            tvResult.setVisibility(View.VISIBLE);
+
+            // Disable both buttons after answering
+            btnScam.setEnabled(false);
+            btnSafe.setEnabled(false);
+        };
+
+        btnScam.setOnClickListener(answerListener);
+        btnSafe.setOnClickListener(answerListener);
     }
 
     private void setupTopicButtons() {

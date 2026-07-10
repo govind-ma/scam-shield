@@ -44,15 +44,13 @@ import java.util.Locale;
 public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHolder> {
 
     // Colour constants — Safe/Alert Mode palette
-    private static final int COLOR_SCAM        = Color.parseColor("#B71C1C");
-    private static final int COLOR_SUSPICIOUS  = Color.parseColor("#E65100");
-    private static final int COLOR_SAFE        = Color.parseColor("#00695C");
-    private static final int COLOR_TRUSTED     = Color.parseColor("#757575"); // grey
-    private static final int COLOR_SCAM_BG     = Color.parseColor("#FFEBEE");
-    private static final int COLOR_SUSP_BG     = Color.parseColor("#FBE9E7");
-    private static final int COLOR_SAFE_BG     = Color.parseColor("#E8F5E9");
-    private static final int COLOR_TRUSTED_BG  = Color.parseColor("#F5F5F5"); // light grey
-    private static final int COLOR_TRUST_BTN   = Color.parseColor("#E8F5E9"); // green tint for button bg
+    private static final int COLOR_SCAM       = Color.parseColor("#B71C1C");
+    private static final int COLOR_SUSPICIOUS = Color.parseColor("#E65100");
+    private static final int COLOR_SAFE       = Color.parseColor("#00695C");
+    private static final int COLOR_SCAM_BG    = Color.parseColor("#FFEBEE");
+    private static final int COLOR_SUSP_BG    = Color.parseColor("#FBE9E7");
+    private static final int COLOR_SAFE_BG    = Color.parseColor("#E8F5E9");
+    private static final int COLOR_TRUST_BTN  = Color.parseColor("#E8F5E9"); // green tint for button bg
 
     private static final SimpleDateFormat DATE_FMT =
             new SimpleDateFormat("dd MMM, hh:mm a", Locale.getDefault());
@@ -99,12 +97,12 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
 
         // ── Verdict pill + Trust button ───────────────────────────────────────
         if (msg.trusted) {
-            // Trusted: grey pill, no action button, row tap does nothing
-            holder.tvVerdict.setText("Trusted ✓");
-            holder.tvVerdict.setTextColor(COLOR_TRUSTED);
-            setPillBackground(holder.tvVerdict, COLOR_TRUSTED_BG);
+            // Trusted: show as SAFE (green pill), no trust button, row tap disabled
+            holder.tvVerdict.setText("SAFE");
+            holder.tvVerdict.setTextColor(COLOR_SAFE);
+            setPillBackground(holder.tvVerdict, COLOR_SAFE_BG);
             holder.llTrustRow.setVisibility(View.GONE);
-            holder.vAccentStripe.setBackgroundColor(COLOR_TRUSTED);
+            holder.vAccentStripe.setBackgroundColor(COLOR_SAFE);
             holder.itemView.setOnClickListener(null);
         } else {
             // Not yet trusted: show colour-coded verdict pill + trust button

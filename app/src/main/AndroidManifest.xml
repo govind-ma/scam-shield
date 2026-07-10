@@ -80,6 +80,27 @@
         Required for SpeechRecognizer voice input in ChatAssistantActivity.
         User approves at runtime when they first tap the mic button.
     -->
+    <!--
+        VIBRATE — Normal permission (auto-granted).
+        Required by HapticManager to trigger vibration patterns on scam detection,
+        safe confirmation, and button tap feedback.
+    -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!--
+        READ_CALL_LOG — Dangerous permission.
+        Allows Scam Shield to scan recent call log entries for suspicious numbers
+        alongside SMS analysis. User approves at runtime.
+    -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
+    <!--
+        READ_PHONE_STATE — Dangerous permission.
+        Provides phone number and network info for caller ID verification.
+        User approves at runtime.
+    -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!--
@@ -165,10 +186,20 @@
 
         <!-- ==================================================================
              CHECKSOMETHINGACTIVITY — manual text checking screen.
+             android:exported="true" so external apps (share sheet, other
+             apps) can send text directly to this Activity via ACTION_SEND.
              ================================================================== -->
         <activity
             android:name=".ui.CheckSomethingActivity"
-            android:exported="false" />
+            android:exported="true">
+            <!-- Share-to-Check: user selects "Check with Scam Shield" in
+                 Android share sheet from any app (WhatsApp, SMS, Browser…) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
 
         <!-- ==================================================================
              LEARNABOUTSCAMSACTIVITY — educational content screen.

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
     activity_settings.xml
     Refactored to card design: rounded cards, border, light-neutral background, chevrons.
@@ -55,6 +55,156 @@
             android:paddingEnd="16dp"
             android:paddingTop="16dp"
             android:paddingBottom="88dp">
+
+            <!-- Language Group Title -->
+            <TextView
+                android:id="@+id/tv_settings_group_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Language"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Language Selector Card -->
+            <LinearLayout
+                android:id="@+id/btn_language_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_white"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_marginBottom="24dp"
+                android:clickable="false"
+                android:focusable="false">
+
+                <TextView
+                    android:id="@+id/tv_language_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="App Language"
+                    android:textSize="17sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/btn_lang_english"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:text="English"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:background="@drawable/card_elevated"
+                        android:backgroundTint="@null"
+                        android:layout_marginEnd="6dp"/>
+
+                    <Button
+                        android:id="@+id/btn_lang_hindi"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:text="Hindi"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_secondary"
+                        android:background="@drawable/card_white"
+                        android:backgroundTint="@null"
+                        android:layout_marginEnd="6dp"/>
+
+                    <Button
+                        android:id="@+id/btn_lang_gujarati"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:text="Gujarati"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_secondary"
+                        android:background="@drawable/card_white"
+                        android:backgroundTint="@null"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Family Alert Group Title -->
+            <TextView
+                android:id="@+id/tv_settings_group_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Family Alert Contact"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Family Alert Contact Card -->
+            <LinearLayout
+                android:id="@+id/card_family_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_white"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/tv_family_alert_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="When a scam is detected, alert this person"
+                    android:textSize="17sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <android.widget.EditText
+                        android:id="@+id/et_family_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:hint="Family member phone number"
+                        android:inputType="phone"
+                        android:textSize="17sp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_secondary"
+                        android:background="@drawable/card_elevated"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/btn_test_family_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Test"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:background="@drawable/card_elevated"
+                        android:backgroundTint="@null"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <!-- Permissions Group Title -->
             <TextView
@@ -196,6 +346,134 @@
                     android:text="âž”"
                     android:textSize="20sp"
                     android:textColor="@color/scam_red"/>
+            </LinearLayout>
+
+            <!-- About Group Title -->
+            <TextView
+                android:id="@+id/tv_settings_group_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Version Card -->
+            <LinearLayout
+                android:id="@+id/card_about_version"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_white"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="v"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/safe_green"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_about_version_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Version 1.0.0"
+                    android:textSize="19sp"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- How it Works Card -->
+            <LinearLayout
+                android:id="@+id/btn_how_it_works"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_white"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="?"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/safe_green"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_how_it_works_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="How Scam Shield works"
+                    android:textSize="19sp"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_how_it_works_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_secondary"/>
+            </LinearLayout>
+
+            <!-- Privacy Policy Card -->
+            <LinearLayout
+                android:id="@+id/btn_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/card_white"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/safe_green"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_privacy_policy_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Privacy Policy"
+                    android:textSize="19sp"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_privacy_policy_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_secondary"/>
             </LinearLayout>
 
         </LinearLayout>
