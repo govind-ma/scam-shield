@@ -104,6 +104,7 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
             holder.tvVerdict.setTextColor(COLOR_TRUSTED);
             setPillBackground(holder.tvVerdict, COLOR_TRUSTED_BG);
             holder.llTrustRow.setVisibility(View.GONE);
+            holder.vAccentStripe.setBackgroundColor(COLOR_TRUSTED);
             holder.itemView.setOnClickListener(null);
         } else {
             // Not yet trusted: show colour-coded verdict pill + trust button
@@ -115,22 +116,28 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
                     holder.tvVerdict.setText("⚠ SCAM");
                     holder.tvVerdict.setTextColor(COLOR_SCAM);
                     setPillBackground(holder.tvVerdict, COLOR_SCAM_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SCAM);
+                    holder.llTrustRow.setVisibility(View.VISIBLE);
                     break;
                 case SUSPICIOUS:
                     holder.tvVerdict.setText("⚡ SUSPICIOUS");
                     holder.tvVerdict.setTextColor(COLOR_SUSPICIOUS);
                     setPillBackground(holder.tvVerdict, COLOR_SUSP_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SUSPICIOUS);
+                    holder.llTrustRow.setVisibility(View.VISIBLE);
                     break;
                 case SAFE:
                 default:
                     holder.tvVerdict.setText("✓ SAFE");
                     holder.tvVerdict.setTextColor(COLOR_SAFE);
                     setPillBackground(holder.tvVerdict, COLOR_SAFE_BG);
+                    holder.vAccentStripe.setBackgroundColor(COLOR_SAFE);
+                    // Hide trust button for SAFE messages
+                    holder.llTrustRow.setVisibility(View.GONE);
                     break;
             }
 
-            // Trust button — always visible for untrusted messages
-            holder.llTrustRow.setVisibility(View.VISIBLE);
+            // Trust button — only visible for SCAM/SUSPICIOUS messages
             setPillBackground(holder.btnTrust, COLOR_TRUST_BTN);
 
             holder.btnTrust.setOnClickListener(v -> {
@@ -186,6 +193,7 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
         final TextView    tvTimestamp;
         final LinearLayout llTrustRow;
         final TextView    btnTrust;
+        final View        vAccentStripe;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -195,6 +203,7 @@ public class SmsInboxAdapter extends RecyclerView.Adapter<SmsInboxAdapter.ViewHo
             tvTimestamp = itemView.findViewById(R.id.tv_sms_timestamp);
             llTrustRow  = itemView.findViewById(R.id.ll_trust_row);
             btnTrust    = itemView.findViewById(R.id.btn_trust_message);
+            vAccentStripe = itemView.findViewById(R.id.v_accent_stripe);
         }
     }
 }

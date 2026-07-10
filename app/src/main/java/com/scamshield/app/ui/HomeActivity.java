@@ -250,10 +250,11 @@ public class HomeActivity extends AppCompatActivity
 
     private void updateProtectionStatus() {
         TextView  tvStatus   = findViewById(R.id.tv_protection_status);
-        TextView  tvSubtitle = findViewById(R.id.tv_protection_subtitle);
         android.widget.ImageView ivIcon = findViewById(R.id.iv_protection_icon);
         View      iconBadge  = findViewById(R.id.status_icon_badge);
         View      cardView   = findViewById(R.id.card_protection_status);
+        TextView  tvScamsBlocked = findViewById(R.id.tv_scams_blocked_count);
+        TextView  tvMessagesScanned = findViewById(R.id.tv_messages_scanned_count);
 
         boolean isAlert = false;
         try {
@@ -262,18 +263,20 @@ public class HomeActivity extends AppCompatActivity
 
         applyHomeTheme(isAlert);
 
+        // Calculate today's stats
+        int scamsBlockedCount = getTodayScamCount();
+        int messagesTodayCount = getTodayMessageCount();
+        if (tvScamsBlocked != null) tvScamsBlocked.setText(String.valueOf(scamsBlockedCount));
+        if (tvMessagesScanned != null) tvMessagesScanned.setText(String.valueOf(messagesTodayCount));
+
         if (isAlert) {
             if (ivIcon != null) {
                 ivIcon.setImageResource(R.drawable.ic_warning);
                 ivIcon.setColorFilter(android.graphics.Color.parseColor("#FF5252"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_alert);
-            tvStatus.setText("Alert active");
+            tvStatus.setText("THREAT DETECTED");
             tvStatus.setTextColor(android.graphics.Color.parseColor("#FF5252"));
-            if (tvSubtitle != null) {
-                tvSubtitle.setText("Tap for emergency help");
-                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#B0BEC5"));
-            }
             cardView.setBackgroundResource(R.drawable.card_dark_gray);
             cardView.setOnClickListener(v ->
                 startActivity(new Intent(this, IGotScammedActivity.class)));
@@ -284,17 +287,13 @@ public class HomeActivity extends AppCompatActivity
 
         if (overlayOk) {
             if (ivIcon != null) {
-                ivIcon.setImageResource(R.drawable.ic_check);
-                ivIcon.setColorFilter(android.graphics.Color.parseColor("#3B6D11"));
+                ivIcon.setImageResource(R.drawable.ic_shield_filled);
+                ivIcon.setColorFilter(android.graphics.Color.parseColor("#FFFFFF"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_green);
-            tvStatus.setText("You're protected");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
-            if (tvSubtitle != null) {
-                tvSubtitle.setText("No threats found today");
-                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#6B7280"));
-            }
-            cardView.setBackgroundResource(R.drawable.card_white);
+            tvStatus.setText("YOU'RE PROTECTED");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+            cardView.setBackgroundResource(R.drawable.card_elevated);
             cardView.setOnClickListener(null);
             startFloatingService();
         } else {
@@ -303,16 +302,53 @@ public class HomeActivity extends AppCompatActivity
                 ivIcon.setColorFilter(android.graphics.Color.parseColor("#E65100"));
             }
             if (iconBadge != null) iconBadge.setBackgroundResource(R.drawable.bg_badge_amber);
-            tvStatus.setText("Finish setting up");
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#1A1A1A"));
-            if (tvSubtitle != null) {
-                tvSubtitle.setText("Tap to turn on protection");
-                tvSubtitle.setTextColor(android.graphics.Color.parseColor("#E65100"));
+            tvStatus.setText("FINISH SETUP");
+            tvStatus.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
             }
             cardView.setBackgroundResource(R.drawable.card_white);
             cardView.setOnClickListener(v ->
-                OverlayPermissionHelper.requestPermission(this));
+                startActivity(new Intent(this, OverlayPermissionHelper.launchOverlaySettings(this))));
         }
+    }
+
+    /**
+     * Get count of scams blocked today.
+     */
+    private int getTodayScamCount() {
+        try {
+            List<String> allDetections = LocalDataStore.getInstance().getDetectionHistory();
+            if (allDetections == null || allDetections.isEmpty()) return 0;
+
+            int count = 0;
+            long today = System.currentTimeMillis() - (System.currentTimeMillis() % 86400000);
+            for (String entry : allDetections) {
+                try {
+                    long timestamp = Long.parseLong(entry.split("\\|")[2]);
+                    if (timestamp >= today && entry.contains("SCAM")) {
+                        count++;
+                    }
+                } catch (Exception ignored) {}
+            }
+            return count;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calculating scams blocked: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Get count of messages scanned today (in SMS inbox).
+     */
+    private int getTodayMessageCount() {
+        try {
+            if (smsInboxAdapter != null) {
+                return smsInboxAdapter.getItemCount();
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calculating messages scanned: " + e.getMessage());
+        }
+        return 0;
+    }
     }
 
     private void applyHomeTheme(boolean isAlert) {
