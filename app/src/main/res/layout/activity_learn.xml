@@ -29,7 +29,7 @@
             android:text="ðŸ“–  Learn &amp; Protect"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/text_primary"/>
 
     </LinearLayout>
 
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:text="âž”"
                         android:textSize="20sp"
-                        android:textColor="#9E9E9E"/>
+                        android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <!-- Topic 2 Card -->
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:text="âž”"
                         android:textSize="20sp"
-                        android:textColor="#9E9E9E"/>
+                        android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <!-- Topic 3 Card (Emergency - Light Red Tint) -->
@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:text="âž”"
                         android:textSize="20sp"
-                        android:textColor="#9E9E9E"/>
+                        android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <!-- QUIZ ACTION BANNER -->
@@ -254,7 +254,7 @@
                         android:text="Start Quiz"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:background="@drawable/ripple_frosted"
                         android:backgroundTint="@null"/>
 

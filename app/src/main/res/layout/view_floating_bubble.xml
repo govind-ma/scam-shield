@@ -38,7 +38,7 @@
         android:layout_gravity="center"
         android:text="🛡"
         android:textSize="26sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:gravity="center"
         android:background="@drawable/circle_fab_green"
         android:elevation="10dp"

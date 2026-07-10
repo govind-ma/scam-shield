@@ -22,7 +22,7 @@
         android:text="⚠  Please Check This Message"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:gravity="center"
         android:paddingBottom="12dp"/>
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="This message has some warning signs."
         android:textSize="18sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:lineSpacingExtra="4dp"
         android:layout_marginBottom="16dp"/>
 

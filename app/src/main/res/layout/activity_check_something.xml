@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/bg_primary">
 
     <!-- Main content area with padding -->
     <LinearLayout
@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ðŸ”  Check a message"
+        android:text="ðŸ"  Check a message"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="Paste or type the message you want to check:"
         android:textSize="18sp"
-        android:textColor="#424242"
+        android:textColor="@color/text_secondary"
         android:paddingBottom="8dp"/>
 
     <EditText
@@ -36,9 +36,10 @@
         android:layout_height="160dp"
         android:hint="Type or paste the message here..."
         android:textSize="18sp"
+        android:textColor="@color/text_primary"
         android:gravity="top"
         android:padding="12dp"
-        android:background="@color/text_primary"
+        android:background="@color/bg_secondary"
         android:inputType="textMultiLine"/>
 
     <Button

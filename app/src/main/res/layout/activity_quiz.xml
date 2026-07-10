@@ -30,7 +30,7 @@
             android:text="âœï¸  Spot the Scam"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/text_primary"/>
 
         <!-- Progress text, e.g. "1 / 10" -->
         <TextView
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="Is this message a SCAM or is it SAFE?"
                     android:textSize="20sp"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- The Message/Scenario Card -->
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#FFFFFF"
+                    android:background="@color/bg_secondary"
                     android:elevation="4dp"
                     android:padding="20dp"
                     android:layout_marginBottom="24dp">
@@ -100,7 +100,7 @@
                     android:text="ðŸš¨  SCAM"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="12dp"/>
@@ -113,7 +113,7 @@
                     android:text="âœ“  SAFE"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="24dp"/>
@@ -158,7 +158,7 @@
                         android:layout_height="56dp"
                         android:text="Next Scenario  âž”"
                         android:textSize="18sp"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:background="@drawable/ripple_frosted"
                         android:backgroundTint="@null"/>
 
@@ -209,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:text="Great job! You know how to spot scams. Keep being careful!"
                     android:textSize="18sp"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_secondary"
                     android:gravity="center"
                     android:lineSpacingExtra="4dp"
                     android:layout_marginBottom="32dp"/>
@@ -221,7 +221,7 @@
                     android:layout_height="64dp"
                     android:text="ðŸ”„  Try Again"
                     android:textSize="18sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:background="@drawable/ripple_frosted"
                     android:backgroundTint="@null"
                     android:layout_marginBottom="12dp"/>

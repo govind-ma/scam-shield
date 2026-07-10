@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
     activity_home.xml â€” Restructured Home dashboard for HomeActivity.
 
@@ -71,7 +71,7 @@
                         android:layout_height="36dp"
                         android:layout_marginEnd="12dp"
                         android:src="@drawable/ic_shield_filled"
-                        android:tint="#FFFFFF"
+                        android:tint="@color/text_primary"
                         android:contentDescription="Scam Shield logo"/>
 
                     <LinearLayout
@@ -86,7 +86,7 @@
                             android:text="Scam Shield"
                             android:textSize="28sp"
                             android:textStyle="bold"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:letterSpacing="-0.01"/>
 
                         <TextView
@@ -143,7 +143,7 @@
                             android:layout_height="28dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_check"
-                            android:tint="#FFFFFF"
+                            android:tint="@color/text_primary"
                             android:contentDescription="Protection status"/>
                     </FrameLayout>
 
@@ -169,7 +169,7 @@
                             android:layout_marginTop="4dp"
                             android:text="No threats found today"
                             android:textSize="13sp"
-                            android:textColor="#6B7280"/>
+                            android:textColor="@color/text_secondary"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -189,7 +189,7 @@
                 android:text="SMS Inbox"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#555555"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="6dp"/>
 
             <!-- Sub-label explaining the scam labels -->
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:text="Each message is checked for scams automatically"
                 android:textSize="13sp"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/text_secondary"
                 android:layout_marginBottom="10dp"/>
 
             <!-- Loading indicator â€” shown while SmsInboxLoader is running -->
@@ -216,16 +216,16 @@
                 android:id="@+id/tv_sms_inbox_empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_white"
+                android:background="@drawable/card_elevated"
                 android:text="No messages to show.\nScam Shield needs SMS permission to scan your inbox."
                 android:textSize="15sp"
-                android:textColor="#757575"
+                android:textColor="@color/text_secondary"
                 android:gravity="center"
                 android:padding="20dp"
                 android:layout_marginBottom="10dp"
                 android:visibility="gone"/>
 
-            <!-- The main inbox RecyclerView â€” filled by SmsInboxAdapter -->
+            <!-- The main inbox RecyclerView â€" filled by SmsInboxAdapter -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sms_inbox"
                 android:layout_width="match_parent"
@@ -234,14 +234,14 @@
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone"/>
 
-            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+            <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
                  DIVIDER
                  Visual separator between inbox and the action buttons below.
-                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+                 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E0E0E0"
+                android:background="@color/surface_border"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"/>
 
@@ -256,7 +256,7 @@
                 android:text="Quick Actions"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#555555"
+                android:textColor="@color/text_secondary"
                 android:layout_marginBottom="10dp"/>
 
             <!-- Card 1: Check a message or link (redesigned with 88dp height & card_elevated) -->
@@ -287,7 +287,7 @@
                         android:layout_height="26dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_search"
-                        android:tint="#FFFFFF"
+                        android:tint="@color/text_primary"
                         android:contentDescription="Check icon"/>
                 </FrameLayout>
 
@@ -353,7 +353,7 @@
                         android:layout_height="26dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_book"
-                        android:tint="#FFFFFF"
+                        android:tint="@color/text_primary"
                         android:contentDescription="Learn icon"/>
                 </FrameLayout>
 
@@ -419,7 +419,7 @@
                         android:layout_height="26dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_help"
-                        android:tint="#FFFFFF"
+                        android:tint="@color/text_primary"
                         android:contentDescription="Help icon"/>
                 </FrameLayout>
 
@@ -558,7 +558,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_shield_filled"
-                android:tint="#FFFFFF"
+                android:tint="@color/text_primary"
                 android:contentDescription="Shield"/>
         </FrameLayout>
 

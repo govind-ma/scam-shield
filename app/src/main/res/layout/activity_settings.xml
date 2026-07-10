@@ -26,7 +26,7 @@
             android:text="âš™  Settings &amp; Permissions"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/text_primary"/>
 
     </LinearLayout>
 
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:text="âž”"
                     android:textSize="20sp"
-                    android:textColor="#9E9E9E"/>
+                    android:textColor="@color/text_secondary"/>
             </LinearLayout>
 
             <!-- System App Details Settings Card Button -->
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="âž”"
                     android:textSize="20sp"
-                    android:textColor="#9E9E9E"/>
+                    android:textColor="@color/text_secondary"/>
             </LinearLayout>
 
             <!-- Data & Storage Group Title -->

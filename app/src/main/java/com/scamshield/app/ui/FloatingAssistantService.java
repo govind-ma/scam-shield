@@ -53,9 +53,9 @@ public class FloatingAssistantService extends Service {
     private static final int    NOTIFICATION_ID = 101;
     private static final int    TAP_THRESHOLD_PX = 10;
 
-    // Safe Mode = teal/green, Alert Mode = red
-    private static final int COLOR_SAFE  = Color.parseColor("#00695C");
-    private static final int COLOR_ALERT = Color.parseColor("#B71C1C");
+    // Safe Mode = green, Alert Mode = red (from colors.xml)
+    private static final int COLOR_SAFE  = Color.parseColor("#00E676");
+    private static final int COLOR_ALERT = Color.parseColor("#FF1744");
 
     private WindowManager windowManager;
     private View          bubbleView;

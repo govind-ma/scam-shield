@@ -19,7 +19,7 @@
         android:text="Need help?"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:gravity="center"
         android:paddingBottom="10dp"/>
 
@@ -30,7 +30,7 @@
         android:layout_height="52dp"
         android:text="🔍 Check something"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"
         android:backgroundTint="@null"
         android:layout_marginBottom="8dp"/>
@@ -42,7 +42,7 @@
         android:layout_height="52dp"
         android:text="📖 Learn about scams"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"
         android:backgroundTint="@null"
         android:layout_marginBottom="8dp"/>
@@ -54,7 +54,7 @@
         android:layout_height="52dp"
         android:text="🆘 I got scammed"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:background="@drawable/ripple_frosted"
         android:backgroundTint="@null"/>
 

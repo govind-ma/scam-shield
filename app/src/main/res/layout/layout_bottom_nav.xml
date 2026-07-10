@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="@color/bg_secondary"
     android:weightSum="1">
 
     <!-- 1dp top divider line -->
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="🏠"
                 android:textSize="20sp"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
             <TextView
                 android:id="@+id/tv_nav_home_label"
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:text="Home"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
         <!-- Tab 2: Chat -->
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="💬"
                 android:textSize="20sp"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
             <TextView
                 android:id="@+id/tv_nav_chat_label"
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:text="Chat"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
         <!-- Tab 3: Learn -->
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="📖"
                 android:textSize="20sp"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
             <TextView
                 android:id="@+id/tv_nav_learn_label"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                 android:text="Learn"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
         <!-- Tab 4: Settings -->
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:text="⚙"
                 android:textSize="20sp"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
             <TextView
                 android:id="@+id/tv_nav_settings_label"
                 android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                 android:text="Settings"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#9E9E9E"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
     </LinearLayout>
