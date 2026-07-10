@@ -72,6 +72,8 @@ public class ChatAssistantActivity extends AppCompatActivity {
     private ImageView    btnMic;
     private ImageView    btnSend;
     private View         chatTopbar;
+    private View         layoutChipsContainer;
+    private boolean      chipsVisible = true; // Hide after first message
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +82,23 @@ public class ChatAssistantActivity extends AppCompatActivity {
 
         geminiClient = new GeminiApiClient(BuildConfig.GEMINI_API_KEY);
 
-        chatTopbar      = findViewById(R.id.chat_topbar);
-        layoutChatThread = findViewById(R.id.layout_chat_thread);
-        chatScrollView  = findViewById(R.id.chat_scroll_view);
-        etInput         = findViewById(R.id.et_chat_input);
-        btnAttach       = findViewById(R.id.btn_attach);
-        btnMic          = findViewById(R.id.btn_mic);
-        btnSend         = findViewById(R.id.btn_chat_send);
+        chatTopbar         = findViewById(R.id.chat_topbar);
+        layoutChatThread   = findViewById(R.id.layout_chat_thread);
+        chatScrollView     = findViewById(R.id.chat_scroll_view);
+        etInput            = findViewById(R.id.et_chat_input);
+        btnAttach          = findViewById(R.id.btn_attach);
+        btnMic             = findViewById(R.id.btn_mic);
+        btnSend            = findViewById(R.id.btn_chat_send);
+        layoutChipsContainer = findViewById(R.id.layout_chips_container);
 
         btnSend.setOnClickListener(v -> handleSendText());
         btnAttach.setOnClickListener(v -> handleAttachImage());
         btnMic.setOnClickListener(v -> handleVoiceInput());
+
+        // Quick action chips
+        findViewById(R.id.chip_check_message).setOnClickListener(v -> handleChipTap("Check a message: "));
+        findViewById(R.id.chip_got_scammed).setOnClickListener(v -> handleChipTap("I got scammed. Help me: "));
+        findViewById(R.id.chip_teach_me).setOnClickListener(v -> handleChipTap("Teach me about scams"));
     }
 
     @Override
@@ -112,12 +120,27 @@ public class ChatAssistantActivity extends AppCompatActivity {
     // 1. Text input → Gemini text analysis
     // =========================================================================
 
+    /**
+     * Handle quick action chip tap — populate input and send.
+     */
+    private void handleChipTap(String chipText) {
+        etInput.setText(chipText);
+        handleSendText();
+    }
+
     private void handleSendText() {
         String input = etInput.getText().toString().trim();
         if (input.isEmpty()) {
             Toast.makeText(this, "Please type a message first.", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Hide chips after first message
+        if (chipsVisible && layoutChipsContainer != null) {
+            layoutChipsContainer.setVisibility(View.GONE);
+            chipsVisible = false;
+        }
+
         etInput.setText("");
         addUserTextBubble(input);
 
@@ -326,7 +349,7 @@ public class ChatAssistantActivity extends AppCompatActivity {
         bubble.setText(message);
         bubble.setTextSize(17);
         bubble.setTextColor(Color.parseColor("#FFFFFF"));
-        bubble.setBackgroundResource(R.drawable.bg_bubble_user);
+        bubble.setBackgroundColor(getResources().getColor(R.color.bg_tertiary, getTheme()));
         bubble.setPadding(36, 26, 36, 26);
 
         row.addView(label);
@@ -371,14 +394,16 @@ public class ChatAssistantActivity extends AppCompatActivity {
         row.setTag("thinking_bubble");
 
         TextView label = makeLabel("🤖 Cyber Help Agent", Gravity.START);
-        label.setTextColor(Color.parseColor("#004D40"));
+        label.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
 
         TextView bubble = new TextView(this);
-        bubble.setText("Analysing… please wait ✦");
+        bubble.setText("●●●");
         bubble.setTextSize(17);
-        bubble.setTextColor(Color.parseColor("#004D40"));
-        bubble.setBackgroundColor(Color.parseColor("#E0F2F1"));
+        bubble.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
+        bubble.setBackgroundColor(getResources().getColor(R.color.bg_secondary, getTheme()));
         bubble.setPadding(16, 12, 16, 12);
+        // Add fade animation
+        bubble.setAlpha(0.6f);
 
         row.addView(label);
         row.addView(bubble);
@@ -401,20 +426,19 @@ public class ChatAssistantActivity extends AppCompatActivity {
         row.setPadding(0, 4, 0, 14);
 
         TextView label = makeLabel("🤖 Cyber Help Agent", Gravity.START);
-        label.setTextColor(Color.parseColor("#004D40"));
+        label.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
 
         TextView bubble = new TextView(this);
         bubble.setText(responseText);
         bubble.setTextSize(17);
         bubble.setLineSpacing(4, 1.0f);
         bubble.setPadding(16, 12, 16, 12);
+        bubble.setTextColor(getResources().getColor(R.color.text_primary, getTheme()));
 
         if (isError) {
-            bubble.setTextColor(Color.parseColor("#5D4037"));
-            bubble.setBackgroundColor(Color.parseColor("#FFF3E0"));
+            bubble.setBackgroundColor(Color.parseColor("#FFEBEE"));
         } else {
-            bubble.setTextColor(Color.parseColor("#1A1A1A"));
-            bubble.setBackgroundColor(Color.parseColor("#E0F2F1"));
+            bubble.setBackgroundColor(getResources().getColor(R.color.bg_secondary, getTheme()));
         }
 
         row.addView(label);
@@ -430,8 +454,8 @@ public class ChatAssistantActivity extends AppCompatActivity {
     private TextView makeLabel(String text, int gravity) {
         TextView tv = new TextView(this);
         tv.setText(text);
-        tv.setTextSize(13);
-        tv.setTextColor(Color.GRAY);
+        tv.setTextSize(11);
+        tv.setTextColor(getResources().getColor(R.color.text_secondary, getTheme()));
         tv.setGravity(gravity);
         tv.setPadding(4, 0, 4, 4);
         return tv;
